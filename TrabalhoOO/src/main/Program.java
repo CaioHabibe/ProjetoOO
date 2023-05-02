@@ -1,5 +1,6 @@
 package main;
 import java.util.Scanner;
+import model.*;
 
 public class Program {
 
