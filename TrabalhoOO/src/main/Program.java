@@ -1,48 +1,31 @@
 package main;
-import java.util.Scanner;
+
 import model.*;
 
 public class Program {
 
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+
+		Cliente cliente = new Cliente("Masculino", 61444444, 12345, 19, "Junior");
+		System.out.println(cliente.toString());
+		cliente.setNome("Pedro");
+		System.out.println(cliente.getNome());
 		
-		System.out.println("Seja bem vindo ao aplicativo de farmácia FGA!");
-		System.out.println("Escolha a opção desejada: ");
-		System.out.println("1 - Cadastrar cliente. ");
-		System.out.println("2 - Cadastrar produto. ");
-		int numero = input.nextInt();
-		if (numero == 1) {
-			System.out.print("Digite o seu nome: ");
-			String nome = input.next();
-			
-			System.out.println();
-			System.out.print("Digite o seu telefone: ");
-			int telefone = input.nextInt();
-			
-			System.out.println();
-			System.out.print("Digite o seu sexo: ");
-			String sexo = input.next();
-			
-			System.out.println();
-			System.out.print("Digite a sua idade:  ");
-			int idade = input.nextInt();
-			
-			System.out.println();
-			System.out.print("Digite o seu CPF: ");
-			String cpf = input.next();
-			
-			Cliente cliente = new Cliente(sexo, telefone, cpf, idade, nome);
-			System.out.println(cliente.toString());
-		} 
-		else if (numero == 2) { 
-			
-		}
-		else {
-			System.out.println("Obrigado por usar o aplicativo e volte sempre.");
-		}
+		Remedio remedio = new Remedio(69773, "Dipirona", "Genérico", 9.99, "Para dor de cabeça", 21,
+				"10 ml");
+		System.out.println(remedio.toString());
+		remedio.setNome("Novalgina");
+		System.out.println(remedio.getNome());
 		
-		input.close();
+		Beleza beleza = new Beleza(58498, "Shampoo", "Pantene", 7.99, "Para cabelos",
+				2,	true);
+		System.out.println(beleza.toString());
+		beleza.setPresencaPerfume(false);
+		System.out.println(beleza.getPresencaPerfume());
+		
+		Filiais filiais = new Filiais("Brasília", "Sqsw 100", 99999999);
+		System.out.println(filiais.toString());
+		filiais.setCidade("Santa Catarina");
+		System.out.println(filiais.getCidade());
 	}
 }
-	

@@ -4,13 +4,9 @@ public abstract class Produto {
 	protected int id;
 	protected String nome;
 	protected String marca;
-	protected double preco;
 	protected String descricao;
+	protected double preco;
 	protected int qtd;
-	
-	public Produto() {
-		super();
-	}
 	
 	public Produto(int identificacao, String nome, String marca, double preco,
 			String descricao, int qtd) {
@@ -21,7 +17,6 @@ public abstract class Produto {
 		this.descricao = descricao;
 		this.qtd = qtd;
 	}
-	
 	
 	public int getId() {
 		return id;
@@ -70,5 +65,4 @@ public abstract class Produto {
 	public void setQtd(int qtd) {
 		this.qtd = qtd;
 	}
-	
 }
