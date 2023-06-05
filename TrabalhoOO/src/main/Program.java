@@ -91,7 +91,7 @@ public class Program {
 										dosagem,formula, administracao);
 						System.out.println(remedio.toString());		
 				} else {
-					System.out.println("TIPO DE PRODUTO NÃO EXISTENTE!");
+					System.out.println("TIPO DE PRODUTO NÃO EXISTENTE!!!!!!");
 				}
 			break;
 		case 2:
