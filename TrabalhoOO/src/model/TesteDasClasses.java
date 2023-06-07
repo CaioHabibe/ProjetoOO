@@ -96,8 +96,8 @@ public class TesteDasClasses {
 		carrinho.fechaCarrinho(carrinho.getCarrinhoProdutos());
 		
 		Cliente cliente = new Cliente("Lucas", "991498776", "08287845157", 19, "laraujooo11@gmail.com");
-		cliente.listaDeProdutosComprados(carrinho.getCarrinhoProdutos());
 		
+		System.out.println(cliente.listaDeProdutosComprados(carrinho));
 		
 		
 		

@@ -8,8 +8,7 @@ public class Cliente {
 	private String cpf;
 	private int idade;
 	private String email;
-	private Carrinho carrinho = new Carrinho();
-	private ArrayList<Produto> produtosComprados = new ArrayList<>();
+	private ArrayList<Carrinho> produtosComprados = new ArrayList<>();
 	
 	public Cliente() {}
 
@@ -61,18 +60,22 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public ArrayList<Produto> listaDeProdutosComprados(Carrinho carrinho){
+		ArrayList<Produto> produtosCliente = new ArrayList<>();
+		for (Produto produto : carrinho.getCarrinhoProdutos()) {produtosCliente.add(produto);}
+		return produtosCliente;
+	}
 
-	public ArrayList<Produto> getProdutosComprados() {
-		return produtosComprados;
+	@Override
+	public String toString() {
+		return "Cliente [nome=" + nome + 
+				", telefone=" + telefone + 
+				", cpf=" + cpf + 
+				", idade=" + idade + 
+				", email="+ email + "]";
 	}
 	
 	
-	public ArrayList<Produto> listaDeProdutosComprados(){
-		ArrayList<Produto> listaProdutos = new ArrayList<>();
-		for (Produto produto : lista) {
-			listaProdutos.add(produto);
-		}
-		return listaProdutos;
-	}
 	
 }
