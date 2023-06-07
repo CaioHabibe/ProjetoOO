@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 public class Cliente {
 	private String nome;
-	private int telefone;
-	private int cpf;
+	private String telefone;
+	private String cpf;
 	private int idade;
-	private int email;
-	private ArrayList<Carrinho> produtosComprados = new ArrayList<>();
+	private String email;
+	private Carrinho carrinho = new Carrinho();
+	private ArrayList<Produto> produtosComprados = new ArrayList<>();
 	
 	public Cliente() {}
 
-	public Cliente(String nome, int telefone, int cpf, int idade, int email) {
+	public Cliente(String nome, String telefone, String cpf, int idade, String email) {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.cpf = cpf;
@@ -29,19 +30,19 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -53,22 +54,23 @@ public class Cliente {
 		this.idade = idade;
 	}
 
-	public int getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(int email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public ArrayList<Carrinho> getProdutosComprados() {
+	public ArrayList<Produto> getProdutosComprados() {
 		return produtosComprados;
 	}
 	
-	public ArrayList<Carrinho> listaDeProdutosComprados(ArrayList<Carrinho> lista){
-		ArrayList<Carrinho > listaProdutos = new ArrayList<Carrinho>();
-		for (Carrinho carrinho : lista) {
-			listaProdutos.add(carrinho);
+	
+	public ArrayList<Produto> listaDeProdutosComprados(ArrayList<Produto> lista){
+		ArrayList<Produto> listaProdutos = new ArrayList<>();
+		for (Produto produto : lista) {
+			listaProdutos.add(produto);
 		}
 		return listaProdutos;
 	}

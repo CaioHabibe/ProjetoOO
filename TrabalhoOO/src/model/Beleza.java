@@ -5,7 +5,7 @@ public class Beleza extends Produto {
 	private String textura;
 	private String tipoDePele;
 	
-	
+	public Beleza() {};
 	public Beleza(String nome, String marca, double preco,
 				   int qtd, boolean presencaPerfume,String textura, String tipoDePele) {
 		 super(nome, marca, preco, qtd);

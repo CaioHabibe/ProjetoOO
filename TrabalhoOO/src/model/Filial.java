@@ -7,6 +7,8 @@ public class Filial {
 	private String endereco;
 	private int cep;
 	private ArrayList<Produto> produtosCadastrados = new ArrayList<Produto>();
+	private ArrayList<Carrinho> carrinhoRegistrado = new ArrayList<Carrinho>();
+	
 	
 	public Filial() {};
 	public Filial(String cidade, String endereco, int cep) {
