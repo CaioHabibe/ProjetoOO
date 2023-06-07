@@ -67,7 +67,7 @@ public class Cliente {
 	}
 	
 	
-	public ArrayList<Produto> listaDeProdutosComprados(ArrayList<Produto> lista){
+	public ArrayList<Produto> listaDeProdutosComprados(){
 		ArrayList<Produto> listaProdutos = new ArrayList<>();
 		for (Produto produto : lista) {
 			listaProdutos.add(produto);

@@ -7,7 +7,7 @@ public class Filial {
 	private String endereco;
 	private int cep;
 	private ArrayList<Produto> produtosCadastrados = new ArrayList<Produto>();
-	private ArrayList<Carrinho> carrinhoRegistrado = new ArrayList<Carrinho>();
+	private ArrayList<Carrinho> carrinhoRegistrado = new ArrayList<Carrinho>(); //REVISAR
 	
 	
 	public Filial() {};
@@ -16,6 +16,7 @@ public class Filial {
 		this.endereco = endereco;
 		this.cep = cep;
 	}
+	
 	public String getCidade() {
 		return cidade;
 	}
@@ -34,16 +35,13 @@ public class Filial {
 	public void setCep(int cep) {
 		this.cep = cep;
 	}
-	
 	public ArrayList<Produto> getProdutosCadastrados() {
 		return produtosCadastrados;
 	}
 	
 	public ArrayList<Produto> listaProdutosCadastrados(ArrayList<Produto> lista) {
 		ArrayList<Produto> listagem = new ArrayList<Produto>();
-		for(Produto produto : lista) {
-			listagem.add(produto);
-		}
+		for(Produto produto : lista) { listagem.add(produto); }
 		return listagem;
 	}
 	
