@@ -26,7 +26,7 @@ public class TelaAdministracao {
         int yPos = (screenHeight - frameHeight) / 2;
         frame.setLocation(xPos, yPos);
 
-        JPanel panelBotoes = new JPanel(new GridLayout(3, 1, 10, 10));
+        JPanel panelBotoes = new JPanel(new GridLayout(4, 1, 10, 10));
         panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JButton btnClientes = new JButton("Clientes");
@@ -52,11 +52,19 @@ public class TelaAdministracao {
                 abrirTelaProdutos();
             }
         });
-
+        
+        JButton back = new JButton("Voltar");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
+        });
+        
         panelBotoes.add(btnClientes);
         panelBotoes.add(btnFiliais);
         panelBotoes.add(btnProdutos);
-
+        panelBotoes.add(back);
         frame.add(panelBotoes, BorderLayout.CENTER);
 
         frame.setVisible(true);
@@ -64,19 +72,25 @@ public class TelaAdministracao {
 
     private void abrirTelaClientes() {
         frame.dispose();
-        // Aqui você pode abrir a tela de clientes
-        JOptionPane.showMessageDialog(null, "Tela de clientes aberta.");
+        TelaGerenciamentoCliente tela = new TelaGerenciamentoCliente();
+        tela.initialize();
     }
 
     private void abrirTelaFiliais() {
         frame.dispose();
-        // Aqui você pode abrir a tela de filiais
-        JOptionPane.showMessageDialog(null, "Tela de filiais aberta.");
+        TelaGerenciamentoFilial telaFilial = new TelaGerenciamentoFilial();
+        telaFilial.initialize();
     }
 
     private void abrirTelaProdutos() {
         frame.dispose();
-        // Aqui você pode abrir a tela de produtos
-        JOptionPane.showMessageDialog(null, "Tela de produtos aberta.");
+        TelaGerenciamentoProduto t = new TelaGerenciamentoProduto();
+        t.initialize();
+    }
+    
+    private void voltar() {
+    	frame.dispose();
+    	TelaBoasVindas v = new TelaBoasVindas();
+    	v.initialize();
     }
 }

@@ -46,7 +46,7 @@ public class TelaBoasVindas {
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirTelaLoginCliente();
+//                abrirTelaLoginCliente();
             }
         });
 
@@ -63,11 +63,5 @@ public class TelaBoasVindas {
         frame.dispose();
         TelaLoginAdministracao telaLogin = new TelaLoginAdministracao();
         telaLogin.initialize();
-    }
-
-    private void abrirTelaLoginCliente() {
-        frame.dispose();
-        // Aqui você pode chamar a tela de login para cliente
-        JOptionPane.showMessageDialog(null, "Tela de login para cliente aberta.");
     }
 }
