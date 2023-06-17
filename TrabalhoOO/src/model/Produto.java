@@ -8,7 +8,6 @@ public abstract class Produto {
 	protected long id;
 	
 	public Produto(String nome, double preco, String descricao, long id) {
-		super();
 		this.nome = nome;
 		this.preco = preco;
 		this.descricao = descricao;

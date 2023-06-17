@@ -5,11 +5,6 @@ public class Filial {
 	private String cidade;
 	private String endereco;
 	
-	public Filial(String cidade, String endereco) {
-		this.cidade = cidade;
-		this.endereco = endereco;
-	}
-	
 	public String getCidade() {
 		return cidade;
 	}

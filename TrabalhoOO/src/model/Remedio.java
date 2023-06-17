@@ -5,16 +5,9 @@ public class Remedio extends Produto{
 	private double dosagem;
 	private String formula;
 	private String administracao;
-	
-	public Remedio(String nome, double preco, String descricao, double dosagem, String formula, String administracao) {
-		super(nome, preco, descricao);
-		this.dosagem = dosagem;
-		this.formula = formula;
-		this.administracao = administracao;
-	}
 
-	public Remedio(String nome, double preco, String descicao) {
-		super(nome, preco, descicao);
+	public Remedio(String nome, double preco, String descricao, long id) {
+		super(nome, preco, descricao, id);
 		// TODO Auto-generated constructor stub
 	}
 

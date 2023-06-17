@@ -6,16 +6,8 @@ public class Cosmetico extends Produto {
 	private String fragrancia;
 	private boolean corante;
 	
-	public Cosmetico(String nome, double preco, String descricao, String textura, String fragrancia, boolean corante) {
-		super(nome, preco, descricao);
-		this.textura = textura;
-		this.fragrancia = fragrancia;
-		this.corante = corante;
-	}
-		
-	public Cosmetico(String nome, double preco, String descricao) {
-		super(nome, preco, descricao);
-		// TODO Auto-generated constructor stub
+	public Cosmetico(String nome, double preco, String descricao, long id) {
+		super(nome, preco, descricao, id);
 	}
 
 	public String getTextura() {
