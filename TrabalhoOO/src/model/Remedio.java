@@ -1,18 +1,21 @@
 package model;
 
 public class Remedio extends Produto{
+	
 	private double dosagem;
 	private String formula;
 	private String administracao;
 	
-	
-	public Remedio() {};
-	public Remedio(String nome, String marca, double preco, int qtd,
-			double dosagem, String formula, String administracao) {
-		super(nome, marca, preco, qtd);
+	public Remedio(String nome, double preco, String descricao, double dosagem, String formula, String administracao) {
+		super(nome, preco, descricao);
 		this.dosagem = dosagem;
 		this.formula = formula;
 		this.administracao = administracao;
+	}
+
+	public Remedio(String nome, double preco, String descicao) {
+		super(nome, preco, descicao);
+		// TODO Auto-generated constructor stub
 	}
 
 	public double getDosagem() {
@@ -39,17 +42,4 @@ public class Remedio extends Produto{
 		this.administracao = administracao;
 	}
 
-	@Override
-	public String toString() {
-		return "Produto [Remedio [nome=" + nome + ""
-				+ ", marca=" + marca + ","
-				+ ", preco=" + preco + ","
-				+ " qtd=" + qtd + ","
-				+ " dosagem=" + dosagem + " mg,"
-				+ " formula=" + formula + ","
-				+ " administracao=" + administracao + 
-				"]]";
-	}
-	
-	
 }

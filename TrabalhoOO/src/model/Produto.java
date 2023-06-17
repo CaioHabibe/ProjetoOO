@@ -1,17 +1,18 @@
 package model;
 
 public abstract class Produto {
-	protected String nome;
-	protected String marca;
-	protected double preco;
-	protected int qtd;
 	
-	public Produto() {};
-	public Produto(String nome, String marca, double preco, int qtd) {
+	protected String nome;
+	protected double preco;
+	protected String descricao;
+	protected long id;
+	
+	public Produto(String nome, double preco, String descricao, long id) {
+		super();
 		this.nome = nome;
-		this.marca = marca;
 		this.preco = preco;
-		this.qtd = qtd;
+		this.descricao = descricao;
+		this.id = id;
 	}
 	
 	public String getNome() {
@@ -20,30 +21,22 @@ public abstract class Produto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
 	public double getPreco() {
 		return preco;
 	}
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-	public int getQtd() {
-		return qtd;
+	public String getDescicao() {
+		return descricao;
 	}
-	public void setQtd(int qtd) {
-		this.qtd = qtd;
+	public void setDescicao(String descicao) {
+		this.descricao = descicao;
 	}
-
-	@Override
-	public String toString() {
-		return "Produto [nome=" + nome + ", marca=" + marca + ", preco=" + preco + ", qtd=" + qtd + "]";
+	public long getId() {
+		return id;
 	}
-	
-	
-	
+	public void setId(long id) {
+		this.id = id;
+	}
 }
