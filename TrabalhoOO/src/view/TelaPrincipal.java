@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import model.Empresa;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +30,7 @@ public class TelaPrincipal {
         frame.setLocation(xPos, yPos);
 
         JPanel panelTitulo = new JPanel();
-        JLabel lblTitulo = new JLabel("Bem-vindo à farmaFGA");
+        JLabel lblTitulo = new JLabel("Bem-vindo à " + Empresa.getNome());
         panelTitulo.add(lblTitulo);
           
         
@@ -36,6 +39,7 @@ public class TelaPrincipal {
         panelBotoes.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
         JButton btnAdministracao = new JButton("Administração");
+        btnAdministracao.setFocusable(false);
         btnAdministracao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,6 +48,7 @@ public class TelaPrincipal {
         });
 
         JButton btnCliente = new JButton("Cliente");
+        btnCliente.setFocusable(false);
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

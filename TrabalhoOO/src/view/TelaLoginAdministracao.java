@@ -48,21 +48,34 @@ public class TelaLoginAdministracao {
 
         JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton btnLogin = new JButton("Login");
+        btnLogin.setFocusable(false);
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 realizarLogin();
             }
         });
+        JButton voltar = new JButton("Voltar");
+        voltar.setFocusable(false);
+        voltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	frame.dispose();
+            	TelaPrincipal v = new TelaPrincipal();
+            	v.initialize();
+            }
+        });
+        
         panelBotoes.add(btnLogin);
-
+        panelBotoes.add(voltar);
+        
         frame.add(panelTitulo, BorderLayout.NORTH);
         frame.add(panelFormulario, BorderLayout.CENTER);
         frame.add(panelBotoes, BorderLayout.SOUTH);
 
         frame.setVisible(true);
     }
-
+    
     private void realizarLogin() {
         String usuario = txtUsuario.getText();
         String senha = new String(txtSenha.getPassword());
