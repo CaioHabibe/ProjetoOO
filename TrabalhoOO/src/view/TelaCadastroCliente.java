@@ -11,15 +11,19 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class TelaGerenciamentoProduto {
+import control.ControleCliente;
+
+public class TelaCadastroCliente {
 	private JFrame frame;
-
+	
     public void initialize() {
-        frame = new JFrame();
-        frame.setTitle("Bem-vindo");
-        frame.setSize(800, 600);
+        frame = new JFrame("Cadastro de cliente");
+        frame.setSize(600, 300);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -33,27 +37,62 @@ public class TelaGerenciamentoProduto {
         int yPos = (screenHeight - frameHeight) / 2;
         frame.setLocation(xPos, yPos);
         
-        JPanel panelBotoes = new JPanel(new GridLayout(5, 1, 10, 10));
+        JPanel painelDados = new JPanel(new GridLayout(2, 1, 10, 10));
+        painelDados.setBorder(BorderFactory.createEmptyBorder(15, 15, 120, 40));
+        painelDados.setAlignmentX(Component.TOP_ALIGNMENT);
+        JLabel labelNome = new JLabel("Nome: ");
+        JTextField txtNome = new JTextField(50);
+        txtNome.setBounds(100,100,100,100);
+        
+        JLabel labelCPF = new JLabel("CPF: ");
+        JTextField txtCPF = new JTextField(11);
+        
+        painelDados.add(labelNome);
+        painelDados.add(txtNome);
+        painelDados.add(labelCPF);
+        painelDados.add(txtCPF);
+        
+        
+        
+        JPanel panelBotoes = new JPanel(new GridLayout(1, 5, 10, 10));
         panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panelBotoes.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelBotoes.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
-        JButton bAdd = new JButton("Adicionar produto");
+        
+        
+        JButton bAdd = new JButton("Salvar");
         bAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                String nome = txtNome.getText();
+                String cpf = txtCPF.getText();
+                boolean sucesso;
+                try {
+                	ControleCliente controle = new ControleCliente();
+                	sucesso = controle.salvarCliente(nome, cpf);
+                	if (sucesso == true) {
+                		JOptionPane.showMessageDialog(null, "O cliente foi cadastrado "
+                				+ "com sucesso!");
+                	} else {
+                		JOptionPane.showMessageDialog(null, "Os campos não foram "
+                				+ "preenchidos corretamente.");
+                	}
+                } catch (Exception e1) {
+                	JOptionPane.showMessageDialog(null, "Erro: "+ e1);
+                }
             }
         });
 
-        JButton bRemove = new JButton("Remover produto");
+        JButton bRemove = new JButton("Limpar");
         bRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                txtNome.setText("");
+                txtCPF.setText("");
             }
         });
         
-        JButton bUpdate = new JButton("Atualizar produto");
+        JButton bUpdate = new JButton("Cancelar");
         bUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,7 +100,7 @@ public class TelaGerenciamentoProduto {
             }
         });
         
-        JButton bRead = new JButton("Mostrar produto");
+        JButton bRead = new JButton("Consultar");
         bRead.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,7 +122,8 @@ public class TelaGerenciamentoProduto {
         panelBotoes.add(bRead);
         panelBotoes.add(back);
         
-        frame.add(panelBotoes, BorderLayout.CENTER);
+        frame.add(painelDados, BorderLayout.CENTER);
+        frame.add(panelBotoes, BorderLayout.SOUTH);
 
         frame.setVisible(true);
     }

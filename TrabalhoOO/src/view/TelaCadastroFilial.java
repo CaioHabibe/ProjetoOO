@@ -11,15 +11,20 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class TelaGerenciamentoCliente {
+import control.ControleFilial;
+
+public class TelaCadastroFilial {
 	private JFrame frame;
 
     public void initialize() {
         frame = new JFrame();
-        frame.setTitle("Bem-vindo");
-        frame.setSize(800, 600);
+        frame.setTitle("Cadastro de filial");
+        frame.setSize(600, 300);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -33,27 +38,61 @@ public class TelaGerenciamentoCliente {
         int yPos = (screenHeight - frameHeight) / 2;
         frame.setLocation(xPos, yPos);
         
-        JPanel panelBotoes = new JPanel(new GridLayout(5, 1, 10, 10));
+        JPanel painelDados = new JPanel(new GridLayout(2, 1, 10, 10));
+        painelDados.setBorder(BorderFactory.createEmptyBorder(15, 15, 120, 40));
+        painelDados.setAlignmentX(Component.TOP_ALIGNMENT);
+        JLabel labelCidade = new JLabel("CIDADE: ");
+        JTextField txtCidade = new JTextField(30);
+        txtCidade.setBounds(100,100,100,100);
+        
+        JLabel labelEndereco = new JLabel("ENDEREÇO: ");
+        JTextField txtEndereco = new JTextField(50);
+        
+        painelDados.add(labelCidade);
+        painelDados.add(txtCidade);
+        painelDados.add(labelEndereco);
+        painelDados.add(txtEndereco);
+        
+        
+        
+        JPanel panelBotoes = new JPanel(new GridLayout(1, 5, 10, 10));
         panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panelBotoes.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelBotoes.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
-        JButton bAdd = new JButton("Adicionar cliente");
+        JButton bAdd = new JButton("Salvar");
         bAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                String cidade = txtCidade.getText();
+                String endereco = txtEndereco.getText();
+                boolean sucesso;
+                try {
+                	ControleFilial controle = new ControleFilial();
+                	sucesso = controle.salvarFilial(cidade, endereco);
+                	if (sucesso) {
+                		JOptionPane.showMessageDialog(null, "A filial foi cadastrada"
+                				+ " com sucesso!");
+                	} else {
+                		JOptionPane.showMessageDialog(null, "Os campos não foram "
+                				+ "preenchidos corretamente.");
+                	}
+                	
+                } catch (Exception e2) {
+                	JOptionPane.showMessageDialog(null, "Erro: " + e2);
+                }
             }
         });
 
-        JButton bRemove = new JButton("Remover cliente");
+        JButton bRemove = new JButton("Limpar");
         bRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+            	txtCidade.setText("");
+                txtEndereco.setText("");
             }
         });
         
-        JButton bUpdate = new JButton("Atualizar cliente");
+        JButton bUpdate = new JButton("Cancelar");
         bUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,7 +100,7 @@ public class TelaGerenciamentoCliente {
             }
         });
         
-        JButton bRead = new JButton("Mostrar cliente");
+        JButton bRead = new JButton("Consultar");
         bRead.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,8 +122,9 @@ public class TelaGerenciamentoCliente {
         panelBotoes.add(bRead);
         panelBotoes.add(back);
         
-        frame.add(panelBotoes, BorderLayout.CENTER);
-
+        frame.add(painelDados, BorderLayout.CENTER);
+        frame.add(panelBotoes, BorderLayout.SOUTH);
+        
         frame.setVisible(true);
     }
     
@@ -93,4 +133,5 @@ public class TelaGerenciamentoCliente {
     	TelaAdministracao v = new TelaAdministracao();
     	v.initialize();
     }
+    
 }

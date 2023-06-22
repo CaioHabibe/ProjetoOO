@@ -13,7 +13,7 @@ public class TelaLoginAdministracao {
 
     public void initialize() {
         frame = new JFrame();
-        frame.setTitle("Login - Administração");
+        frame.setTitle("Login");
         frame.setSize(300, 200);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +29,7 @@ public class TelaLoginAdministracao {
         frame.setLocation(xPos, yPos);
 
         JPanel panelTitulo = new JPanel();
-        JLabel lblTitulo = new JLabel("Login - Administração");
+        JLabel lblTitulo = new JLabel("Login");
         panelTitulo.add(lblTitulo);
 
         JPanel panelFormulario = new JPanel(new GridLayout(2, 2, 10, 10));

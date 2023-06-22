@@ -4,6 +4,12 @@ public class Carrinho {
 	
 	private int id;
 
+	public Carrinho() {}
+	
+	public Carrinho(int id) {
+		this.id = id;
+	}
+	
 	public int getId() {
 		return id;
 	}

@@ -69,28 +69,34 @@ public class TelaAdministracao {
 
         frame.setVisible(true);
     }
-
+    /*
+     * Método abrirTelaClientes()
+     * É o método responsável por abrir a tela para o CRUD de clientes
+     * */
     private void abrirTelaClientes() {
         frame.dispose();
-        TelaGerenciamentoCliente tela = new TelaGerenciamentoCliente();
+        TelaCadastroCliente tela = new TelaCadastroCliente();
         tela.initialize();
     }
-
+    /*
+     * Método
+     * 
+     * */
     private void abrirTelaFiliais() {
         frame.dispose();
-        TelaGerenciamentoFilial telaFilial = new TelaGerenciamentoFilial();
+        TelaCadastroFilial telaFilial = new TelaCadastroFilial();
         telaFilial.initialize();
     }
 
     private void abrirTelaProdutos() {
         frame.dispose();
-        TelaGerenciamentoProduto t = new TelaGerenciamentoProduto();
+        TelaCadastroProduto t = new TelaCadastroProduto();
         t.initialize();
     }
     
     private void voltar() {
     	frame.dispose();
-    	TelaBoasVindas v = new TelaBoasVindas();
+    	TelaPrincipal v = new TelaPrincipal();
     	v.initialize();
     }
 }

@@ -7,14 +7,30 @@ public class ControleFilial {
 
 	private ArrayList <Filial> listaDeFiliais = new ArrayList<Filial>();
 
-	public boolean salvarCliente(Filial filial) {
-		if (filial != null) {
-			listaDeFiliais.add(filial);
+	public boolean salvarFilial(String cidade, String endereco) {
+		if (validarCidade(cidade) && validarEndereco(endereco)) {
+			Filial filial = new Filial(cidade, endereco);
+			filial.cadastrarFilial(filial);
 			return true;
 		} else {
 			return false;
 		}
 	}
+	
+	public static boolean validarCidade(String cidade) {
+		if(cidade != null && cidade.length() > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean validarEndereco(String endereco) {
+		if (endereco != null && endereco.length() > 0) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public ArrayList<Filial> ler() {
 		return listaDeFiliais;
@@ -38,4 +54,5 @@ public class ControleFilial {
 	}
 		}
 	}
+	
 }
