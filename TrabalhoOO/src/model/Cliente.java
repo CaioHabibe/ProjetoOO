@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Cliente {
 	
 	private String nome;
@@ -27,6 +29,11 @@ public class Cliente {
 	
 	public void cadastrarCliente() {
 		
+	}
+	
+	public static ArrayList<Cliente> getClientes(){
+		ArrayList<Cliente> clientes = new ArrayList<>();
+		return clientes;
 	}
 	
 }

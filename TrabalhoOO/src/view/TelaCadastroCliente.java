@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import control.ControleCliente;
+import controller.ControleCliente;
 
 public class TelaCadastroCliente {
 	private JFrame frame;
@@ -52,15 +52,12 @@ public class TelaCadastroCliente {
         painelDados.add(labelCPF);
         painelDados.add(txtCPF);
         
-        
-        
         JPanel panelBotoes = new JPanel(new GridLayout(1, 5, 10, 10));
         panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panelBotoes.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
-        
-        
         JButton bAdd = new JButton("Salvar");
+        bAdd.setFocusable(false);
         bAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,13 +95,13 @@ public class TelaCadastroCliente {
             public void actionPerformed(ActionEvent e) {
                 
             }
-        });
-        
+        }); 
+
         JButton bRead = new JButton("Consultar");
         bRead.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                consultar();
             }
         });
         
@@ -131,6 +128,12 @@ public class TelaCadastroCliente {
     private void voltar() {
     	frame.dispose();
     	TelaAdministracao v = new TelaAdministracao();
+    	v.initialize();
+    }
+    
+    private void consultar() {
+    	frame.dispose();
+    	TelaConsultaCliente v = new TelaConsultaCliente();
     	v.initialize();
     }
 }

@@ -12,7 +12,7 @@ public class TelaAdministracao {
     public void initialize() {
         frame = new JFrame();
         frame.setTitle("Administração");
-        frame.setSize(300, 200);
+        frame.setSize(600, 400);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -30,6 +30,7 @@ public class TelaAdministracao {
         panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JButton btnClientes = new JButton("Clientes");
+        btnClientes.setFocusable(false);
         btnClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,6 +39,7 @@ public class TelaAdministracao {
         });
 
         JButton btnFiliais = new JButton("Filiais");
+        btnFiliais.setFocusable(false);
         btnFiliais.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,6 +48,7 @@ public class TelaAdministracao {
         });
 
         JButton btnProdutos = new JButton("Produtos");
+        btnProdutos.setFocusable(false);
         btnProdutos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,6 +57,7 @@ public class TelaAdministracao {
         });
         
         JButton back = new JButton("Voltar");
+        back.setFocusable(false);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import control.ControleProduto;
+import controller.ControleProduto;
 
 public class TelaCadastroProduto {
 	private JFrame frame;
@@ -93,21 +93,20 @@ public class TelaCadastroProduto {
         bAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String tipo = txtTipo.getText();
-                String nome = txtNome.getText();
-                double preco = Double.parseDouble(txtPreco.getText());
-                String descricao = txtDescricao.getText();
-                long id = Integer.parseInt(txtId.getText());
-                boolean sucesso;
-                try {
-                	 ControleProduto controle = new ControleProduto();
-                	 controle.salvarProduto(tipo, nome, preco, descricao, id);
-                	 
-                	 
-                } catch (Exception e2) {
-                	JOptionPane.showMessageDialog(null, "Erro: " + e2);
-                }
-                
+//            	String tipo = txtTipo.getText();
+//                String nome = txtNome.getText();
+//                double preco = Double.parseDouble(txtPreco.getText());
+//                String descricao = txtDescricao.getText();
+//                long id = Integer.parseInt(txtId.getText());
+//                boolean sucesso;
+//                try {
+//                	 ControleProduto controle = new ControleProduto();
+//                	 sucesso = controle.salvarProduto(tipo, nome, preco, descricao, id);
+//                	 
+//                	 
+//                } catch (Exception e2) {
+//                	JOptionPane.showMessageDialog(null, "Erro: " + e2);
+//                }
             }
         });
 
@@ -115,6 +114,14 @@ public class TelaCadastroProduto {
         bRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                txtTipo.setText("");
+                txtNome.setText("");
+                txtPreco.setText("");
+                txtDescricao.setText("");
+                txtId.setText("");
+                txtPrimaria.setText("");
+                txtSecundaria.setText("");
+                txtTerciaria.setText("");
                 
             }
         });
@@ -131,7 +138,7 @@ public class TelaCadastroProduto {
         bRead.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                consultar();
             }
         });
         
@@ -158,6 +165,12 @@ public class TelaCadastroProduto {
     private void voltar() {
     	frame.dispose();
     	TelaAdministracao v = new TelaAdministracao();
+    	v.initialize();
+    }
+    
+    private void consultar() {
+    	frame.dispose();
+    	TelaConsultaProduto v = new TelaConsultaProduto();
     	v.initialize();
     }
 }

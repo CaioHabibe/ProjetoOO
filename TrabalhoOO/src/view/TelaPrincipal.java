@@ -36,6 +36,7 @@ public class TelaPrincipal {
         panelBotoes.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
         JButton btnAdministracao = new JButton("Administração");
+        btnAdministracao.setFocusable(false);
         btnAdministracao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,10 +45,11 @@ public class TelaPrincipal {
         });
 
         JButton btnCliente = new JButton("Cliente");
+        btnCliente.setFocusable(false);
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                abrirTelaLoginCliente();
+                abrirTelaCarrinho();
             }
         });
 
@@ -60,6 +62,12 @@ public class TelaPrincipal {
         frame.setVisible(true);
     }
 
+    private void abrirTelaCarrinho() {
+    	frame.dispose();
+    	TelaCarrinho t = new TelaCarrinho();
+    	t.initialize();
+    }
+    
     private void abrirTelaLoginAdmin() {
         frame.dispose();
         TelaLoginAdministracao telaLogin = new TelaLoginAdministracao();

@@ -29,7 +29,7 @@ public class TelaLoginAdministracao {
         frame.setLocation(xPos, yPos);
 
         JPanel panelTitulo = new JPanel();
-        JLabel lblTitulo = new JLabel("Login");
+        JLabel lblTitulo = new JLabel("Login de administrador");
         panelTitulo.add(lblTitulo);
 
         JPanel panelFormulario = new JPanel(new GridLayout(2, 2, 10, 10));
@@ -54,7 +54,16 @@ public class TelaLoginAdministracao {
                 realizarLogin();
             }
         });
+        
+        JButton voltar = new JButton("Voltar");
+        voltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
+        });
         panelBotoes.add(btnLogin);
+        panelBotoes.add(voltar);
 
         frame.add(panelTitulo, BorderLayout.NORTH);
         frame.add(panelFormulario, BorderLayout.CENTER);
@@ -74,5 +83,11 @@ public class TelaLoginAdministracao {
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private void voltar() {
+    	frame.dispose();
+    	TelaPrincipal v = new TelaPrincipal();
+    	v.initialize();
     }
 }

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import control.ControleFilial;
+import controller.ControleFilial;
 
 public class TelaCadastroFilial {
 	private JFrame frame;
@@ -41,11 +41,11 @@ public class TelaCadastroFilial {
         JPanel painelDados = new JPanel(new GridLayout(2, 1, 10, 10));
         painelDados.setBorder(BorderFactory.createEmptyBorder(15, 15, 120, 40));
         painelDados.setAlignmentX(Component.TOP_ALIGNMENT);
-        JLabel labelCidade = new JLabel("CIDADE: ");
+        JLabel labelCidade = new JLabel("Cidade: ");
         JTextField txtCidade = new JTextField(30);
         txtCidade.setBounds(100,100,100,100);
         
-        JLabel labelEndereco = new JLabel("ENDEREÇO: ");
+        JLabel labelEndereco = new JLabel("Endereço: ");
         JTextField txtEndereco = new JTextField(50);
         
         painelDados.add(labelCidade);
@@ -104,7 +104,7 @@ public class TelaCadastroFilial {
         bRead.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                consultar();
             }
         });
         
@@ -131,6 +131,12 @@ public class TelaCadastroFilial {
     private void voltar() {
     	frame.dispose();
     	TelaAdministracao v = new TelaAdministracao();
+    	v.initialize();
+    }
+    
+    private void consultar() {
+    	frame.dispose();
+    	TelaConsultaFilial v = new TelaConsultaFilial();
     	v.initialize();
     }
     
