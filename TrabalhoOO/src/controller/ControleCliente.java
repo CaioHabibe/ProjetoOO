@@ -1,4 +1,4 @@
-package control;
+package controller;
 
 import java.util.ArrayList;
 import model.Cliente;
@@ -49,6 +49,19 @@ public class ControleCliente {
 			return true;
 		}
 		return false;
+	}
+	
+	// MODIFICACAO 22/06 
+	public static ArrayList<String[]> getCliente(){
+		ArrayList<String[]> cliente = new ArrayList<>();
+		ArrayList<Cliente> C = Cliente.getClientes();
+		for (int i = 0; i < C.size(); i++) {
+			String c[] = new String[2];
+			c[0] = C.get(i).getNome(); //Nome
+			c[1] = C.get(i).getCpf(); //CPF
+			cliente.add(c);
+		}	
+		return cliente;
 	}
 	
 	//Método responsável por mostrar os clientes 

@@ -1,9 +1,6 @@
 package view;
 
 import javax.swing.*;
-
-import model.Empresa;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +27,7 @@ public class TelaPrincipal {
         frame.setLocation(xPos, yPos);
 
         JPanel panelTitulo = new JPanel();
-        JLabel lblTitulo = new JLabel("Bem-vindo à " + Empresa.getNome());
+        JLabel lblTitulo = new JLabel("Bem-vindo à farmaFGA");
         panelTitulo.add(lblTitulo);
           
         
@@ -52,7 +49,7 @@ public class TelaPrincipal {
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                abrirTelaLoginCliente();
+                abrirTelaCarrinho();
             }
         });
 
@@ -65,6 +62,12 @@ public class TelaPrincipal {
         frame.setVisible(true);
     }
 
+    private void abrirTelaCarrinho() {
+    	frame.dispose();
+    	TelaCarrinho t = new TelaCarrinho();
+    	t.initialize();
+    }
+    
     private void abrirTelaLoginAdmin() {
         frame.dispose();
         TelaLoginAdministracao telaLogin = new TelaLoginAdministracao();

@@ -1,4 +1,4 @@
-package control;
+package controller;
 
 import java.util.ArrayList;
 import model.Filial;

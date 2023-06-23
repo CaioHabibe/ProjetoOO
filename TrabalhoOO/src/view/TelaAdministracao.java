@@ -12,7 +12,7 @@ public class TelaAdministracao {
     public void initialize() {
         frame = new JFrame();
         frame.setTitle("Administração");
-        frame.setSize(300, 200);
+        frame.setSize(600, 400);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
