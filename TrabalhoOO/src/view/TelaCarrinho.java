@@ -1,21 +1,10 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class TelaCarrinho {
 	private JFrame frame;
@@ -38,19 +27,89 @@ public class TelaCarrinho {
         frame.setLocation(xPos, yPos);
         
         JPanel procurarFilial = new JPanel();
+        procurarFilial.setVisible(true);
+        //procurarFilial.setBackground(Color.green);
+        procurarFilial.setPreferredSize(new Dimension(100,100));
+        
         JLabel lblProcura = new JLabel("Digite a sua cidade: ");
+        
         JTextField txtProcura = new JTextField(20);
+        
         JButton Procurar = new JButton("Procurar");
+        Procurar.setFocusable(false);
         Procurar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
+        
         procurarFilial.add(lblProcura);
         procurarFilial.add(txtProcura);
         procurarFilial.add(Procurar);
         
+        
+        //panel esquerda
+        JPanel panelFiliais = new JPanel();
+        //panelFiliais.setBackground(Color.green);
+        panelFiliais.setPreferredSize(new Dimension(600,70));
+        
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("Nome");
+        tableModel.addColumn("Idade");
+        tableModel.addRow(new Object[]{"João", 25});
+        tableModel.addRow(new Object[]{"Maria", 30});
+        JTable tabelaFiliais = new JTable();
+      
+        panelFiliais.add(new JScrollPane(tabelaFiliais), BorderLayout.SOUTH);
+        //fim panel esquerda
+        
+        
+        //Panel da direita
+        JPanel panelProdutos = new JPanel();
+        //panelProdutos.setBackground(Color.red);
+        panelProdutos.setPreferredSize(new Dimension(600,70));
+        
+        DefaultTableModel tableModelP = new DefaultTableModel();
+        tableModel.addColumn("Nome");
+        tableModel.addColumn("Idade");
+        tableModel.addRow(new Object[]{"João", 25});
+        tableModel.addRow(new Object[]{"Maria", 30});
+        JTable tabelaProdutos = new JTable();
+      
+        panelProdutos.add(new JScrollPane(tabelaProdutos), BorderLayout.SOUTH);
+        
+        //fim panel da direita
+        
+        
+        //panel de baixo
+        JPanel panelBotoes = new JPanel();
+        //panelBotoes.setBackground(Color.blue);
+        panelBotoes.setPreferredSize(new Dimension(600,110));
+        
+        JButton add = new JButton("Adicionar");
+        add.setFocusable(false);
+        
+        JButton remove = new JButton("Remover");
+        remove.setFocusable(false);
+        
+        JButton comprar = new JButton("Fechar carrinho");
+        comprar.setFocusable(false);
+        
+        JButton back = new JButton("Voltar");
+        back.setFocusable(false);
+        
+        panelBotoes.setLayout((LayoutManager) new FlowLayout(FlowLayout.CENTER, 30, 30));
+        
+        panelBotoes.add(add);
+        panelBotoes.add(remove);
+        panelBotoes.add(comprar);
+        panelBotoes.add(back);
+        
+        //fim panel de baixo
+        
+        
+        /*
         JPanel FiliaisEProdutos = new JPanel(new GridLayout(2, 2, 10, 10));
         FiliaisEProdutos.setPreferredSize(new Dimension(400, 200));
         FiliaisEProdutos.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -70,9 +129,13 @@ public class TelaCarrinho {
         
         FiliaisEProdutos.add(table.getTableHeader());
         FiliaisEProdutos.add(table);
+        */
         
-        frame.add(procurarFilial);
-        frame.add(FiliaisEProdutos, BorderLayout.CENTER);
+        frame.add(procurarFilial, BorderLayout.NORTH);
+        frame.add(panelBotoes, BorderLayout.SOUTH);
+        frame.add(panelFiliais, BorderLayout.WEST);
+        frame.add(panelProdutos, BorderLayout.EAST);
+        
         frame.setVisible(true);
 	}
 }

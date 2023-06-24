@@ -82,6 +82,5 @@ public class TelaPrincipal {
 			System.out.println("Houve um problema na inicialização "
 					+ "da tela.");
 		}
-		
     }
 }
