@@ -12,7 +12,7 @@ public class TelaCarrinho {
 	public void initialize() {
 		frame = new JFrame();
         frame.setTitle("Carrinho");
-        frame.setSize(1200, 800);
+        frame.setSize(1000, 700);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -52,7 +52,7 @@ public class TelaCarrinho {
         //panel esquerda
         JPanel panelFiliais = new JPanel();
         //panelFiliais.setBackground(Color.green);
-        panelFiliais.setPreferredSize(new Dimension(600,70));
+        panelFiliais.setPreferredSize(new Dimension(500,70));
         
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.addColumn("Nome");
@@ -67,8 +67,8 @@ public class TelaCarrinho {
         
         //Panel da direita
         JPanel panelProdutos = new JPanel();
-        //panelProdutos.setBackground(Color.red);
-        panelProdutos.setPreferredSize(new Dimension(600,70));
+       //panelProdutos.setBackground(Color.red);
+        panelProdutos.setPreferredSize(new Dimension(500,70));
         
         DefaultTableModel tableModelP = new DefaultTableModel();
         tableModel.addColumn("Nome");
