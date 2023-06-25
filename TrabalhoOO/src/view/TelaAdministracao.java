@@ -79,8 +79,7 @@ public class TelaAdministracao {
      * */
     private void abrirTelaClientes() {
         frame.dispose();
-        TelaCadastroCliente tela = new TelaCadastroCliente();
-        tela.initialize();
+        new TelaCliente();
     }
     /*
      * Método
@@ -88,14 +87,14 @@ public class TelaAdministracao {
      * */
     private void abrirTelaFiliais() {
         frame.dispose();
-        TelaCadastroFilial telaFilial = new TelaCadastroFilial();
-        telaFilial.initialize();
+        new TelaFilial();
+
     }
 
     private void abrirTelaProdutos() {
         frame.dispose();
-        TelaCadastroProduto t = new TelaCadastroProduto();
-        t.initialize();
+        new TelaProduto();
+
     }
     
     private void voltar() {

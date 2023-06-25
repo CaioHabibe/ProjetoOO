@@ -12,7 +12,7 @@ public class TelaPrincipal {
     public void initialize() {
         frame = new JFrame();
         frame.setTitle("Bem-vindo");
-        frame.setSize(400, 300);
+        frame.setSize(683, 384);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -32,7 +32,7 @@ public class TelaPrincipal {
           
         
         JPanel panelBotoes = new JPanel(new GridLayout(2, 1, 10, 10));
-        panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         panelBotoes.setAlignmentX(Component.BOTTOM_ALIGNMENT);
 
         JButton btnAdministracao = new JButton("Administração");
@@ -73,14 +73,5 @@ public class TelaPrincipal {
         TelaLoginAdministracao telaLogin = new TelaLoginAdministracao();
         telaLogin.initialize();
     }
-    
-    public static void main(String[] args) {
-		try {
-			TelaPrincipal telaBoasVindas = new TelaPrincipal();
-	        telaBoasVindas.initialize();
-		} catch (Exception e) {
-			System.out.println("Houve um problema na inicialização "
-					+ "da tela.");
-		}
-    }
+
 }
