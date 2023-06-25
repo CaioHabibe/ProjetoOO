@@ -98,6 +98,12 @@ public class TelaCarrinho {
         
         JButton back = new JButton("Voltar");
         back.setFocusable(false);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                voltar();
+            }
+        });
         
         panelBotoes.setLayout((LayoutManager) new FlowLayout(FlowLayout.CENTER, 30, 30));
         
@@ -138,4 +144,10 @@ public class TelaCarrinho {
         
         frame.setVisible(true);
 	}
+	
+	private void voltar() {
+    	frame.dispose();
+    	TelaPrincipal v = new TelaPrincipal();
+    	v.initialize();
+    }
 }
