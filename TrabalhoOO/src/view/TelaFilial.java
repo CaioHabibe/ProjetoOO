@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ControleFilial;
+
 public class TelaFilial extends JFrame{
 	JTable table;
 	
@@ -60,6 +62,9 @@ public class TelaFilial extends JFrame{
 					String cidade = t1.getText().toString();
 					String endereco =  t2.getText().toString();
 					String cnpj = t3.getText().toString();
+					
+					ControleFilial cf = new ControleFilial();
+					cf.salvarFilial(cidade, endereco, cnpj);
 					
 					Object[] novaLinha = {cidade, endereco, cnpj};
 					modelo.addRow(novaLinha);

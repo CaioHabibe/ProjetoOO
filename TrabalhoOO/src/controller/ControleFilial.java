@@ -1,36 +1,18 @@
 package controller;
 
 import java.util.ArrayList;
+
 import model.Filial;
 
 public class ControleFilial {
 
 	private ArrayList <Filial> listaDeFiliais = new ArrayList<Filial>();
 
-	public boolean salvarFilial(String cidade, String endereco) {
-		if (validarCidade(cidade) && validarEndereco(endereco)) {
-			Filial filial = new Filial(cidade, endereco);
-			filial.cadastrarFilial(filial);
+	public boolean salvarFilial(String cidade, String endereco, String cnpj) {
+			Filial filial = new Filial(cidade, endereco, cnpj);
+			listaDeFiliais.add(filial);
 			return true;
-		} else {
-			return false;
-		}
 	}
-	
-	public static boolean validarCidade(String cidade) {
-		if(cidade != null && cidade.length() > 0) {
-			return true;
-		}
-		return false;
-	}
-	
-	public static boolean validarEndereco(String endereco) {
-		if (endereco != null && endereco.length() > 0) {
-			return true;
-		}
-		return false;
-	}
-	
 	
 	public ArrayList<Filial> ler() {
 		return listaDeFiliais;
@@ -51,7 +33,7 @@ public class ControleFilial {
 				listaDeFiliais.remove(aux);
 				listaDeFiliais.add(filial);
 				break;
-	}
+			}
 		}
 	}
 	

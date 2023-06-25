@@ -8,7 +8,6 @@ public class Remedio extends Produto{
 
 	public Remedio(String nome, double preco, String descricao, long id) {
 		super(nome, preco, descricao, id);
-		// TODO Auto-generated constructor stub
 	}
 
 	public double getDosagem() {

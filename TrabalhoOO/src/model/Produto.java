@@ -17,25 +17,33 @@ public abstract class Produto {
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public double getPreco() {
 		return preco;
 	}
+	
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
+	
 	public String getDescicao() {
 		return descricao;
 	}
+	
 	public void setDescicao(String descicao) {
 		this.descricao = descicao;
 	}
+	
 	public long getId() {
 		return id;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 }
