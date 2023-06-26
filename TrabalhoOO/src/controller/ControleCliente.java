@@ -27,19 +27,8 @@ public class ControleCliente {
     	return conteudoLinha;
     }
 
-<<<<<<< HEAD
     public void removerCliente(Integer indexLinha) {
         empresa.removeCliente(empresa.getListaClientesCadastrados().get(indexLinha));
-=======
-    public Object[] ler() {
-    	Object conteudoLinha[] = new Object[3];
-    	for (Cliente cliente : listaDeClientes) {
-			conteudoLinha[0] = cliente.getNome();
-			conteudoLinha[1] = cliente.getCpf();
-			conteudoLinha[2] = cliente.getIdade();
-    	}
-    	return conteudoLinha;
->>>>>>> 10a9d7096577110f515cbad6387066e26922c73f
     }
 
     public void atualizarCliente(String nome, String cpf, Integer idade) {
