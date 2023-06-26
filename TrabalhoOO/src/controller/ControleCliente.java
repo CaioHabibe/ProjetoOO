@@ -5,20 +5,18 @@ import model.Empresa;
 
 public class ControleCliente {
 	Empresa empresa = new Empresa();
-    //private ArrayList <Cliente> listaDeClientes = new ArrayList<Cliente>();
 
 	public Integer quantidadeClientes() {
 		return empresa.getListaClientesCadastrados().size();
 	}
 	
-    public void salvarCliente(String nome, String cpf, Integer idade) {
+    public void salvarCliente(String nome, String cpf, String idade) {
             Cliente cliente = new Cliente(nome, cpf, idade);
             empresa.addCliente(cliente);
-            //listaDeClientes.add(cliente);
     }
     
-    public Object[] lerCliente() {
-    	Object conteudoLinha[] = new Object[3];
+    public String[] lerCliente() {
+    	String conteudoLinha[] = new String[3];
     	for (Cliente cliente : empresa.getListaClientesCadastrados()) {
 			conteudoLinha[0] = cliente.getNome();
 			conteudoLinha[1] = cliente.getCpf();
@@ -31,7 +29,7 @@ public class ControleCliente {
         empresa.removeCliente(empresa.getListaClientesCadastrados().get(indexLinha));
     }
 
-    public void atualizarCliente(String nome, String cpf, Integer idade) {
+    public void atualizarCliente(String nome, String cpf, String idade) {
         for (Cliente c : empresa.getListaClientesCadastrados()) {
         	if (c.getNome() != nome) {
 				c.setNome(nome);

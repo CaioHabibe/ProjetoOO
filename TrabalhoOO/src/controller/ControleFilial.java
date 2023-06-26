@@ -5,7 +5,6 @@ import model.Filial;
 
 public class ControleFilial {
 	private Empresa empresa = new Empresa();
-	//private ArrayList <Filial> listaDeFiliais = new ArrayList<Filial>();
 	
 	public Integer quantidadeFiliais() {
 		return empresa.getListaFiliaisCadastradas().size();
@@ -14,7 +13,6 @@ public class ControleFilial {
 	public void salvarFilial(String cidade, String endereco, String cnpj) {
 			Filial filial = new Filial(cidade, endereco, cnpj);
 			empresa.addFilial(filial);
-			//listaDeFiliais.add(filial);
 	}
 	
 	public String[] lerFilial() {

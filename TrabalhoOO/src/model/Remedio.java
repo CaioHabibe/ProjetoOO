@@ -6,8 +6,8 @@ public class Remedio extends Produto{
 	private String formula;
 	private String administracao;
 
-	public Remedio(String nome, double preco, String descricao, long id) {
-		super(nome, preco, descricao, id);
+	public Remedio(String nome, double preco, String descricao) {
+		super(nome, preco, descricao);
 	}
 
 	public double getDosagem() {

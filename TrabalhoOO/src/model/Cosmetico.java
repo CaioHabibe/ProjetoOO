@@ -4,10 +4,10 @@ public class Cosmetico extends Produto {
 	
 	private String textura;
 	private String fragrancia;
-	private boolean corante;
+	private String corante;
 	
-	public Cosmetico(String nome, double preco, String descricao, long id) {
-		super(nome, preco, descricao, id);
+	public Cosmetico(String nome, double preco, String descricao) {
+		super(nome, preco, descricao);
 	}
 
 	public String getTextura() {
@@ -26,11 +26,11 @@ public class Cosmetico extends Produto {
 		this.fragrancia = fragrancia;
 	}
 
-	public boolean isCorante() {
+	public String getCorante() {
 		return corante;
 	}
 
-	public void setCorante(boolean corante) {
+	public void setCorante(String corante) {
 		this.corante = corante;
 	}
 	

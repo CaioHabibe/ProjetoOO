@@ -5,13 +5,11 @@ public abstract class Produto {
 	protected String nome;
 	protected double preco;
 	protected String descricao;
-	protected long id;
 	
-	public Produto(String nome, double preco, String descricao, long id) {
+	public Produto(String nome, double preco, String descricao) {
 		this.nome = nome;
 		this.preco = preco;
 		this.descricao = descricao;
-		this.id = id;
 	}
 	
 	public String getNome() {
@@ -36,14 +34,6 @@ public abstract class Produto {
 	
 	public void setDescicao(String descicao) {
 		this.descricao = descicao;
-	}
-	
-	public long getId() {
-		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
 	}
 	
 }

@@ -6,13 +6,13 @@ public class Cliente {
 	ArrayList<Carrinho> listaComprasEfetuadas;
     private String nome;
     private String cpf;
-    private Integer idade;
+    private String idade;
 
     public Cliente() {
     	listaComprasEfetuadas = new ArrayList<>();
     }
 
-    public Cliente(String nome, String cpf, Integer idade) {
+    public Cliente(String nome, String cpf, String idade) {
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
@@ -35,11 +35,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public Integer getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(Integer idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 

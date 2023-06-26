@@ -55,11 +55,8 @@ public class TelaCliente extends JFrame{
 					return;
 				}
 				else {
-					String nome = t1.getText();
-					String cpf = t2.getText();
-					Integer idade = Integer.parseInt(t3.getText());
 					
-					cc.salvarCliente(nome, cpf, idade);
+					cc.salvarCliente(t1.getText(), t2.getText(), t3.getText());
 
 					modelo.addRow(cc.lerCliente());
 					
@@ -85,7 +82,7 @@ public class TelaCliente extends JFrame{
 					String cpf =  t2.getText().toString();
 					int idade = Integer.parseInt(t3.getText().toString());
 					
-					cc.atualizarCliente(nome, cpf, idade);
+//					cc.atualizarCliente(nome, cpf, idade);
 					
 					int linha = table.getSelectedRow();
 					modelo.setValueAt(nome, linha, 0);
