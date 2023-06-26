@@ -55,6 +55,7 @@ public class TelaCliente extends JFrame{
 					return;
 				}
 				else {
+<<<<<<< HEAD
 					String nome = t1.getText();
 					String cpf = t2.getText();
 					Integer idade = Integer.parseInt(t3.getText());
@@ -62,6 +63,17 @@ public class TelaCliente extends JFrame{
 					cc.salvarCliente(nome, cpf, idade);
 
 					modelo.addRow(cc.lerCliente());
+=======
+		
+					ControleCliente cc = new ControleCliente();
+					
+					cc.salvarCliente(t1.getText(), t2.getText(), Integer.parseInt(t3.getText()));
+					
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					
+					model.addRow(cc.ler());
+					
+>>>>>>> 10a9d7096577110f515cbad6387066e26922c73f
 					
 					t1.setText(getName());
 					t2.setText(getName());
@@ -154,4 +166,8 @@ public class TelaCliente extends JFrame{
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
 	}
 	 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 10a9d7096577110f515cbad6387066e26922c73f
