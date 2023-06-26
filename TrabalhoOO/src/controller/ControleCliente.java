@@ -1,39 +1,47 @@
 package controller;
 
-import java.util.ArrayList;
-
 import model.Cliente;
+import model.Empresa;
 
 public class ControleCliente {
+	Empresa empresa = new Empresa();
+    //private ArrayList <Cliente> listaDeClientes = new ArrayList<Cliente>();
 
-    private ArrayList <Cliente> listaDeClientes = new ArrayList<Cliente>();
-
+	public Integer quantidadeClientes() {
+		return empresa.getListaClientesCadastrados().size();
+	}
+	
     public void salvarCliente(String nome, String cpf, Integer idade) {
             Cliente cliente = new Cliente(nome, cpf, idade);
-            listaDeClientes.add(cliente);
+            empresa.addCliente(cliente);
+            //listaDeClientes.add(cliente);
+    }
+    
+    public Object[] lerCliente() {
+    	Object conteudoLinha[] = new Object[3];
+    	for (Cliente cliente : empresa.getListaClientesCadastrados()) {
+			conteudoLinha[0] = cliente.getNome();
+			conteudoLinha[1] = cliente.getCpf();
+			conteudoLinha[2] = cliente.getIdade();
+    	}
+    	return conteudoLinha;
     }
 
-    public ArrayList<Cliente> ler() {
-        return listaDeClientes;
+    public void removerCliente(Integer indexLinha) {
+        empresa.removeCliente(empresa.getListaClientesCadastrados().get(indexLinha));
     }
 
-    public void  remover (String cpf) {
-        for (Cliente cliente : listaDeClientes) {
-            if (cliente.getCpf() == cpf) {
-                listaDeClientes.remove(cliente);
-                break;
-            }
+    public void atualizarCliente(String nome, String cpf, Integer idade) {
+        for (Cliente c : empresa.getListaClientesCadastrados()) {
+        	if (c.getNome() != nome) {
+				c.setNome(nome);
+			}	
+			if (c.getCpf() != cpf) {
+				c.setCpf(cpf);
+			}
+			if (c.getIdade() != idade) {
+				c.setIdade(idade);
+			}
         }
     }
-
-    public void alterar (Cliente cliente) {
-        for (Cliente aux : listaDeClientes) {
-            if (aux.getCpf() == cliente.getCpf()) {
-                listaDeClientes.remove(aux);
-                listaDeClientes.add(cliente);
-                break;
-            }
-        }
-    }
-
 }

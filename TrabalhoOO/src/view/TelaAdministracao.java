@@ -78,7 +78,6 @@ public class TelaAdministracao {
      * É o método responsável por abrir a tela para o CRUD de clientes
      * */
     private void abrirTelaClientes() {
-        frame.dispose();
         new TelaCliente();
     }
     /*
@@ -86,13 +85,11 @@ public class TelaAdministracao {
      * 
      * */
     private void abrirTelaFiliais() {
-        frame.dispose();
         new TelaFilial();
 
     }
 
     private void abrirTelaProdutos() {
-        frame.dispose();
         new TelaProduto();
 
     }

@@ -7,7 +7,7 @@ public class Principal {
 		
 		TelaPrincipal telaBoasVindas = new TelaPrincipal();
 	    telaBoasVindas.initialize();
-		
+
 	}
 	
 }

@@ -1,17 +1,22 @@
 package model;
 
-public class Cliente {
+import java.util.ArrayList;
 
+public class Cliente {
+	ArrayList<Carrinho> listaComprasEfetuadas;
     private String nome;
     private String cpf;
     private Integer idade;
 
-    public Cliente() {}
+    public Cliente() {
+    	listaComprasEfetuadas = new ArrayList<>();
+    }
 
     public Cliente(String nome, String cpf, Integer idade) {
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
+        listaComprasEfetuadas = new ArrayList<>();
     }
 
     public String getNome() {
@@ -38,4 +43,16 @@ public class Cliente {
         this.idade = idade;
     }
 
+    public void fechaCompra(Carrinho carrinho) {
+    	listaComprasEfetuadas.add(carrinho);
+    }
+    
+    public ArrayList<Produto> listagemProdutosComprados(){
+    	ArrayList<Produto> aux = new ArrayList<>();
+    	for (Carrinho c : listaComprasEfetuadas) {
+    		aux.addAll(c.listaProdutosCarrinho);
+    	}
+    	return aux;
+    }
+    
 }

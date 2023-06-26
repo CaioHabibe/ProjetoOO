@@ -24,7 +24,7 @@ public class TelaProduto extends JFrame{
 	
 	TelaProduto(){
 		setSize(500, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		
 		String[][] dataC = { 
@@ -52,7 +52,7 @@ public class TelaProduto extends JFrame{
 		t7 = new JTextField();
 		t8 = new JTextField();
 		
-		b1 = new JButton("Add");
+		b1 = new JButton("Salvar");
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
@@ -86,7 +86,7 @@ public class TelaProduto extends JFrame{
 			}
 		});
 		
-		b2 = new JButton("Update");
+		b2 = new JButton("Atualizar");
 		b2.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -128,7 +128,7 @@ public class TelaProduto extends JFrame{
 			}
 		});
 		//Botão de remover e função para o botão
-		b3 = new JButton("Delete");
+		b3 = new JButton("Remover");
 		b3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

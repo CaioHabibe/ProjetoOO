@@ -1,21 +1,38 @@
 package model;
 
-public class Carrinho {
-	
-	private int id;
+import java.util.ArrayList;
 
-	public Carrinho() {}
+public class Carrinho {
+	ArrayList<Produto> listaProdutosCarrinho;
 	
-	public Carrinho(int id) {
+	private Integer id;
+
+	public Carrinho() {
+		listaProdutosCarrinho = new ArrayList<>();
+	}
+	
+	public Carrinho(Integer id) {
 		this.id = id;
+		listaProdutosCarrinho = new ArrayList<>();
 	}
 	
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	public void addProdutoCarrinho(Produto produto) {
+		listaProdutosCarrinho.add(produto);
+	}
+	
+	public void removeProdutoCarrinho(Produto produto) {
+		 listaProdutosCarrinho.remove(produto);
+	}
+	
+	public ArrayList<Produto> getListaProdutosCarrinho(){
+		return listaProdutosCarrinho;
+	}
+	
 }

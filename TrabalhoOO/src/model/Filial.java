@@ -1,16 +1,23 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Filial {
+	private ArrayList<Produto> listaProdutosCadastrados; 
+	
 	private String cidade;
 	private String endereco;
 	private String cnpj;
 	
-	public Filial() {}
+	public Filial() {
+		listaProdutosCadastrados = new ArrayList<Produto>();
+	}
 
 	public Filial(String cidade, String endereco, String cnpj) {
 		this.cidade = cidade;
 		this.endereco = endereco;
 		this.cnpj = cnpj;
+		listaProdutosCadastrados = new ArrayList<Produto>();
 	}
 	
 	public String getCidade() {
@@ -37,6 +44,19 @@ public class Filial {
 		this.cnpj = cnpj;
 	}
 
+	public ArrayList<Produto> getListaProdutosCadastrados(){
+		return listaProdutosCadastrados;
+	}
+	
+	public void addProduto(Produto p) {
+		listaProdutosCadastrados.add(p);
+	}
+	
+	public void removeProduto(Produto p) {
+		listaProdutosCadastrados.remove(p);
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Filial [cidade=" + cidade + ", endereco=" + endereco + ", cnpj=" + cnpj + "]";

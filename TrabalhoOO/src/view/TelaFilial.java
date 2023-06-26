@@ -15,41 +15,35 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
 import controller.ControleFilial;
 
 public class TelaFilial extends JFrame{
+	ControleFilial cf = new ControleFilial();
 	JTable table;
 	
 	JTextField t1,t2,t3;
 	JButton b1, b2, b3;
 	
-	TelaFilial(){
+	public TelaFilial(){
 		setSize(500, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		
-		String[][] dataC = { 
-				
-		};
-		
 		String[] nomeColunas = {"Cidade", "Endereço", "CNPJ"};
-		
-		DefaultTableModel modelo = new DefaultTableModel(dataC, nomeColunas);
-		
+		DefaultTableModel modelo = new DefaultTableModel(nomeColunas, 0);
 		table = new JTable(modelo);
 		
 		setLayout(new GridLayout(3, 3));
 		JPanel painelC = new JPanel();
 		add(new JScrollPane(table));
 		add(new JPanel());
-		add(painelC);
+		add(painelC); 
 		
 		t1 = new JTextField();
 		t2 = new JTextField();
 		t3 = new JTextField();
 		
-		b1 = new JButton("Add");
+		b1 = new JButton("Salvar");
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -63,20 +57,18 @@ public class TelaFilial extends JFrame{
 					String endereco =  t2.getText();
 					String cnpj = t3.getText();
 					
-					ControleFilial cf = new ControleFilial();
 					cf.salvarFilial(cidade, endereco, cnpj);
-					
-					String[] novaLinha = {cf.ler()};
-					modelo.addRow(novaLinha);
+				
+					modelo.addRow(cf.lerFilial());
 					t1.setText(null);
 					t2.setText(null);
 					t3.setText(null);
+					
+					JOptionPane.showMessageDialog(null, "Cadastro de filial realizado com sucesso!");
 				}
-				
 			}
 		});
-		
-		b2 = new JButton("Update");
+		b2 = new JButton("Atualizar");
 		b2.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -89,6 +81,9 @@ public class TelaFilial extends JFrame{
 					String cidade = t1.getText().toString();
 					String endereco =  t2.getText().toString();
 					String cnpj = t3.getText().toString();
+					 
+					cf.atualizarFilial(cidade, endereco, cnpj);
+
 					
 					int linha = table.getSelectedRow();
 					modelo.setValueAt(cidade, linha, 0);
@@ -102,9 +97,7 @@ public class TelaFilial extends JFrame{
 				
 			}
 		});
-		
-		//Botão de remover e função para o botão
-		b3 = new JButton("Delete");
+		b3 = new JButton("Remover");
 		b3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -112,20 +105,19 @@ public class TelaFilial extends JFrame{
 					JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja apagar esta linha? ", "Confirm", JOptionPane.YES_NO_OPTION);
+					int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja apagar esta linha? \n" + "CIDADE: " 
+																+ t1.getText() + "\n" + "ENDEREÇO: " + t2.getText() + "\n" +
+																"CNPJ: " + t3.getText(), "Confirm", JOptionPane.YES_NO_OPTION);
 					
 					if (escolha == JOptionPane.YES_OPTION) {
+						//System.out.println(cf.quantidadeFiliais());
+						cf.removerFilial(table.getSelectedRow());
+						//System.out.println(cf.quantidadeFiliais());
 						modelo.removeRow(table.getSelectedRow());
 					}
 				}
-				
-				
 			}
 		});
-		
-		
-		
-		
 		painelC.setLayout(new GridLayout(3, 3));
 		
 		painelC.add(new JLabel("Cidade:"));
@@ -157,12 +149,6 @@ public class TelaFilial extends JFrame{
 			}
 		});
 		
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!
-		
-		
-		
-		
-		
-		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
 	}
 }

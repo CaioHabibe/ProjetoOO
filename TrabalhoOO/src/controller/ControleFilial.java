@@ -1,42 +1,47 @@
 package controller;
 
-import java.util.ArrayList;
-
-import javax.swing.table.DefaultTableModel;
-
-import model.Cliente;
+import model.Empresa;
 import model.Filial;
 
 public class ControleFilial {
-
-	private ArrayList <Filial> listaDeFiliais = new ArrayList<Filial>();
-
+	private Empresa empresa = new Empresa();
+	//private ArrayList <Filial> listaDeFiliais = new ArrayList<Filial>();
+	
+	public Integer quantidadeFiliais() {
+		return empresa.getListaFiliaisCadastradas().size();
+	}
+	
 	public void salvarFilial(String cidade, String endereco, String cnpj) {
 			Filial filial = new Filial(cidade, endereco, cnpj);
-			listaDeFiliais.add(filial);
+			empresa.addFilial(filial);
+			//listaDeFiliais.add(filial);
 	}
 	
-	public String ler() {
-		return listaDeFiliais.toString();
+	public String[] lerFilial() {
+		String a[] = new String[3];
+		for (Filial filial : empresa.getListaFiliaisCadastradas()) {
+			a[0] = filial.getCidade();
+			a[1] = filial.getEndereco();
+			a[2] = filial.getCnpj();
+		}
+		return a;
 	}
 	
-	public void  remover (String cidade) {
-		for (Filial filial : listaDeFiliais) {
-			if (filial.getCidade() == cidade) {
-				listaDeFiliais.remove(filial);
-				break;
+	public void removerFilial(Integer indexLinha) {
+		empresa.removeFilial(empresa.getListaFiliaisCadastradas().get(indexLinha));
+	}
+	
+	public void atualizarFilial(String cidade, String endereco, String cnpj) {
+		for (Filial f : empresa.getListaFiliaisCadastradas()) {
+			if (f.getCidade() != cidade) {
+				f.setCidade(cidade);
+			}	
+			if (f.getEndereco() != endereco) {
+				f.setEndereco(endereco);
+			}
+			if (f.getCnpj() != cnpj) {
+				f.setCnpj(cnpj);
 			}
 		}
 	}
-	
-	public void alterar (Filial filial) {
-		for (Filial aux : listaDeFiliais) {
-			if (aux.getCidade() == filial.getCidade()) {
-				listaDeFiliais.remove(aux);
-				listaDeFiliais.add(filial);
-				break;
-			}
-		}
-	}
-	
 }
