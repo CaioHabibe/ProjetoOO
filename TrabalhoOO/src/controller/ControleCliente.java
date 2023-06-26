@@ -13,8 +13,14 @@ public class ControleCliente {
             listaDeClientes.add(cliente);
     }
 
-    public ArrayList<Cliente> ler() {
-        return listaDeClientes;
+    public Object[] ler() {
+    	Object conteudoLinha[] = new Object[3];
+    	for (Cliente cliente : listaDeClientes) {
+			conteudoLinha[0] = cliente.getNome();
+			conteudoLinha[1] = cliente.getCpf();
+			conteudoLinha[2] = cliente.getIdade();
+    	}
+    	return conteudoLinha;
     }
 
     public void  remover (String cpf) {
