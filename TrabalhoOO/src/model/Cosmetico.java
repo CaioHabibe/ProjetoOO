@@ -6,7 +6,7 @@ public class Cosmetico extends Produto {
 	private String fragrancia;
 	private String corante;
 	
-	public Cosmetico(String nome, double preco, String descricao) {
+	public Cosmetico(String nome, double preco, String descricao, String textura, String fragrancia, String corante) {
 		super(nome, preco, descricao);
 	}
 
