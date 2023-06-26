@@ -59,14 +59,14 @@ public class TelaFilial extends JFrame{
 					return;
 				}
 				else {
-					String cidade = t1.getText().toString();
-					String endereco =  t2.getText().toString();
-					String cnpj = t3.getText().toString();
+					String cidade = t1.getText();
+					String endereco =  t2.getText();
+					String cnpj = t3.getText();
 					
 					ControleFilial cf = new ControleFilial();
 					cf.salvarFilial(cidade, endereco, cnpj);
 					
-					Object[] novaLinha = {cidade, endereco, cnpj};
+					String[] novaLinha = {cf.ler()};
 					modelo.addRow(novaLinha);
 					t1.setText(null);
 					t2.setText(null);
