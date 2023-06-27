@@ -12,7 +12,7 @@ public class Empresa {
 	public Empresa() {
 		this.nome = "Farmácias FGA";
 		listaFiliaisCadastradas = new ArrayList<>();
-		listaClientesCadastrados = new ArrayList<>();
+		listaClientesCadastrados = new ArrayList<Cliente>();
 	}
 	
 	public String getNome() {

@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class TelaLoginAdministracao{
 
@@ -18,7 +16,7 @@ public class TelaLoginAdministracao{
         frame.setTitle("Login");
         frame.setSize(300, 200);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -31,9 +29,7 @@ public class TelaLoginAdministracao{
         frame.setLocation(xPos, yPos);
 
         JPanel panelTitulo = new JPanel();
-        //JLabel lblTitulo = new JLabel("Login");
-        //panelTitulo.add(lblTitulo);
-
+        
         JPanel panelFormulario = new JPanel(new GridLayout(2, 2, 10, 10));
         panelFormulario.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -63,7 +59,6 @@ public class TelaLoginAdministracao{
             @Override
             public void actionPerformed(ActionEvent e) {
             	frame.dispose();
-            	TelaPrincipal v = new TelaPrincipal();
             }
         });
         
@@ -83,7 +78,7 @@ public class TelaLoginAdministracao{
 
         if (usuario.equals("fga") && senha.equals("123")) {
             frame.dispose();
-            TelaAdministracao telaAdministracao = new TelaAdministracao();
+            new TelaAdministracao();
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
         }

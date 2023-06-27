@@ -69,12 +69,11 @@ public class TelaPrincipal{
 
     private void abrirTelaCarrinho() {
     	frame.dispose();
-    	TelaCarrinho t = new TelaCarrinho();
+    	new TelaCarrinho();
     }
     
     private void abrirTelaLoginAdmin() {
-        frame.dispose();
-        TelaLoginAdministracao telaLogin = new TelaLoginAdministracao();
+    	new TelaLoginAdministracao();
     }
 
 }

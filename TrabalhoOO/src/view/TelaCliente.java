@@ -24,11 +24,13 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControleCliente;
 
 public class TelaCliente extends JFrame{
-	private ControleCliente cc = new ControleCliente();
+	
 	private JTable table;
 	
 	private JTextField t1,t2,t3;
 	private JButton b1, b2, b3;
+	
+	ControleCliente cc = new ControleCliente();
 	
 	 public TelaCliente(){
 		setSize(800, 600);
@@ -59,6 +61,9 @@ public class TelaCliente extends JFrame{
 		t2 = new JTextField();
 		t3 = new JTextField();
 		
+		DefaultTableModel tabela = (DefaultTableModel) table.getModel();
+		
+    	
 		b1 = new JButton("Salvar");
 		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
 		b1.setFocusable(false);
@@ -73,8 +78,8 @@ public class TelaCliente extends JFrame{
 				else {
 					
 					cc.salvarCliente(t1.getText(), t2.getText(), t3.getText());
-
-					modelo.addRow(cc.lerCliente());
+					
+//					tabela.addRow(adicionarTabela());
 					
 					t1.setText(getName());
 					t2.setText(getName());
@@ -170,5 +175,15 @@ public class TelaCliente extends JFrame{
 		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
 	}
+	 
+//	 public Object[] adicionarTabela() {
+//		 Object row[] = new Object[3];
+//		 for (int i = 0; i < cc.lerCliente().size(); i++) {
+//     		row [0] = cc.lerCliente().get(i).getNome();
+//     		row [1] = cc.lerCliente().get(i).getCpf();
+//     		row [2] = cc.lerCliente().get(i).getIdade();
+// 		}
+//		 return row;
+//	 }
 	 
 }

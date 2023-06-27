@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Cliente;
 import model.Empresa;
 
@@ -15,14 +17,16 @@ public class ControleCliente {
             empresa.addCliente(cliente);
     }
     
-    public String[] lerCliente() {
-    	String conteudoLinha[] = new String[3];
-    	for (Cliente cliente : empresa.getListaClientesCadastrados()) {
-			conteudoLinha[0] = cliente.getNome();
-			conteudoLinha[1] = cliente.getCpf();
-			conteudoLinha[2] = cliente.getIdade();
-    	}
-    	return conteudoLinha;
+    public ArrayList<Cliente> lerCliente() {
+//    	Object row[] = new Object[3];
+//    	for (int i=0; i < lista.size(); i++) {
+//    		for (Cliente cliente : lista) {
+//        		row [0] = lista.get(i).getNome();
+//        		row [1] = lista.get(i).getCpf();
+//        		row [2] = lista.get(i).getIdade();
+//    		}
+//    	}
+		return empresa.getListaClientesCadastrados();
     }
 
     public void removerCliente(Integer indexLinha) {
@@ -41,5 +45,11 @@ public class ControleCliente {
 				c.setIdade(idade);
 			}
         }
+    }
+    
+    public void teste() {
+    	for (Cliente cliente : empresa.getListaClientesCadastrados()) {
+        	System.out.println(cliente.getNome());
+    	}
     }
 }

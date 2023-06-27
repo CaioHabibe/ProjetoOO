@@ -82,7 +82,7 @@ public class TelaAdministracao {
      * É o método responsável por abrir a tela para o CRUD de clientes
      * */
     private void abrirTelaClientes() {
-        TelaCliente tc = new TelaCliente();
+        new TelaCliente();
     }
     /*
      * Método
@@ -100,6 +100,5 @@ public class TelaAdministracao {
     
     private void voltar() {
     	frame.dispose();
-    	TelaPrincipal v = new TelaPrincipal();
     }
 }
