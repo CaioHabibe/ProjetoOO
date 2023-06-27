@@ -1,10 +1,15 @@
 package view;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,11 +30,20 @@ public class TelaFilial extends JFrame{
 	JButton b1, b2, b3;
 	
 	public TelaFilial(){
-		setSize(500, 300);
+		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		
-		String[] nomeColunas = {"Cidade", "Endereço", "CNPJ"};
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+        int xPos = (screenWidth - frameWidth) / 2;
+        int yPos = (screenHeight - frameHeight) / 2;
+        setLocation(xPos, yPos);
+		
+		String[] nomeColunas = {"CIDADE", "ENDEREÇO", "CNPJ"};
 		DefaultTableModel modelo = new DefaultTableModel(nomeColunas, 0);
 		table = new JTable(modelo);
 		
@@ -44,6 +58,8 @@ public class TelaFilial extends JFrame{
 		t3 = new JTextField();
 		
 		b1 = new JButton("Salvar");
+		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b1.setFocusable(false);
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -69,6 +85,8 @@ public class TelaFilial extends JFrame{
 			}
 		});
 		b2 = new JButton("Atualizar");
+		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b2.setFocusable(false);
 		b2.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +116,8 @@ public class TelaFilial extends JFrame{
 			}
 		});
 		b3 = new JButton("Remover");
+		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b3.setFocusable(false);
 		b3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -119,6 +139,7 @@ public class TelaFilial extends JFrame{
 			}
 		});
 		painelC.setLayout(new GridLayout(3, 3));
+		painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 20));
 		
 		painelC.add(new JLabel("Cidade:"));
 		painelC.add(t1);

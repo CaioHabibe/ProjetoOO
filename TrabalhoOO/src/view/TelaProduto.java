@@ -1,10 +1,15 @@
 package view;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,15 +22,24 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaProduto extends JFrame{
-	JTable table;
+	private JTable table;
 	
-	JTextField t1,t2,t3,t4,t5,t6,t7,t8;
-	JButton b1, b2, b3;
+	private JTextField t1,t2,t3,t4,t5,t6,t7,t8;
+	private JButton b1, b2, b3;
 	
 	TelaProduto(){
-		setSize(500, 300);
+		setSize(1100, 800);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+        int xPos = (screenWidth - frameWidth) / 2;
+        int yPos = (screenHeight - frameHeight) / 2;
+        setLocation(xPos, yPos);
 		
 		String[][] dataC = { 
 				{"Remedio", "Dipirona", "30,00", "Antipirético", "#0001", "30mg", "Metanidol", "Oral"}
@@ -43,6 +57,8 @@ public class TelaProduto extends JFrame{
 		add(new JPanel());
 		add(painelC);
 		
+		
+		
 		t1 = new JTextField();
 		t2 = new JTextField();
 		t3 = new JTextField();
@@ -53,6 +69,8 @@ public class TelaProduto extends JFrame{
 		t8 = new JTextField();
 		
 		b1 = new JButton("Salvar");
+		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b1.setFocusable(false);
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
@@ -87,6 +105,8 @@ public class TelaProduto extends JFrame{
 		});
 		
 		b2 = new JButton("Atualizar");
+		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b2.setFocusable(false);
 		b2.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -129,6 +149,8 @@ public class TelaProduto extends JFrame{
 		});
 		//Botão de remover e função para o botão
 		b3 = new JButton("Remover");
+		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b3.setFocusable(false);
 		b3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -146,6 +168,8 @@ public class TelaProduto extends JFrame{
 				
 			}
 		});
+		
+		painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 40, 20));
 		painelC.setLayout(new GridLayout(9, 2));
 		
 		painelC.add(new JLabel("Tipo:"));

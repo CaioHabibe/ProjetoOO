@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class TelaLoginAdministracao {
+public class TelaLoginAdministracao{
 
     private JFrame frame;
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
 
-    public void initialize() {
+    public TelaLoginAdministracao() {
         frame = new JFrame();
         frame.setTitle("Login");
         frame.setSize(300, 200);
@@ -31,8 +31,8 @@ public class TelaLoginAdministracao {
         frame.setLocation(xPos, yPos);
 
         JPanel panelTitulo = new JPanel();
-        JLabel lblTitulo = new JLabel("Login");
-        panelTitulo.add(lblTitulo);
+        //JLabel lblTitulo = new JLabel("Login");
+        //panelTitulo.add(lblTitulo);
 
         JPanel panelFormulario = new JPanel(new GridLayout(2, 2, 10, 10));
         panelFormulario.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -64,7 +64,6 @@ public class TelaLoginAdministracao {
             public void actionPerformed(ActionEvent e) {
             	frame.dispose();
             	TelaPrincipal v = new TelaPrincipal();
-            	v.initialize();
             }
         });
         
@@ -85,7 +84,6 @@ public class TelaLoginAdministracao {
         if (usuario.equals("fga") && senha.equals("123")) {
             frame.dispose();
             TelaAdministracao telaAdministracao = new TelaAdministracao();
-            telaAdministracao.initialize();
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
         }

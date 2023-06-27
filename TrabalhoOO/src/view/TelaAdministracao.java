@@ -9,10 +9,10 @@ public class TelaAdministracao {
 
     private JFrame frame;
 
-    public void initialize() {
+    public TelaAdministracao() {
         frame = new JFrame();
         frame.setTitle("Administração");
-        frame.setSize(600, 400);
+        frame.setSize(700, 600);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -27,9 +27,10 @@ public class TelaAdministracao {
         frame.setLocation(xPos, yPos);
 
         JPanel panelBotoes = new JPanel(new GridLayout(4, 1, 10, 10));
-        panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
+        panelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
+        
         JButton btnClientes = new JButton("Clientes");
+        btnClientes.setFont(new Font("SansSerif", Font.PLAIN, 17));
         btnClientes.setFocusable(false);
         btnClientes.addActionListener(new ActionListener() {
             @Override
@@ -39,6 +40,7 @@ public class TelaAdministracao {
         });
 
         JButton btnFiliais = new JButton("Filiais");
+        btnFiliais.setFont(new Font("SansSerif", Font.PLAIN, 17));
         btnFiliais.setFocusable(false);
         btnFiliais.addActionListener(new ActionListener() {
             @Override
@@ -48,6 +50,7 @@ public class TelaAdministracao {
         });
 
         JButton btnProdutos = new JButton("Produtos");
+        btnProdutos.setFont(new Font("SansSerif", Font.PLAIN, 17));
         btnProdutos.setFocusable(false);
         btnProdutos.addActionListener(new ActionListener() {
             @Override
@@ -57,6 +60,7 @@ public class TelaAdministracao {
         });
         
         JButton back = new JButton("Voltar");
+        back.setFont(new Font("SansSerif", Font.PLAIN, 17));
         back.setFocusable(false);
         back.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +82,7 @@ public class TelaAdministracao {
      * É o método responsável por abrir a tela para o CRUD de clientes
      * */
     private void abrirTelaClientes() {
-        new TelaCliente();
+        TelaCliente tc = new TelaCliente();
     }
     /*
      * Método
@@ -97,6 +101,5 @@ public class TelaAdministracao {
     private void voltar() {
     	frame.dispose();
     	TelaPrincipal v = new TelaPrincipal();
-    	v.initialize();
     }
 }

@@ -1,11 +1,15 @@
 package view;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,23 +24,33 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControleCliente;
 
 public class TelaCliente extends JFrame{
-	ControleCliente cc = new ControleCliente();
-	JTable table;
+	private ControleCliente cc = new ControleCliente();
+	private JTable table;
 	
-	JTextField t1,t2,t3;
-	JButton b1, b2, b3;
+	private JTextField t1,t2,t3;
+	private JButton b1, b2, b3;
 	
 	 public TelaCliente(){
-		setSize(500, 300);
+		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		
-		Object[] nomeColunas = {"Nome", "CPF", "Idade"};
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+        int xPos = (screenWidth - frameWidth) / 2;
+        int yPos = (screenHeight - frameHeight) / 2;
+        setLocation(xPos, yPos);
+		
+		Object[] nomeColunas = {"NOME", "CPF", "IDADE"};
 		DefaultTableModel modelo = new DefaultTableModel(nomeColunas, 0);
 		table = new JTable(modelo);
 		
 		setLayout(new GridLayout(3, 3));
 		JPanel painelC = new JPanel();
+		painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 20));
 		add(new JScrollPane(table));
 		add(new JPanel());
 		add(painelC);
@@ -46,6 +60,8 @@ public class TelaCliente extends JFrame{
 		t3 = new JTextField();
 		
 		b1 = new JButton("Salvar");
+		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b1.setFocusable(false);
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -69,6 +85,8 @@ public class TelaCliente extends JFrame{
 			}
 		});
 		b2 = new JButton("Atualizar");
+		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b2.setFocusable(false);
 		b2.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +116,8 @@ public class TelaCliente extends JFrame{
 		});
 		//Botão de remover e função para o botão
 		b3 = new JButton("Remover");
+		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b3.setFocusable(false);
 		b3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

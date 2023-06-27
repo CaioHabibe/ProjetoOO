@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaCarrinho {
 	private JFrame frame;
 	
-	public void initialize() {
+	public TelaCarrinho() {
 		frame = new JFrame();
         frame.setTitle("Carrinho");
         frame.setSize(1000, 700);
@@ -148,6 +148,5 @@ public class TelaCarrinho {
 	private void voltar() {
     	frame.dispose();
     	TelaPrincipal v = new TelaPrincipal();
-    	v.initialize();
     }
 }
