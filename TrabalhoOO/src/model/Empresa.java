@@ -35,11 +35,6 @@ public class Empresa {
 	public ArrayList<Cliente> getListaClientesCadastrados() {
 		return listaClientesCadastrados;
 	}
-
-	public Cliente[] toArray(Cliente[] clientes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 //	public ArrayList<Filial> listagemFilialPorCidade(String cidade){
 //		ArrayList<Filial> filtro = new ArrayList<>();

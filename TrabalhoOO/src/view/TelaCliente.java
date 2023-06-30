@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -19,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import controller.ControleCliente;
 
@@ -29,8 +29,9 @@ public class TelaCliente extends JFrame{
 	private JTextField t1,t2,t3;
 	private JButton b1, b2, b3;
 	
-//	ControleCliente cc = new ControleCliente();
-
+	private DefaultListModel dlm = new DefaultListModel();
+	JList lista = new JList();
+	 
 	 public TelaCliente(ControleCliente cc){
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,20 +46,22 @@ public class TelaCliente extends JFrame{
         int yPos = (screenHeight - frameHeight) / 2;
         setLocation(xPos, yPos);
         
-        DefaultListModel dlm = new DefaultListModel();
-        JList list = new JList();
-        dlm.addElement(cc.lerCliente());
-
+       lista.setModel(dlm);
+        
 		setLayout(new GridLayout(3, 3));
 		JPanel painelC = new JPanel();
 		painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 20));
-		add(new JScrollPane(list));
+		add(new JScrollPane(lista));
 		add(new JPanel());
 		add(painelC);
 		
 		t1 = new JTextField();
 		t2 = new JTextField();
 		t3 = new JTextField();
+		
+		if (lista.isSelectionEmpty()) {
+			new TelaFilial();
+		}
 
 		b1 = new JButton("Salvar");
 		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
@@ -74,8 +77,10 @@ public class TelaCliente extends JFrame{
 				else {
 					
 					cc.salvarCliente(t1.getText(), t2.getText(), t3.getText());
-					list.setModel(dlm);
-					dlm.addElement(cc.lerCliente());
+					Object [] dados = cc.lerCliente();
+				      for (int i = 0; i < dados.length; i++) {
+				    	  dlm.addElement(dados[i]);
+				      }
 					
 					t1.setText(getName());
 					t2.setText(getName());
