@@ -12,7 +12,7 @@ public class ControleFilial {
 	
 	public void salvarFilial(String cidade, String endereco, String cnpj) {
 			Filial filial = new Filial(cidade, endereco, cnpj);
-			empresa.addFilial(filial);
+//			empresa.setListaClientesCadastrados(filial);
 	}
 	
 	public String[] lerFilial() {
@@ -26,7 +26,7 @@ public class ControleFilial {
 	}
 	
 	public void removerFilial(Integer indexLinha) {
-		empresa.removeFilial(empresa.getListaFiliaisCadastradas().get(indexLinha));
+//		empresa.removeFilial(empresa.getListaFiliaisCadastradas().get(indexLinha));
 	}
 	
 	public void atualizarFilial(String cidade, String endereco, String cnpj) {

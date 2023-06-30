@@ -4,53 +4,53 @@ import java.util.ArrayList;
 
 public class Empresa {
 	
-	ArrayList<Filial> listaFiliaisCadastradas;
-	ArrayList<Cliente> listaClientesCadastrados;
-	
 	private String nome;
+	private ArrayList<Filial> listaFiliaisCadastradas = new ArrayList<Filial>();
+	private ArrayList<Cliente> listaClientesCadastrados = new ArrayList<Cliente>();
 	
 	public Empresa() {
 		this.nome = "Farmácias FGA";
-		listaFiliaisCadastradas = new ArrayList<>();
-		listaClientesCadastrados = new ArrayList<Cliente>();
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
-	public ArrayList<Filial> getListaFiliaisCadastradas(){
+	public void adicionarCliente(Cliente cliente) {
+		listaClientesCadastrados.add(cliente);
+	}
+	
+	public void setListaFiliaisCadastradas(ArrayList<Filial> listaFiliaisCadastradas) {
+		this.listaFiliaisCadastradas = listaFiliaisCadastradas;
+	}
+
+	public ArrayList<Filial> getListaFiliaisCadastradas() {
 		return listaFiliaisCadastradas;
 	}
-	
-	public ArrayList<Cliente> getListaClientesCadastrados(){
+
+	public ArrayList<Cliente> getListaClientesCadastrados() {
 		return listaClientesCadastrados;
 	}
-	
-	public void addFilial(Filial f) {
-		listaFiliaisCadastradas.add(f);
+
+	public Cliente[] toArray(Cliente[] clientes) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	public void removeFilial(Filial f) {
-		listaFiliaisCadastradas.remove(f);
-	}
+//	public ArrayList<Filial> listagemFilialPorCidade(String cidade){
+//		ArrayList<Filial> filtro = new ArrayList<>();
+//		for(Filial filial : listaFiliaisCadastradas) {
+//			if(filial.getCidade().contains(cidade)) {
+//				filtro.add(filial);
+//			}
+//		}
+//		return filtro;
+//	}
 	
-	public void addCliente(Cliente c) {
-		listaClientesCadastrados.add(c);
-	}
 	
-	public void removeCliente(Cliente c) {
-		listaClientesCadastrados.remove(c);
-	}
-	
-	public ArrayList<Filial> listagemFilialPorCidade(String cidade){
-		ArrayList<Filial> filtro = new ArrayList<>();
-		for(Filial filial : listaFiliaisCadastradas) {
-			if(filial.getCidade().contains(cidade)) {
-				filtro.add(filial);
-			}
-		}
-		return filtro;
-	}
 	
 }

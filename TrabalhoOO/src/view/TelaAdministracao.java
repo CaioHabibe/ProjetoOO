@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import controller.ControleCliente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -82,7 +85,8 @@ public class TelaAdministracao {
      * É o método responsável por abrir a tela para o CRUD de clientes
      * */
     private void abrirTelaClientes() {
-        new TelaCliente();
+    	ControleCliente cc = new ControleCliente();
+        new TelaCliente(cc);
     }
     /*
      * Método

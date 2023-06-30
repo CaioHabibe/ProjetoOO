@@ -1,25 +1,24 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 
 import controller.ControleCliente;
 
@@ -30,9 +29,9 @@ public class TelaCliente extends JFrame{
 	private JTextField t1,t2,t3;
 	private JButton b1, b2, b3;
 	
-	ControleCliente cc = new ControleCliente();
-	
-	 public TelaCliente(){
+//	ControleCliente cc = new ControleCliente();
+
+	 public TelaCliente(ControleCliente cc){
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -45,25 +44,22 @@ public class TelaCliente extends JFrame{
         int xPos = (screenWidth - frameWidth) / 2;
         int yPos = (screenHeight - frameHeight) / 2;
         setLocation(xPos, yPos);
-		
-		Object[] nomeColunas = {"NOME", "CPF", "IDADE"};
-		DefaultTableModel modelo = new DefaultTableModel(nomeColunas, 0);
-		table = new JTable(modelo);
-		
+        
+        DefaultListModel dlm = new DefaultListModel();
+        JList list = new JList();
+        dlm.addElement(cc.lerCliente());
+
 		setLayout(new GridLayout(3, 3));
 		JPanel painelC = new JPanel();
 		painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 20));
-		add(new JScrollPane(table));
+		add(new JScrollPane(list));
 		add(new JPanel());
 		add(painelC);
 		
 		t1 = new JTextField();
 		t2 = new JTextField();
 		t3 = new JTextField();
-		
-		DefaultTableModel tabela = (DefaultTableModel) table.getModel();
-		
-    	
+
 		b1 = new JButton("Salvar");
 		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
 		b1.setFocusable(false);
@@ -78,8 +74,8 @@ public class TelaCliente extends JFrame{
 				else {
 					
 					cc.salvarCliente(t1.getText(), t2.getText(), t3.getText());
-					
-//					tabela.addRow(adicionarTabela());
+					list.setModel(dlm);
+					dlm.addElement(cc.lerCliente());
 					
 					t1.setText(getName());
 					t2.setText(getName());
@@ -108,9 +104,6 @@ public class TelaCliente extends JFrame{
 //					cc.atualizarCliente(nome, cpf, idade);
 					
 					int linha = table.getSelectedRow();
-					modelo.setValueAt(nome, linha, 0);
-					modelo.setValueAt(cpf, linha, 1);
-					modelo.setValueAt(idade, linha, 2);
 					
 					t1.setText(null);
 					t2.setText(null);
@@ -136,8 +129,6 @@ public class TelaCliente extends JFrame{
 															  + "IDADE: " + t3.getText(), "Confirm", JOptionPane.YES_NO_OPTION);
 					
 					if (escolha == JOptionPane.YES_OPTION) {
-						cc.removerCliente(table.getSelectedRow());
-						modelo.removeRow(table.getSelectedRow());
 					}
 				}
 			}
@@ -157,33 +148,6 @@ public class TelaCliente extends JFrame{
 		painelC.add(b3);
 		
 		validate();
-		
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int linhaIndex = table.getSelectedRow();
-				String nome = (String) modelo.getValueAt(linhaIndex, 0);
-				String cpf = (String) modelo.getValueAt(linhaIndex, 1);
-				int idade = (int) modelo.getValueAt(linhaIndex, 2);
-				
-				t1.setText(nome);
-				t2.setText(cpf);
-				t3.setText(String.valueOf(idade));
-				
-			}
-		});
-		
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
 	}
-	 
-//	 public Object[] adicionarTabela() {
-//		 Object row[] = new Object[3];
-//		 for (int i = 0; i < cc.lerCliente().size(); i++) {
-//     		row [0] = cc.lerCliente().get(i).getNome();
-//     		row [1] = cc.lerCliente().get(i).getCpf();
-//     		row [2] = cc.lerCliente().get(i).getIdade();
-// 		}
-//		 return row;
-//	 }
 	 
 }
