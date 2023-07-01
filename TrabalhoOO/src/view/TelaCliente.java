@@ -46,7 +46,7 @@ public class TelaCliente extends JFrame{
         int yPos = (screenHeight - frameHeight) / 2;
         setLocation(xPos, yPos);
         
-       lista.setModel(dlm);
+        lista.setModel(dlm);
         
 		setLayout(new GridLayout(3, 3));
 		JPanel painelC = new JPanel();
@@ -58,10 +58,6 @@ public class TelaCliente extends JFrame{
 		t1 = new JTextField();
 		t2 = new JTextField();
 		t3 = new JTextField();
-		
-		if (lista.isSelectionEmpty()) {
-			new TelaFilial();
-		}
 
 		b1 = new JButton("Salvar");
 		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
@@ -77,14 +73,16 @@ public class TelaCliente extends JFrame{
 				else {
 					
 					cc.salvarCliente(t1.getText(), t2.getText(), t3.getText());
-					Object [] dados = cc.lerCliente();
-				      for (int i = 0; i < dados.length; i++) {
-				    	  dlm.addElement(dados[i]);
-				      }
 					
-					t1.setText(getName());
-					t2.setText(getName());
-					t3.setText(getName());
+//					Object [] dados = cc.lerCliente();
+//					
+//				      for (int i = 0; i < dados.length; i++) {
+//				    	  dlm.addElement(dados[i]);
+//				      }
+					
+					t1.setText(null);
+					t2.setText(null);
+					t3.setText(null);
 					
 					JOptionPane.showMessageDialog(null, "Cadastro de cliente realizado com sucesso!");					
 				}

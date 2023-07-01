@@ -12,7 +12,7 @@ public class TelaAdministracao {
 
     private JFrame frame;
 
-    public TelaAdministracao() {
+    public TelaAdministracao(ControleCliente cc) {
         frame = new JFrame();
         frame.setTitle("Administração");
         frame.setSize(700, 600);
@@ -38,7 +38,7 @@ public class TelaAdministracao {
         btnClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirTelaClientes();
+            	new TelaCliente(cc);
             }
         });
 
@@ -84,10 +84,6 @@ public class TelaAdministracao {
      * Método abrirTelaClientes()
      * É o método responsável por abrir a tela para o CRUD de clientes
      * */
-    private void abrirTelaClientes() {
-    	ControleCliente cc = new ControleCliente();
-        new TelaCliente(cc);
-    }
     /*
      * Método
      * 

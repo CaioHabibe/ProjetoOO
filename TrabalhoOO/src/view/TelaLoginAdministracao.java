@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import controller.ControleCliente;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +14,7 @@ public class TelaLoginAdministracao{
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
 
-    public TelaLoginAdministracao() {
+    public TelaLoginAdministracao(ControleCliente cc) {
         frame = new JFrame();
         frame.setTitle("Login");
         frame.setSize(300, 200);
@@ -50,7 +53,15 @@ public class TelaLoginAdministracao{
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                realizarLogin();
+                String usuario = txtUsuario.getText();
+                String senha = new String(txtSenha.getPassword());
+
+                if (usuario.equals("fga") && senha.equals("123")) {
+                    frame.dispose();
+                    new TelaAdministracao(cc);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         JButton voltar = new JButton("Voltar");
@@ -71,16 +82,5 @@ public class TelaLoginAdministracao{
 
         frame.setVisible(true);
     }
-    
-    private void realizarLogin() {
-        String usuario = txtUsuario.getText();
-        String senha = new String(txtSenha.getPassword());
 
-        if (usuario.equals("fga") && senha.equals("123")) {
-            frame.dispose();
-            new TelaAdministracao();
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 }

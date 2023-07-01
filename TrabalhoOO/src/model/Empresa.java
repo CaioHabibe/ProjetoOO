@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Empresa {
 	
 	private String nome;
-	private ArrayList<Filial> listaFiliaisCadastradas = new ArrayList<Filial>();
-	private ArrayList<Cliente> listaClientesCadastrados = new ArrayList<Cliente>();
+	private static final ArrayList<Cliente> listaClientesCadastrados = new ArrayList<Cliente>();
+	private static final ArrayList<Filial> listaFiliaisCadastradas = new ArrayList<Filial>();
 	
 	public Empresa() {
 		this.nome = "Farmácias FGA";
@@ -24,9 +24,9 @@ public class Empresa {
 		listaClientesCadastrados.add(cliente);
 	}
 	
-	public void setListaFiliaisCadastradas(ArrayList<Filial> listaFiliaisCadastradas) {
-		this.listaFiliaisCadastradas = listaFiliaisCadastradas;
-	}
+//	public void setListaFiliaisCadastradas(ArrayList<Filial> listaFiliaisCadastradas) {
+//		this.listaFiliaisCadastradas = listaFiliaisCadastradas;
+//	}
 
 	public ArrayList<Filial> getListaFiliaisCadastradas() {
 		return listaFiliaisCadastradas;

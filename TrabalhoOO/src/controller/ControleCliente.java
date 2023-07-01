@@ -1,11 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Cliente;
 import model.Empresa;
 
 public class ControleCliente {
 	
-	Empresa empresa = new Empresa();
+	static Empresa empresa = new Empresa();
 	
     public void salvarCliente(String nome, String cpf, String idade) {
             Cliente cliente = new Cliente(nome, cpf, idade);
@@ -13,15 +15,15 @@ public class ControleCliente {
             
             }
   
-    public Object[] lerCliente() {
-    	Object[] clientes = null;
-        	for (Cliente cliente : empresa.getListaClientesCadastrados()) {
-        		Object[] clientes1 = {
-        				cliente.getNome(),
-        		};
-        		clientes = clientes1;
-        	}
-		return clientes;
+    public ArrayList<Cliente> lerCliente() {
+//    	Object[] clientes = null;
+//        	for (Cliente cliente : empresa.getListaClientesCadastrados()) {
+//        		Object[] clientes1 = {
+//        				cliente.getNome(),
+//        		};
+//        		clientes = clientes1;
+//        	}
+		return empresa.getListaClientesCadastrados();
     }
 //
 //    public void removerCliente(Integer indexLinha) {

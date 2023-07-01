@@ -147,6 +147,5 @@ public class TelaCarrinho {
 	
 	private void voltar() {
     	frame.dispose();
-    	TelaPrincipal v = new TelaPrincipal();
     }
 }
