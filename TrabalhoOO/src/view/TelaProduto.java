@@ -50,7 +50,7 @@ public class TelaProduto extends JFrame{
         int yPos = (screenHeight - frameHeight) / 2;
         setLocation(xPos, yPos);
         
-        final var dados = cp.lerProduto();
+        final var dados = cp.lerRemedio();
         final var modelo = new DefaultTableModel(dados, colunas) {
         	@Override
         	public boolean isCellEditable(int linhas, int colunas) {
@@ -101,8 +101,6 @@ public class TelaProduto extends JFrame{
             	
                 String selectedOption = (String) comboBox.getSelectedItem();
                 
-                
-                
             }
         });
 
@@ -133,6 +131,7 @@ public class TelaProduto extends JFrame{
 						t6.setText(null);
 					}
 				}
+				
 				if(comboBox.getSelectedItem().equals("Cosmético")){
 					if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
 							|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
@@ -163,7 +162,6 @@ public class TelaProduto extends JFrame{
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(comboBox.getSelectedItem().equals("Remédio")){
 					if (e.getClickCount() == 2) {
 						int row = table.rowAtPoint(e.getPoint());
 						int column = table.columnAtPoint(e.getPoint());
@@ -174,21 +172,13 @@ public class TelaProduto extends JFrame{
 						t4.setText((String) table.getValueAt(table.getSelectedRow(), 4));
 						t5.setText((String) table.getValueAt(table.getSelectedRow(), 5));
 						t6.setText((String) table.getValueAt(table.getSelectedRow(), 6));
-					}
-				}
-
-				if(comboBox.getSelectedItem().equals("Cosmético")){
-					if (e.getClickCount() == 2) {
-						int row = table.rowAtPoint(e.getPoint());
-						int column = table.columnAtPoint(e.getPoint());
-
-						t1.setText((String) table.getValueAt(table.getSelectedRow(), 1));
-						t2.setText((String) table.getValueAt(table.getSelectedRow(), 2));
-						t3.setText((String) table.getValueAt(table.getSelectedRow(), 3));
-						t4.setText((String) table.getValueAt(table.getSelectedRow(), 4));
-						t5.setText((String) table.getValueAt(table.getSelectedRow(), 5));
-						t6.setText((String) table.getValueAt(table.getSelectedRow(), 6));
-                    }
+						
+						if (table.getValueAt(table.getSelectedRow(), 0) == "Remédio") {
+							comboBox.setSelectedItem("Remédio");
+						}
+						if (table.getValueAt(table.getSelectedRow(), 0) == "Cosmético") {
+							comboBox.setSelectedItem("Cosmético");
+						}
 				}
 			}
 		});
@@ -196,6 +186,7 @@ public class TelaProduto extends JFrame{
 		b2.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				if(comboBox.getSelectedItem().equals("Remédio")){
 					if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
 						|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
@@ -218,6 +209,7 @@ public class TelaProduto extends JFrame{
 						}
 					}	
 				}
+				
 				if(comboBox.getSelectedItem().equals("Cosmético")){
 					if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
 							|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
@@ -250,7 +242,8 @@ public class TelaProduto extends JFrame{
 				if(comboBox.getSelectedItem().equals("Remédio")){
 					if(table.getSelectedRow() == -1) {
 						JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-					}else {
+					}
+					else {
 						int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover este remédio? \n"
 								+ "TIPO: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
 								+ "NOME: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
@@ -326,4 +319,5 @@ public class TelaProduto extends JFrame{
 		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
 	}
+			
 }

@@ -18,28 +18,20 @@ public class ControleProduto {
     		filial.getListaRemediosCadastrados().add(remedio);
     }
 
-    public String[][] lerProduto() {
-    	final var dados = new String[filial.getListaRemediosCadastrados().size()][];
-    	final var dados2 = new String[filial.getListaCosmeticosCadastrados().size()][];
-        final int colunas = 6;
-        
-    	for (int i = 0; i < filial.getListaRemediosCadastrados().size(); i++) {
-    		dados[i] = filial.getListaRemediosCadastrados().get(i).remedioJtableStruct();
-        	}
-    	for (int i = 0; i < filial.getListaCosmeticosCadastrados().size(); i++) {
-    		dados2[i] = filial.getListaCosmeticosCadastrados().get(i).cosmeticoJtableStruct();
-    	}
-    	
-    	final int linhas1 = dados.length;
-        final int linhas2 = dados2.length;
-        
-        final var array = new String[linhas1 + linhas2][colunas];
-        
-        System.arraycopy(dados, 0, array, 0, linhas1);
-        
-        System.arraycopy(dados2, 0, array, linhas1, linhas2);
-
-        return array;
+    public String[][] lerRemedio() {
+        final var dados = new String[filial.getListaRemediosCadastrados().size()][];
+        for (int i = 0; i < filial.getListaRemediosCadastrados().size(); i++) {
+        	dados[i] =filial.getListaRemediosCadastrados().get(i).remedioJtableStruct();
+        }
+        return dados;
+    }
+    
+    public String[][] lerCosmetico() {
+        final var dados = new String[filial.getListaCosmeticosCadastrados().size()][];
+        for (int i = 0; i < filial.getListaCosmeticosCadastrados().size(); i++) {
+        	dados[i] = filial.getListaCosmeticosCadastrados().get(i).cosmeticoJtableStruct();
+        }
+        return dados;
     }
 
     public void removerRemedio(int index) {
