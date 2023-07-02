@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -25,19 +26,21 @@ import controller.ControleCliente;
 
 public class TelaCliente extends JFrame {
 
-    private JTable table;
+    private JTable table, tableListagem;
 
-    private JTextField t1, t2, t3;
-    private JButton b1, b2, b3;
+    private JTextField textoNome, textoCPF, textoRemover;
+    private JButton btnSalvar, btnAtualizar, btnRemover, btnListar;
 
     private final String[] colunas = new String[]{"Nome", "CPF", "idade"};
-
+    private final String[] colunaListagem = new String[]{"Nome"};
+    
     public TelaCliente(ControleCliente cc) {
 
-        setSize(800, 600);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
-
+        
+        //Abrir a view no centro da tela
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
@@ -46,7 +49,8 @@ public class TelaCliente extends JFrame {
         int xPos = (screenWidth - frameWidth) / 2;
         int yPos = (screenHeight - frameHeight) / 2;
         setLocation(xPos, yPos);
-
+        
+        //Layout da Table de cima
         final var dados = cc.lerCliente();
         final var modelo = new DefaultTableModel(dados, colunas) {
         	@Override
@@ -59,48 +63,74 @@ public class TelaCliente extends JFrame {
         	}
         };
         
+        //Layout da Table debaixo
+        final var dadoListagem = cc.lerCliente();
+        final var modeloListagem = new DefaultTableModel(dadoListagem, colunaListagem) {
+        	@Override
+        	public boolean isCellEditable(int linhas, int colunas) {
+        		if(colunas == 1) {
+        			return false;
+        		}else {
+        			return false;
+        		}
+        	}
+        };
+        
+        //Criando as tables e adicionando no frame
         table = new JTable(modelo);
+        tableListagem = new JTable(modeloListagem);
+
         add(table);
-
-        setLayout(new GridLayout(3, 3));
-        JPanel painelC = new JPanel();
-        painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 20));
+        add(tableListagem);
+        
+        
+        setLayout(new GridLayout(4, 3));
         add(new JScrollPane(table));
+        add(new JScrollPane(tableListagem));
         add(new JPanel());
-        add(painelC);
-
-        t1 = new JTextField();
-        t2 = new JTextField();
-        t3 = new JTextField();
-
-        b1 = new JButton("Salvar");
-        b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
-        b1.setFocusable(false);
-        b1.addActionListener(new ActionListener() {
+        
+        //Criando o painel os botoes e textos
+        JPanel painelC = new JPanel();
+        painelC.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 20));
+        painelC.setPreferredSize(new Dimension(100,220));
+        add(painelC,BorderLayout.SOUTH);
+        
+        //Caixas de texto
+        textoNome = new JTextField();
+        textoCPF = new JTextField();
+        textoRemover = new JTextField();
+        
+        
+        //Botao salvar
+        btnSalvar = new JButton("Salvar");
+        btnSalvar.setFont(new Font("SansSerif", Font.PLAIN, 17));
+        btnSalvar.setFocusable(false);
+        btnSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty() || t3.getText().toString().isEmpty()) {
+                if (textoNome.getText().toString().isEmpty() || textoCPF.getText().toString().isEmpty() || textoRemover.getText().toString().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else {
                 	try {
-                		cc.salvarCliente(t1.getText(), Long.valueOf(t2.getText()), Integer.valueOf(t3.getText()));
-                    	modelo.addRow(new String[]{t1.getText(), t2.getText(), t3.getText()});
+                		cc.salvarCliente(textoNome.getText(), Long.valueOf(textoCPF.getText()), Integer.valueOf(textoRemover.getText()));
+                    	modelo.addRow(new String[]{textoNome.getText(), textoCPF.getText(), textoRemover.getText()});
                     	JOptionPane.showMessageDialog(null, "Cliente cadastrado realizado com sucesso!");
                     	
                 	} catch (RuntimeException e1) {
                 		JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
                 	}
 
-                	t1.setText(null);
-                    t2.setText(null);
-                    t3.setText(null);
+                	textoNome.setText(null);
+                    textoCPF.setText(null);
+                    textoRemover.setText(null);
 
                 }
             }
         });
-             
+        
+        //Table de cima     
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -108,30 +138,31 @@ public class TelaCliente extends JFrame {
                     int row = table.rowAtPoint(e.getPoint());
                     int column = table.columnAtPoint(e.getPoint());
 
-                    t1.setText((String) table.getValueAt(table.getSelectedRow(), 0));
-                    t2.setText((String) table.getValueAt(table.getSelectedRow(), 1));
-                    t3.setText((String) table.getValueAt(table.getSelectedRow(), 2));
+                    textoNome.setText((String) table.getValueAt(table.getSelectedRow(), 0));
+                    textoCPF.setText((String) table.getValueAt(table.getSelectedRow(), 1));
+                    textoRemover.setText((String) table.getValueAt(table.getSelectedRow(), 2));
                 }
             }
         });
         
-        b2 = new JButton("Atualizar");
-        b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
-        b2.setFocusable(false);
-        b2.addActionListener(new ActionListener() {
+        //Botao Atualizar
+        btnAtualizar = new JButton("Atualizar");
+        btnAtualizar.setFont(new Font("SansSerif", Font.PLAIN, 17));
+        btnAtualizar.setFocusable(false);
+        btnAtualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty() || t3.getText().toString().isEmpty()) {
+                if (textoNome.getText().toString().isEmpty() || textoCPF.getText().toString().isEmpty() || textoRemover.getText().toString().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else {
                 	
                 	try {
-                		cc.atualizarCliente(t1.getText(), Long.valueOf(t2.getText()), Integer.valueOf(t3.getText()),table.getSelectedRow());
-                    	modelo.setValueAt(t1.getText(), table.getSelectedRow(), 0);
-                    	modelo.setValueAt(t2.getText(), table.getSelectedRow(), 1);                	
-                    	modelo.setValueAt(t3.getText(), table.getSelectedRow(), 2);
+                		cc.atualizarCliente(textoNome.getText(), Long.valueOf(textoCPF.getText()), Integer.valueOf(textoRemover.getText()),table.getSelectedRow());
+                    	modelo.setValueAt(textoNome.getText(), table.getSelectedRow(), 0);
+                    	modelo.setValueAt(textoCPF.getText(), table.getSelectedRow(), 1);                	
+                    	modelo.setValueAt(textoRemover.getText(), table.getSelectedRow(), 2);
                     	JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
                     	
                 	} catch (RuntimeException e1) {
@@ -140,11 +171,12 @@ public class TelaCliente extends JFrame {
                 }
             }
         });
-
-        b3 = new JButton("Remover");
-        b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
-        b3.setFocusable(false);
-        b3.addActionListener(new ActionListener() {
+        
+        //Botao remover
+        btnRemover = new JButton("Remover");
+        btnRemover.setFont(new Font("SansSerif", Font.PLAIN, 17));
+        btnRemover.setFocusable(false);
+        btnRemover.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (table.getSelectedRow() == -1) {
@@ -164,20 +196,30 @@ public class TelaCliente extends JFrame {
             }
         });
         
-        painelC.setLayout(new GridLayout(3, 3));
-
+        //Botao Listar
+        btnListar = new JButton("Listar");
+        btnListar.setFont(new Font("SansSerif", Font.PLAIN, 17));
+        btnListar.setFocusable(false);
+        
+        //Adicionando componentes ao painel
+        painelC.setLayout(new GridLayout(4, 3));
+       
         painelC.add(new JLabel("Nome:"));
-        painelC.add(t1);
-        painelC.add(b1);
+        painelC.add(textoNome);
+        painelC.add(btnSalvar);
 
         painelC.add(new JLabel("CPF:"));
-        painelC.add(t2);
-        painelC.add(b2);
+        painelC.add(textoCPF);
+        painelC.add(btnAtualizar);
 
         painelC.add(new JLabel("Idade:"));
-        painelC.add(t3);
-        painelC.add(b3);
-
+        painelC.add(textoRemover);
+        painelC.add(btnRemover);
+       
+        painelC.add(new JPanel());
+        painelC.add(new JPanel());
+        painelC.add(btnListar);
+        
         validate();
         
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
