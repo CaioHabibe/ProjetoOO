@@ -5,14 +5,20 @@ public class Remedio extends Produto{
 	private String dosagem;
 	private String formula;
 	private String administracao;
+	private String tipo;
 
-	public Remedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao) {
+	public Remedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, String tipo) {
 		super(nome, preco, descricao);
 		this.dosagem = dosagem;
 		this.formula = formula;
 		this.administracao = administracao;
+		this.tipo = tipo;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+	
 	public String getDosagem() {
 		return dosagem;
 	}

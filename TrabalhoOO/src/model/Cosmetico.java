@@ -5,14 +5,20 @@ public class Cosmetico extends Produto {
 	private String textura;
 	private String fragrancia;
 	private String corante;
+	private String tipo;
 	
-	public Cosmetico(String nome, double preco, String descricao, String textura, String fragrancia, String corante) {
+	public Cosmetico(String nome, double preco, String descricao, String textura, String fragrancia, String corante, String tipo) {
 		super(nome, preco, descricao);
 		this.corante = corante;
 		this.fragrancia = fragrancia;
 		this.textura = textura;
+		this.tipo = tipo;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+	
 	public String getTextura() {
 		return textura;
 	}

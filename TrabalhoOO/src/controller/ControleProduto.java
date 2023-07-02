@@ -8,13 +8,13 @@ public class ControleProduto {
 	
     static final Filial filial = new Filial();
 
-    public void salvarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante) {
-        	Cosmetico cosmetico = new Cosmetico(nome, preco, descricao, textura, fragrancia, corante);
+    public void salvarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, String tipo) {
+        	Cosmetico cosmetico = new Cosmetico(nome, preco, descricao, textura, fragrancia, corante, tipo);
         	filial.getListaCosmeticosCadastrados().add(cosmetico);
     }
 
-    public void salvarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao) {
-    		Remedio remedio = new Remedio(nome, preco, descricao, dosagem, formula, administracao);
+    public void salvarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, String tipo) {
+    		Remedio remedio = new Remedio(nome, preco, descricao, dosagem, formula, administracao, tipo);
     		filial.getListaRemediosCadastrados().add(remedio);
     }
 

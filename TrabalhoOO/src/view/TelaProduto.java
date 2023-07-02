@@ -33,7 +33,7 @@ public class TelaProduto extends JFrame{
 	
 	private	JComboBox<String> comboBox = new JComboBox<>();
 	
-	private final String[] colunas = {"Nome", "Preço", "Descrição", "Dosagem/Textura", "Fórmula/Fragrância", "Administração/Corante"};
+	private final String[] colunas = {"Tipo", "Nome", "Preço", "Descrição", "Dosagem/Textura", "Fórmula/Fragrância", "Administração/Corante"};
 	
 	TelaProduto(ControleProduto cp){
 		
@@ -73,7 +73,7 @@ public class TelaProduto extends JFrame{
 		add(painelC);
 		
         comboBox.addItem("Selecione uma opção");
-        comboBox.addItem("Rémedio");
+        comboBox.addItem("Remédio");
         comboBox.addItem("Cosmético");
 
 		t1 = new JTextField();
@@ -84,226 +84,212 @@ public class TelaProduto extends JFrame{
 		t6 = new JTextField();
 
         b1 = new JButton("Salvar");
+        b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b1.setFocusable(false);
 		
-		b2 = new JButton("Atualizar");
+		b2 = new JButton("Atualizar");	
+		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b2.setFocusable(false);
 		
 		b3 = new JButton("Remover");
-		
+		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b3.setFocusable(false);
+
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
                 String selectedOption = (String) comboBox.getSelectedItem();
-                switch (selectedOption) {
-                case "Rémedio":
-                	
-            		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
-            		b1.setFocusable(false);
-            		b1.addActionListener(new ActionListener() {
-            			@Override
-            			public void actionPerformed(ActionEvent e) {	
-            				
-            				if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
-            						|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
-            						|| t6.getText().toString().isEmpty()) {
-            					JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-            					return;
-            				}
-            				else {
-            					try {
-                            		cp.salvarRemedio(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText());
-                                	modelo.addRow(new String[]{t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
-                                	JOptionPane.showMessageDialog(null, "Remédio cadastrado com sucesso!");
-                                	
-                            	} catch (RuntimeException e1) {
-                            		JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-                            	}
-            					t1.setText(null);
-            					t2.setText(null);
-            					t3.setText(null);
-            					t4.setText(null);
-            					t5.setText(null);
-            					t6.setText(null);
-            				}
-            			}
-            		});
-            		
-            		table.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            if (e.getClickCount() == 2) {
-                                int row = table.rowAtPoint(e.getPoint());
-                                int column = table.columnAtPoint(e.getPoint());
-
-                                t1.setText((String) table.getValueAt(table.getSelectedRow(), 0));
-                                t2.setText((String) table.getValueAt(table.getSelectedRow(), 1));
-                                t3.setText((String) table.getValueAt(table.getSelectedRow(), 2));
-                                t4.setText((String) table.getValueAt(table.getSelectedRow(), 3));
-                                t5.setText((String) table.getValueAt(table.getSelectedRow(), 4));
-                                t6.setText((String) table.getValueAt(table.getSelectedRow(), 5));
-                            }
-                        }
-                    });
-            		
-            		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
-            		b2.setFocusable(false);
-            		b2.addActionListener(new ActionListener() {	
-            			@Override
-            			public void actionPerformed(ActionEvent e) {
-            				if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
-            						|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
-            						|| t6.getText().toString().isEmpty())  {
-            					JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-            					return;
-            				}
-            				else {
-            					try {
-                            		cp.atualizarRemedio(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), table.getSelectedRow());
-                                	modelo.setValueAt(t1.getText(), table.getSelectedRow(), 0);
-                                	modelo.setValueAt(t2.getText(), table.getSelectedRow(), 1);                	
-                                	modelo.setValueAt(t3.getText(), table.getSelectedRow(), 2);
-                                	modelo.setValueAt(t4.getText(), table.getSelectedRow(), 3);
-                                	modelo.setValueAt(t5.getText(), table.getSelectedRow(), 4);
-                                	modelo.setValueAt(t6.getText(), table.getSelectedRow(), 5);
-                                	JOptionPane.showMessageDialog(null, "Atualização de remédio realizada com sucesso!");
-                                	
-                            	} catch (RuntimeException e1) {
-                            		JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-                            	}
-            				}				
-            			}
-            		});
-
-            		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
-            		b3.setFocusable(false);
-            		b3.addActionListener(new ActionListener() {
-            			@Override
-            			public void actionPerformed(ActionEvent e) {
-            				if(table.getSelectedRow() == -1) {
-            					JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-            				}else {
-                                int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover este remédio? \n" +
-                                        "NOME: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
-                                        + "PREÇO: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
-                                        + "DESCRIÇÃO: " + table.getValueAt(table.getSelectedRow(), 2) +"\n"
-                                        + "DOSAGEM: " + table.getValueAt(table.getSelectedRow(), 3) + "\n"
-                                        + "FÓRMULA: " + table.getValueAt(table.getSelectedRow(), 4) +"\n" 
-                                        + "ADMINISTRAÇÃO: " + table.getValueAt(table.getSelectedRow(), 5), "Confirm", JOptionPane.YES_NO_OPTION);
-
-                                if (escolha == JOptionPane.YES_OPTION) {
-                                	cp.removerRemedio(table.getSelectedRow());
-                                	modelo.removeRow(table.getSelectedRow());
-                                	JOptionPane.showMessageDialog(null, "Remédio removido com sucesso!");
-                                }
-            				}
-            			}
-            		});
-            		break;
-                case "Cosmético":
-            		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
-            		b1.setFocusable(false);
-            		b1.addActionListener(new ActionListener() {
-            			@Override
-            			public void actionPerformed(ActionEvent e) {	
-            				if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
-            						|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
-            						|| t6.getText().toString().isEmpty()) {
-            					JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-            					return;
-            				}
-            				else {
-            					try {
-                            		cp.salvarCosmetico(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText());
-                                	modelo.addRow(new String[]{t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
-                                	JOptionPane.showMessageDialog(null, "Cosmético cadastrado com sucesso!");
-                                	
-                            	} catch (RuntimeException e1) {
-                            		JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-                            	}
-            					t1.setText(null);
-            					t2.setText(null);
-            					t3.setText(null);
-            					t4.setText(null);
-            					t5.setText(null);
-            					t6.setText(null);
-            				}
-            			}
-            		});
-            		
-            		table.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            if (e.getClickCount() == 2) {
-                                int row = table.rowAtPoint(e.getPoint());
-                                int column = table.columnAtPoint(e.getPoint());
-
-                                t1.setText((String) table.getValueAt(table.getSelectedRow(), 0));
-                                t2.setText((String) table.getValueAt(table.getSelectedRow(), 1));
-                                t3.setText((String) table.getValueAt(table.getSelectedRow(), 2));
-                                t4.setText((String) table.getValueAt(table.getSelectedRow(), 3));
-                                t5.setText((String) table.getValueAt(table.getSelectedRow(), 4));
-                                t6.setText((String) table.getValueAt(table.getSelectedRow(), 5));
-                            }
-                        }
-                    });
-            		
-            		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
-            		b2.setFocusable(false);
-            		b2.addActionListener(new ActionListener() {	
-            			@Override
-            			public void actionPerformed(ActionEvent e) {
-            				if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
-            						|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
-            						|| t6.getText().toString().isEmpty())  {
-            					JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-            					return;
-            				}
-            				else {
-            					try {
-                            		cp.atualizarCosmetico(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), table.getSelectedRow());
-                                	modelo.setValueAt(t1.getText(), table.getSelectedRow(), 0);
-                                	modelo.setValueAt(t2.getText(), table.getSelectedRow(), 1);                	
-                                	modelo.setValueAt(t3.getText(), table.getSelectedRow(), 2);
-                                	modelo.setValueAt(t4.getText(), table.getSelectedRow(), 3);
-                                	modelo.setValueAt(t5.getText(), table.getSelectedRow(), 4);
-                                	modelo.setValueAt(t6.getText(), table.getSelectedRow(), 5);
-                                	JOptionPane.showMessageDialog(null, "Cosmético atualizado com sucesso!");
-                                	
-                            	} catch (RuntimeException e1) {
-                            		JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-                            	}
-            				}				
-            			}
-            		});
-            		
-            		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
-            		b3.setFocusable(false);
-            		b3.addActionListener(new ActionListener() {
-            			@Override
-            			public void actionPerformed(ActionEvent e) {
-            				if(table.getSelectedRow() == -1) {
-            					JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-            				}
-            				else {
-                                int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover este cosmético? \n" +
-                                        "NOME: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
-                                        + "PREÇO: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
-                                        + "DESCRIÇÃO: " + table.getValueAt(table.getSelectedRow(), 2) +"\n"
-                                        + "TEXTURA: " + table.getValueAt(table.getSelectedRow(), 3) + "\n"
-                                        + "FRAGRANCIA: " + table.getValueAt(table.getSelectedRow(), 4) +"\n" 
-                                        + "CORANTE: " + table.getValueAt(table.getSelectedRow(), 5), "Confirm", JOptionPane.YES_NO_OPTION);
-
-                                if (escolha == JOptionPane.YES_OPTION) {
-                                	cp.removerCosmetico(table.getSelectedRow());
-                                	modelo.removeRow(table.getSelectedRow());
-                                	JOptionPane.showMessageDialog(null, "Cosmético removido com sucesso!");
-                                }
-            				}
-            			}
-            		});
-            		break;
-                }
+                
+                
+                
             }
         });
+
+		b1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				if(comboBox.getSelectedItem().equals("Remédio")){
+					if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
+							|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
+							|| t6.getText().toString().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else {
+						try {
+							cp.salvarRemedio(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), "RÉMEDIO");
+							modelo.addRow(new String[]{"Remédio",t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
+							JOptionPane.showMessageDialog(null, "Remédio cadastrado com sucesso!");
+							
+						} catch (RuntimeException e1) {
+							JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+						}
+						t1.setText(null);
+						t2.setText(null);
+						t3.setText(null);
+						t4.setText(null);
+						t5.setText(null);
+						t6.setText(null);
+					}
+				}
+				if(comboBox.getSelectedItem().equals("Cosmético")){
+					if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
+							|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
+							|| t6.getText().toString().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else {
+						try {
+							cp.salvarCosmetico(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(),"Cosmético");
+							modelo.addRow(new String[]{"Cosmético",t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
+							JOptionPane.showMessageDialog(null, "Cosmético cadastrado com sucesso!");
+							
+						} catch (RuntimeException e1) {
+							JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+						}
+						t1.setText(null);
+						t2.setText(null);
+						t3.setText(null);
+						t4.setText(null);
+						t5.setText(null);
+						t6.setText(null);
+					}
+				}		
+			}
+		});
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(comboBox.getSelectedItem().equals("Remédio")){
+					if (e.getClickCount() == 2) {
+						int row = table.rowAtPoint(e.getPoint());
+						int column = table.columnAtPoint(e.getPoint());
+
+						t1.setText((String) table.getValueAt(table.getSelectedRow(), 1));
+						t2.setText((String) table.getValueAt(table.getSelectedRow(), 2));
+						t3.setText((String) table.getValueAt(table.getSelectedRow(), 3));
+						t4.setText((String) table.getValueAt(table.getSelectedRow(), 4));
+						t5.setText((String) table.getValueAt(table.getSelectedRow(), 5));
+						t6.setText((String) table.getValueAt(table.getSelectedRow(), 6));
+					}
+				}
+
+				if(comboBox.getSelectedItem().equals("Cosmético")){
+					if (e.getClickCount() == 2) {
+						int row = table.rowAtPoint(e.getPoint());
+						int column = table.columnAtPoint(e.getPoint());
+
+						t1.setText((String) table.getValueAt(table.getSelectedRow(), 1));
+						t2.setText((String) table.getValueAt(table.getSelectedRow(), 2));
+						t3.setText((String) table.getValueAt(table.getSelectedRow(), 3));
+						t4.setText((String) table.getValueAt(table.getSelectedRow(), 4));
+						t5.setText((String) table.getValueAt(table.getSelectedRow(), 5));
+						t6.setText((String) table.getValueAt(table.getSelectedRow(), 6));
+                    }
+				}
+			}
+		});
+
+		b2.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(comboBox.getSelectedItem().equals("Remédio")){
+					if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
+						|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
+						|| t6.getText().toString().isEmpty())  {
+					JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+					return;
+					}
+					else {
+						try {
+							cp.atualizarRemedio(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), table.getSelectedRow());
+							modelo.setValueAt(t1.getText(), table.getSelectedRow(), 1);                	
+							modelo.setValueAt(t2.getText(), table.getSelectedRow(), 2);
+							modelo.setValueAt(t3.getText(), table.getSelectedRow(), 3);
+							modelo.setValueAt(t4.getText(), table.getSelectedRow(), 4);
+							modelo.setValueAt(t5.getText(), table.getSelectedRow(), 5);
+							JOptionPane.showMessageDialog(null, "Atualização de remédio realizada com sucesso!");
+							
+						} catch (RuntimeException e1) {
+							JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+						}
+					}	
+				}
+				if(comboBox.getSelectedItem().equals("Cosmético")){
+					if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty()
+							|| t3.getText().toString().isEmpty() || t4.getText().toString().isEmpty() || t5.getText().toString().isEmpty()
+							|| t6.getText().toString().isEmpty())  {
+						JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else {
+						try {
+							cp.atualizarCosmetico(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), table.getSelectedRow());
+							modelo.setValueAt(t1.getText(), table.getSelectedRow(), 1);
+							modelo.setValueAt(t2.getText(), table.getSelectedRow(), 2);                	
+							modelo.setValueAt(t3.getText(), table.getSelectedRow(), 3);
+							modelo.setValueAt(t4.getText(), table.getSelectedRow(), 4);
+							modelo.setValueAt(t5.getText(), table.getSelectedRow(), 5);
+							modelo.setValueAt(t6.getText(), table.getSelectedRow(), 6);
+							JOptionPane.showMessageDialog(null, "Cosmético atualizado com sucesso!");
+							
+						} catch (RuntimeException e1) {
+							JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				}			
+			}
+		});
+		
+		b3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(comboBox.getSelectedItem().equals("Remédio")){
+					if(table.getSelectedRow() == -1) {
+						JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+					}else {
+						int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover este remédio? \n"
+								+ "TIPO: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
+								+ "NOME: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
+								+ "PREÇO: " + table.getValueAt(table.getSelectedRow(), 2) + "\n"
+								+ "DESCRIÇÃO: " + table.getValueAt(table.getSelectedRow(), 3) +"\n"
+								+ "DOSAGEM: " + table.getValueAt(table.getSelectedRow(), 4) + "\n"
+								+ "FÓRMULA: " + table.getValueAt(table.getSelectedRow(), 5) +"\n" 
+								+ "ADMINISTRAÇÃO: " + table.getValueAt(table.getSelectedRow(), 6), "Confirm", JOptionPane.YES_NO_OPTION);
+
+						if (escolha == JOptionPane.YES_OPTION) {
+							cp.removerRemedio(table.getSelectedRow());
+							modelo.removeRow(table.getSelectedRow());
+							JOptionPane.showMessageDialog(null, "Remédio removido com sucesso!");
+						}
+					}
+				}
+				if(comboBox.getSelectedItem().equals("Cosmético")){
+					if(table.getSelectedRow() == -1) {
+						JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover este cosmético? \n"
+								+ "TIPO: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
+								+"NOME: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
+								+ "PREÇO: " + table.getValueAt(table.getSelectedRow(), 2) + "\n"
+								+ "DESCRIÇÃO: " + table.getValueAt(table.getSelectedRow(), 3) +"\n"
+								+ "TEXTURA: " + table.getValueAt(table.getSelectedRow(), 4) + "\n"
+								+ "FRAGRANCIA: " + table.getValueAt(table.getSelectedRow(), 5) +"\n" 
+								+ "CORANTE: " + table.getValueAt(table.getSelectedRow(), 6), "Confirm", JOptionPane.YES_NO_OPTION);
+
+						if (escolha == JOptionPane.YES_OPTION) {
+							cp.removerCosmetico(table.getSelectedRow());
+							modelo.removeRow(table.getSelectedRow());
+							JOptionPane.showMessageDialog(null, "Cosmético removido com sucesso!");
+						}
+					}
+				}
+			}
+		});
 
         painelC.setLayout(new GridLayout(9, 2));
         
