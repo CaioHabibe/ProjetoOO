@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -26,14 +27,17 @@ import controller.ControleProduto;
 
 public class TelaProduto extends JFrame{
 	
-	private JTable table;
+	private JTable tableRemedio;
+	private JTable tableCosmetico;
 	
 	private JTextField t1,t2,t3,t4,t5,t6;
-	private JButton b1, b2, b3;
+	private JButton b_salvar, b_atualizar, b_remover;
 	
 	private	JComboBox<String> comboBox = new JComboBox<>();
 	
-	private final String[] colunas = {"Tipo", "Nome", "Preço", "Descrição", "Dosagem/Textura", "Fórmula/Fragrância", "Administração/Corante"};
+	private final String[] colunasRemedio = {"Tipo", "Nome", "Preço", "Descrição", "Dosagem", "Fórmula", "Administração"};
+	
+	private final String[] colunasCosmetico = {"Tipo", "Nome", "Preço", "Descrição", "Textura", "Fragrância", "Corante"};
 	
 	TelaProduto(ControleProduto cp){
 		
@@ -50,8 +54,11 @@ public class TelaProduto extends JFrame{
         int yPos = (screenHeight - frameHeight) / 2;
         setLocation(xPos, yPos);
         
-        final var dados = cp.lerRemedio();
-        final var modelo = new DefaultTableModel(dados, colunas) {
+        //Lendo dados de Remédio
+        final var dadosRemedio = cp.lerRemedio();
+        
+        //Criando tabela para Remedio
+        final var modeloRemedio = new DefaultTableModel(dadosRemedio, colunasRemedio) {
         	@Override
         	public boolean isCellEditable(int linhas, int colunas) {
         		if(colunas == 1) {
@@ -62,13 +69,34 @@ public class TelaProduto extends JFrame{
         	}
         };
         
-        table = new JTable(modelo);
-        add(table);
-		
-		setLayout(new GridLayout(3, 8));
+        //lendo dados de cosmético
+        final var dadosCosmetico = cp.lerCosmetico();
+        
+        //Criando tabela para Cosmético
+        final var modeloCosmetico = new DefaultTableModel(dadosCosmetico, colunasCosmetico) {
+        	@Override
+        	public boolean isCellEditable(int linhas, int colunas) {
+        		if(colunas == 1) {
+        			return false;
+        		}else {
+        			return false;
+        		}
+        	}
+        };
+        
+        //Criando tabelas para remédio e cosmético
+        tableRemedio = new JTable(modeloRemedio);
+        tableCosmetico = new JTable(modeloCosmetico);
+        
+        
+        add(tableRemedio);
+		add(tableCosmetico);
+        
+		setLayout(new FlowLayout());
 		JPanel painelC = new JPanel();
 		painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 40, 20));
-		add(new JScrollPane(table));
+		add(new JScrollPane(tableCosmetico));
+		add(new JScrollPane(tableRemedio));
 		add(new JPanel());
 		add(painelC);
 		
@@ -83,17 +111,17 @@ public class TelaProduto extends JFrame{
 		t5 = new JTextField();
 		t6 = new JTextField();
 
-        b1 = new JButton("Salvar");
-        b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
-		b1.setFocusable(false);
+        b_salvar = new JButton("Salvar");
+        b_salvar.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b_salvar.setFocusable(false);
 		
-		b2 = new JButton("Atualizar");	
-		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
-		b2.setFocusable(false);
+		b_atualizar = new JButton("Atualizar");	
+		b_atualizar.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b_atualizar.setFocusable(false);
 		
-		b3 = new JButton("Remover");
-		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
-		b3.setFocusable(false);
+		b_remover = new JButton("Remover");
+		b_remover.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		b_remover.setFocusable(false);
 
         comboBox.addActionListener(new ActionListener() {
             @Override
@@ -103,8 +131,8 @@ public class TelaProduto extends JFrame{
                 
             }
         });
-
-		b1.addActionListener(new ActionListener() {
+        
+		b_salvar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
 				if(comboBox.getSelectedItem().equals("Remédio")){
@@ -117,7 +145,7 @@ public class TelaProduto extends JFrame{
 					else {
 						try {
 							cp.salvarRemedio(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), "RÉMEDIO");
-							modelo.addRow(new String[]{"Remédio",t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
+							modeloRemedio.addRow(new String[]{"Remédio",t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
 							JOptionPane.showMessageDialog(null, "Remédio cadastrado com sucesso!");
 							
 						} catch (RuntimeException e1) {
@@ -142,7 +170,7 @@ public class TelaProduto extends JFrame{
 					else {
 						try {
 							cp.salvarCosmetico(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(),"Cosmético");
-							modelo.addRow(new String[]{"Cosmético",t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
+							modeloCosmetico.addRow(new String[]{"Cosmético",t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText(), t6.getText()});
 							JOptionPane.showMessageDialog(null, "Cosmético cadastrado com sucesso!");
 							
 						} catch (RuntimeException e1) {
@@ -159,31 +187,49 @@ public class TelaProduto extends JFrame{
 			}
 		});
 		
-		table.addMouseListener(new MouseAdapter() {
+		tableRemedio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 					if (e.getClickCount() == 2) {
-						int row = table.rowAtPoint(e.getPoint());
-						int column = table.columnAtPoint(e.getPoint());
+						int row = tableRemedio.rowAtPoint(e.getPoint());
+						int column = tableRemedio.columnAtPoint(e.getPoint());
 
-						t1.setText((String) table.getValueAt(table.getSelectedRow(), 1));
-						t2.setText((String) table.getValueAt(table.getSelectedRow(), 2));
-						t3.setText((String) table.getValueAt(table.getSelectedRow(), 3));
-						t4.setText((String) table.getValueAt(table.getSelectedRow(), 4));
-						t5.setText((String) table.getValueAt(table.getSelectedRow(), 5));
-						t6.setText((String) table.getValueAt(table.getSelectedRow(), 6));
+						t1.setText((String) tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 1));
+						t2.setText((String) tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 2));
+						t3.setText((String) tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 3));
+						t4.setText((String) tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 4));
+						t5.setText((String) tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 5));
+						t6.setText((String) tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 6));
 						
-						if (table.getValueAt(table.getSelectedRow(), 0) == "Remédio") {
+						if (tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 0) == "Remédio") {
 							comboBox.setSelectedItem("Remédio");
 						}
-						if (table.getValueAt(table.getSelectedRow(), 0) == "Cosmético") {
+				}
+			}
+		});
+		
+		tableCosmetico.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						int row = tableCosmetico.rowAtPoint(e.getPoint());
+						int column = tableCosmetico.columnAtPoint(e.getPoint());
+
+						t1.setText((String) tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 1));
+						t2.setText((String) tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 2));
+						t3.setText((String) tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 3));
+						t4.setText((String) tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 4));
+						t5.setText((String) tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 5));
+						t6.setText((String) tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 6));
+						
+						if (tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 0) == "Cosmético") {
 							comboBox.setSelectedItem("Cosmético");
 						}
 				}
 			}
 		});
 
-		b2.addActionListener(new ActionListener() {	
+		b_atualizar.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -196,12 +242,12 @@ public class TelaProduto extends JFrame{
 					}
 					else {
 						try {
-							cp.atualizarRemedio(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), table.getSelectedRow());
-							modelo.setValueAt(t1.getText(), table.getSelectedRow(), 1);                	
-							modelo.setValueAt(t2.getText(), table.getSelectedRow(), 2);
-							modelo.setValueAt(t3.getText(), table.getSelectedRow(), 3);
-							modelo.setValueAt(t4.getText(), table.getSelectedRow(), 4);
-							modelo.setValueAt(t5.getText(), table.getSelectedRow(), 5);
+							cp.atualizarRemedio(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), tableRemedio.getSelectedRow());
+							modeloRemedio.setValueAt(t1.getText(), tableRemedio.getSelectedRow(), 1);                	
+							modeloRemedio.setValueAt(t2.getText(), tableRemedio.getSelectedRow(), 2);
+							modeloRemedio.setValueAt(t3.getText(), tableRemedio.getSelectedRow(), 3);
+							modeloRemedio.setValueAt(t4.getText(), tableRemedio.getSelectedRow(), 4);
+							modeloRemedio.setValueAt(t5.getText(), tableRemedio.getSelectedRow(), 5);
 							JOptionPane.showMessageDialog(null, "Atualização de remédio realizada com sucesso!");
 							
 						} catch (RuntimeException e1) {
@@ -219,13 +265,13 @@ public class TelaProduto extends JFrame{
 					}
 					else {
 						try {
-							cp.atualizarCosmetico(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), table.getSelectedRow());
-							modelo.setValueAt(t1.getText(), table.getSelectedRow(), 1);
-							modelo.setValueAt(t2.getText(), table.getSelectedRow(), 2);                	
-							modelo.setValueAt(t3.getText(), table.getSelectedRow(), 3);
-							modelo.setValueAt(t4.getText(), table.getSelectedRow(), 4);
-							modelo.setValueAt(t5.getText(), table.getSelectedRow(), 5);
-							modelo.setValueAt(t6.getText(), table.getSelectedRow(), 6);
+							cp.atualizarCosmetico(t1.getText(), Double.valueOf(t2.getText()), t3.getText(), t4.getText(), t5.getText(), t6.getText(), tableCosmetico.getSelectedRow());
+							modeloCosmetico.setValueAt(t1.getText(), tableCosmetico.getSelectedRow(), 1);
+							modeloCosmetico.setValueAt(t2.getText(), tableCosmetico.getSelectedRow(), 2);                	
+							modeloCosmetico.setValueAt(t3.getText(), tableCosmetico.getSelectedRow(), 3);
+							modeloCosmetico.setValueAt(t4.getText(), tableCosmetico.getSelectedRow(), 4);
+							modeloCosmetico.setValueAt(t5.getText(), tableCosmetico.getSelectedRow(), 5);
+							modeloCosmetico.setValueAt(t6.getText(), tableCosmetico.getSelectedRow(), 6);
 							JOptionPane.showMessageDialog(null, "Cosmético atualizado com sucesso!");
 							
 						} catch (RuntimeException e1) {
@@ -236,47 +282,47 @@ public class TelaProduto extends JFrame{
 			}
 		});
 		
-		b3.addActionListener(new ActionListener() {
+		b_remover.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getSelectedItem().equals("Remédio")){
-					if(table.getSelectedRow() == -1) {
+					if(tableRemedio.getSelectedRow() == -1) {
 						JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover este remédio? \n"
-								+ "TIPO: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
-								+ "NOME: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
-								+ "PREÇO: " + table.getValueAt(table.getSelectedRow(), 2) + "\n"
-								+ "DESCRIÇÃO: " + table.getValueAt(table.getSelectedRow(), 3) +"\n"
-								+ "DOSAGEM: " + table.getValueAt(table.getSelectedRow(), 4) + "\n"
-								+ "FÓRMULA: " + table.getValueAt(table.getSelectedRow(), 5) +"\n" 
-								+ "ADMINISTRAÇÃO: " + table.getValueAt(table.getSelectedRow(), 6), "Confirm", JOptionPane.YES_NO_OPTION);
+								+ "TIPO: " + tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 0) + "\n"
+								+ "NOME: " + tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 1) + "\n"
+								+ "PREÇO: " + tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 2) + "\n"
+								+ "DESCRIÇÃO: " + tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 3) +"\n"
+								+ "DOSAGEM: " + tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 4) + "\n"
+								+ "FÓRMULA: " + tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 5) +"\n" 
+								+ "ADMINISTRAÇÃO: " + tableRemedio.getValueAt(tableRemedio.getSelectedRow(), 6), "Confirm", JOptionPane.YES_NO_OPTION);
 
 						if (escolha == JOptionPane.YES_OPTION) {
-							cp.removerRemedio(table.getSelectedRow());
-							modelo.removeRow(table.getSelectedRow());
+							cp.removerRemedio(tableRemedio.getSelectedRow());
+							modeloRemedio.removeRow(tableRemedio.getSelectedRow());
 							JOptionPane.showMessageDialog(null, "Remédio removido com sucesso!");
 						}
 					}
 				}
 				if(comboBox.getSelectedItem().equals("Cosmético")){
-					if(table.getSelectedRow() == -1) {
+					if(tableCosmetico.getSelectedRow() == -1) {
 						JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover este cosmético? \n"
-								+ "TIPO: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
-								+"NOME: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
-								+ "PREÇO: " + table.getValueAt(table.getSelectedRow(), 2) + "\n"
-								+ "DESCRIÇÃO: " + table.getValueAt(table.getSelectedRow(), 3) +"\n"
-								+ "TEXTURA: " + table.getValueAt(table.getSelectedRow(), 4) + "\n"
-								+ "FRAGRANCIA: " + table.getValueAt(table.getSelectedRow(), 5) +"\n" 
-								+ "CORANTE: " + table.getValueAt(table.getSelectedRow(), 6), "Confirm", JOptionPane.YES_NO_OPTION);
+								+ "TIPO: " + tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 0) + "\n"
+								+"NOME: " + tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 1) + "\n"
+								+ "PREÇO: " + tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 2) + "\n"
+								+ "DESCRIÇÃO: " + tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 3) +"\n"
+								+ "TEXTURA: " + tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 4) + "\n"
+								+ "FRAGRANCIA: " + tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 5) +"\n" 
+								+ "CORANTE: " + tableCosmetico.getValueAt(tableCosmetico.getSelectedRow(), 6), "Confirm", JOptionPane.YES_NO_OPTION);
 
 						if (escolha == JOptionPane.YES_OPTION) {
-							cp.removerCosmetico(table.getSelectedRow());
-							modelo.removeRow(table.getSelectedRow());
+							cp.removerCosmetico(tableCosmetico.getSelectedRow());
+							modeloCosmetico.removeRow(tableCosmetico.getSelectedRow());
 							JOptionPane.showMessageDialog(null, "Cosmético removido com sucesso!");
 						}
 					}
@@ -309,15 +355,16 @@ public class TelaProduto extends JFrame{
 		painelC.add(new JLabel("Administração/Corante"));
 		painelC.add(t6);
 		
-		painelBotoes.add(b1);
-		painelBotoes.add(b2);
-		painelBotoes.add(b3);
+		painelBotoes.add(b_salvar);
+		painelBotoes.add(b_atualizar);
+		painelBotoes.add(b_remover);
 		
 		painelC.add(painelBotoes);
 		
 		validate();
 		
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
+		tableRemedio.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
+		tableCosmetico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 			
 }
