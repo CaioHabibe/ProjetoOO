@@ -28,7 +28,7 @@ public class TelaLoginCliente {
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
 
-    public TelaLoginCliente(ControleCliente cc) {
+    public TelaLoginCliente(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
         frame = new JFrame();
         frame.setTitle("Login");
         frame.setSize(300, 200);
@@ -56,7 +56,7 @@ public class TelaLoginCliente {
             @Override
             public void keyPressed(KeyEvent usuarioTxt) {
                 if (usuarioTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-                	realizarLogin();
+                	realizarLogin(cc, cf, cp);
                 }
             }
         });
@@ -71,7 +71,7 @@ public class TelaLoginCliente {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	realizarLogin();
+            	realizarLogin(cc, cf, cp);
             }
         });
         JButton voltar = new JButton("Voltar");
@@ -107,13 +107,13 @@ public class TelaLoginCliente {
         
     }
     
-    private void realizarLogin() {
+    private void realizarLogin(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
         String usuario = txtUsuario.getText();
 //        String senha = new String(txtSenha.getPassword());
 
         if (usuario.equals("123")) {
             frame.dispose();
-            new TelaCarrinho();
+            new TelaCarrinho(cc, cf, cp);
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
         }

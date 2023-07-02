@@ -4,7 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
+import controller.ControleCliente;
+import controller.ControleFilial;
+import controller.ControleProduto;
 
 public class TelaCarrinho {
 	private JTable tabelaFiliais; //esquerda
@@ -12,7 +20,15 @@ public class TelaCarrinho {
 	private JTable tabelaCarrinho; //esquerda
 	private JFrame frame;
 	
-	public TelaCarrinho() {
+    static final String[] colunasPanelFiliais = new String[] {"Cidade", "Endereço"};
+    static final String[] colunasProdutosCadastrados = new String[] {"Nome", "Preço"};
+    static final String[] produtosAdiconados = new String[] {"Carrinho"}; 
+    
+    TableRowSorter<DefaultTableModel> trs;
+    TableRowSorter<DefaultTableModel> trs2;
+    TableRowSorter<DefaultTableModel> trs3;
+	
+	public TelaCarrinho(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
 		frame = new JFrame();
         frame.setTitle("Carrinho");
         frame.setSize(1600, 700);
@@ -29,46 +45,11 @@ public class TelaCarrinho {
         int yPos = (screenHeight - frameHeight) / 2;
         frame.setLocation(xPos, yPos);
         
-        //botao e caixa de texto para procurar filial
-        
-        JPanel procurarFilial = new JPanel();
-        procurarFilial.setVisible(true);
-        //procurarFilial.setBackground(Color.green);
-        procurarFilial.setPreferredSize(new Dimension(100,100));
-        
-        JLabel lblProcura = new JLabel("Digite a sua cidade: ");
-        
-        JTextField txtProcura = new JTextField(20);
-        
-        JButton Procurar = new JButton("Procurar");
-        Procurar.setFocusable(false);
-        Procurar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-        
-        procurarFilial.add(lblProcura);
-        procurarFilial.add(txtProcura);
-        procurarFilial.add(Procurar);
-        
-        
         //panel esquerda
         JPanel panelFiliais = new JPanel();
-        //panelFiliais.setBackground(Color.green);
         panelFiliais.setPreferredSize(new Dimension(500,70));
-        
-        //Adicionando a tabela no painel da esquerda
-        
-//        DefaultTableModel tableModel = new DefaultTableModel();
-//        tableModel.addColumn("Nome");
-//        tableModel.addColumn("Idade");
-//        tableModel.addRow(new Object[]{"João", 25});
-//        tableModel.addRow(new Object[]{"Maria", 30});
-        final String[] colunasPanelFiliais = new String[] {"Cidade", "Endereço"};
-        
-        final var modelo = new DefaultTableModel(null, colunasPanelFiliais) {
+        final var dadosFilial = cf.lerFilial();
+        DefaultTableModel modeloFilial = new DefaultTableModel(dadosFilial, colunasPanelFiliais) {
 	        @Override
 	    	public boolean isCellEditable(int linhas, int colunas) {
 	    		if(colunas == 1) {
@@ -78,19 +59,18 @@ public class TelaCarrinho {
 	    		}
 	    	}
         };
-        
-        tabelaFiliais = new JTable(modelo);
-      
-        panelFiliais.add(new JScrollPane(tabelaFiliais), BorderLayout.SOUTH);
+        tabelaFiliais = new JTable(modeloFilial);
+        tabelaFiliais.setAutoCreateRowSorter(true);
+        trs = new TableRowSorter<>(modeloFilial);
+        tabelaFiliais.setRowSorter(trs);
+        panelFiliais.add(new JScrollPane(tabelaFiliais), BorderLayout.SOUTH);       
         //fim panel esquerda
         
         //painel meio
         JPanel painelProdutosFilial = new JPanel();
         painelProdutosFilial.setPreferredSize(new Dimension(500, 70));
-        
-        final String[] colunasProdutosCad = new String[] {"Tipo", "Nome"};
-        
-        final var modeloProd = new DefaultTableModel(null, colunasProdutosCad) {
+        final var dadosProdutos = cp.lerProduto();
+        DefaultTableModel modeloProdutos = new DefaultTableModel(dadosProdutos, colunasProdutosCadastrados) {
         	@Override
 	    	public boolean isCellEditable(int linhas, int colunas) {
 	    		if(colunas == 1) {
@@ -99,28 +79,19 @@ public class TelaCarrinho {
 	    			return false;
 	    		}
 	    	}
-        };
-//        DefaultTableModel tableModelProd = new DefaultTableModel();
-//        tableModelProd.addColumn("Tipo");
-//        tableModelProd.addColumn("Nome");
-//        tableModelProd.addRow(new Object[] {"abc", 23});
-//        tableModelProd.addRow(new Object[] {"def", 25});
-        
-        tabelaProdutos = new JTable(modeloProd);
-        
+        }; 
+        tabelaProdutos = new JTable(modeloProdutos);
+        tabelaProdutos.setAutoCreateRowSorter(true);
+        trs2 = new TableRowSorter<>(modeloProdutos);
+        tabelaProdutos.setRowSorter(trs2);
         painelProdutosFilial.add(new JScrollPane(tabelaProdutos), BorderLayout.SOUTH);
         //fim painel central
-        //Adicionar controller dados cp.lerProduto
         
         
         //Panel da direita
         JPanel panelProdutos = new JPanel();
-       //panelProdutos.setBackground(Color.red);
-        panelProdutos.setPreferredSize(new Dimension(500,70));
-        
-        final String[] colunasProdutosAdd = new String[] {"Carrinho"};      
-        
-        final var modeloCarrinho = new DefaultTableModel(null, colunasProdutosAdd) {
+        panelProdutos.setPreferredSize(new Dimension(500,70));     
+        final var modeloCarrinho = new DefaultTableModel(null, produtosAdiconados) {
         	@Override
 	    	public boolean isCellEditable(int linhas, int colunas) {
 	    		if(colunas == 1) {
@@ -130,11 +101,7 @@ public class TelaCarrinho {
 	    		}
 	    	}
         };
-//        DefaultTableModel tableModelP = new DefaultTableModel();
-//        tableModelP.addColumn("Nome");
-//        tableModelP.addColumn("Idade");
-//        tableModelP.addRow(new Object[]{"João", 25});
-//        tableModelP.addRow(new Object[]{"Maria", 30});
+
         tabelaCarrinho = new JTable(modeloCarrinho);
       
         panelProdutos.add(new JScrollPane(tabelaCarrinho), BorderLayout.SOUTH);
@@ -163,7 +130,7 @@ public class TelaCarrinho {
             public void actionPerformed(ActionEvent e) {
                 voltar();
             }
-        });
+        });   
         
         panelBotoes.setLayout((LayoutManager) new FlowLayout(FlowLayout.CENTER, 30, 30));
         
@@ -172,30 +139,39 @@ public class TelaCarrinho {
         panelBotoes.add(comprar);
         panelBotoes.add(back);
         
-        //fim panel de baixo
+        JPanel procurarFilial = new JPanel();
+        procurarFilial.setVisible(true);
+        //procurarFilial.setBackground(Color.green);
+        procurarFilial.setPreferredSize(new Dimension(100,100));
         
+        JLabel lblProcura = new JLabel("Digite a sua cidade: ");
         
-        /*
-        JPanel FiliaisEProdutos = new JPanel(new GridLayout(2, 2, 10, 10));
-        FiliaisEProdutos.setPreferredSize(new Dimension(400, 200));
-        FiliaisEProdutos.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        FiliaisEProdutos.setAlignmentX(Component.CENTER_ALIGNMENT);
-        	
+        JTextField txtProcura = new JTextField(20);
+        //Atualiza a tabela plotada
+        JButton Procurar = new JButton("Procurar");
+        Procurar.setFocusable(false);
+        Procurar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				trs.setRowFilter(RowFilter.regexFilter(txtProcura.getText(),0));
+			}
+		});
         
-        String[] columnNames = {"Cidade", "Endereço"};        
-        Object[][] data = {{"Brasília", "QD 5 CONJ 6"},
-        				   {"São Paulo",  "QD 8 CONJ 14"},
-        				   {"Rio de Janeiro", "QD 2 CONJ 17"}};
+        tabelaProdutos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int row = tabelaProdutos.rowAtPoint(e.getPoint());
+                    int column = tabelaProdutos.columnAtPoint(e.getPoint());
+                    
+                    trs2.setRowFilter(RowFilter.regexFilter(txtProcura.getText(),1));
+                }
+            }
+        });
         
-        
-        JTable table = new JTable(data, columnNames);
-        JScrollPane scp = new JScrollPane(table);
-        table.getTableHeader().setBounds(50,30,100,20);
-        table.setBounds(50, 50, 100, 100);
-        
-        FiliaisEProdutos.add(table.getTableHeader());
-        FiliaisEProdutos.add(table);
-        */
+        procurarFilial.add(lblProcura);
+        procurarFilial.add(txtProcura);
+        procurarFilial.add(Procurar);
         
         frame.add(procurarFilial, BorderLayout.NORTH);
         frame.add(panelBotoes, BorderLayout.SOUTH);
@@ -209,4 +185,5 @@ public class TelaCarrinho {
 	private void voltar() {
     	frame.dispose();
     }
+	
 }
