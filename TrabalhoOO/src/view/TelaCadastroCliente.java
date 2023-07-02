@@ -14,14 +14,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-//import controller.ControleCliente;
-//import controller.ControleFilial;
-//import controller.ControleProduto;
+import controller.ControleCliente;
 
 public class TelaCadastroCliente {
 	private JFrame frame;
@@ -29,7 +25,7 @@ public class TelaCadastroCliente {
     private JTextField txtCPF;
     private JTextField txtIdade;
 
-    public TelaCadastroCliente() {
+    public TelaCadastroCliente(ControleCliente cc) {
         frame = new JFrame();
         frame.setTitle("Cadastro de cliente");
         frame.setSize(300, 200);
@@ -57,29 +53,29 @@ public class TelaCadastroCliente {
             @Override
             public void keyPressed(KeyEvent usuarioTxt) {
                 if (usuarioTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    txtUsuario.requestFocus();
+                	txtCPF.requestFocus();
                 }
             }
         });
 
         JLabel lblCPF = new JLabel("CPF do Usuário:");
-        txtCPF = new JPasswordField(10);
+        txtCPF = new JTextField(10);
         txtCPF.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent SenhaTxt) {
                 if (SenhaTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-                	txtCPF.requestFocus();
+                	txtIdade.requestFocus();
                 }
             }
         });
         
         JLabel lblIdade = new JLabel("Idade do Usuário:");
-        txtIdade = new JPasswordField(10);
+        txtIdade = new JTextField(10);
         txtIdade.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent SenhaTxt) {
                 if (SenhaTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-                	txtIdade.requestFocus();
+                	cadastrar(cc);
                 }
             }
         });
@@ -99,7 +95,7 @@ public class TelaCadastroCliente {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	frame.dispose();
+            	cadastrar(cc);
             }
         });
         
@@ -112,16 +108,9 @@ public class TelaCadastroCliente {
         frame.setVisible(true);     
     }
     
-//    private void realizarLogin() {
-//        String usuario = txtUsuario.getText();
-//        String senha = new String();
-//
-//        if (usuario.equals("fga") && senha.equals("123")) {
-//            frame.dispose();
-//            new TelaLoginCliente();
-//            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
+    public void cadastrar(ControleCliente cc) {
+    	cc.salvarCliente(txtUsuario.getText(), Long.valueOf(txtCPF.getText()), Integer.valueOf(txtIdade.getText()));
+    	frame.dispose();
+    }
+    
 }

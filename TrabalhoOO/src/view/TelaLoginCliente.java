@@ -28,7 +28,7 @@ public class TelaLoginCliente {
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
 
-    public TelaLoginCliente() {
+    public TelaLoginCliente(ControleCliente cc) {
         frame = new JFrame();
         frame.setTitle("Login");
         frame.setSize(300, 200);
@@ -56,28 +56,15 @@ public class TelaLoginCliente {
             @Override
             public void keyPressed(KeyEvent usuarioTxt) {
                 if (usuarioTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    txtSenha.requestFocus();
+                	realizarLogin();
                 }
             }
         });
 
-//        JLabel lblSenha = new JLabel("Senha:");
-//        txtSenha = new JPasswordField(10);
-//        txtSenha.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyPressed(KeyEvent SenhaTxt) {
-//                if (SenhaTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-//                	realizarLogin(cc,cf,cp);
-//                }
-//            }
-//        });
         
         panelFormulario.add(lblUsuario);
         panelFormulario.add(txtUsuario);
-//        panelFormulario.add(lblSenha);
-//        panelFormulario.add(txtSenha);
         
-
         JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton btnLogin = new JButton("Login");
         btnLogin.setFocusable(false);
@@ -102,7 +89,7 @@ public class TelaLoginCliente {
         cadastro.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new TelaCadastroCliente();
+				new TelaCadastroCliente(cc);
 			}
 		});
         
