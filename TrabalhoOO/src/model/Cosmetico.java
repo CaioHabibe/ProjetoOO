@@ -8,6 +8,9 @@ public class Cosmetico extends Produto {
 	
 	public Cosmetico(String nome, double preco, String descricao, String textura, String fragrancia, String corante) {
 		super(nome, preco, descricao);
+		this.corante = corante;
+		this.fragrancia = fragrancia;
+		this.textura = textura;
 	}
 
 	public String getTextura() {
@@ -33,5 +36,9 @@ public class Cosmetico extends Produto {
 	public void setCorante(String corante) {
 		this.corante = corante;
 	}
+	
+	public String[] cosmeticoJtableStruct() {
+        return new String[]{nome, String.valueOf(preco), descricao, textura, fragrancia, corante};
+    }
 	
 }

@@ -1,45 +1,40 @@
 package controller;
 
-import model.Empresa;
 import model.Filial;
+import model.Empresa;
 
 public class ControleFilial {
-	private Empresa empresa = new Empresa();
 	
-	public Integer quantidadeFiliais() {
-		return empresa.getListaFiliaisCadastradas().size();
-	}
+	static final Empresa empresa = new Empresa();
 	
-	public void salvarFilial(String cidade, String endereco, String cnpj) {
-			Filial filial = new Filial(cidade, endereco, cnpj);
-//			empresa.setListaClientesCadastrados(filial);
-	}
-	
-	public String[] lerFilial() {
-		String a[] = new String[3];
-		for (Filial filial : empresa.getListaFiliaisCadastradas()) {
-			a[0] = filial.getCidade();
-			a[1] = filial.getEndereco();
-			a[2] = filial.getCnpj();
-		}
-		return a;
-	}
-	
-	public void removerFilial(Integer indexLinha) {
-//		empresa.removeFilial(empresa.getListaFiliaisCadastradas().get(indexLinha));
-	}
-	
-	public void atualizarFilial(String cidade, String endereco, String cnpj) {
-		for (Filial f : empresa.getListaFiliaisCadastradas()) {
-			if (f.getCidade() != cidade) {
-				f.setCidade(cidade);
+	public void salvarFilial(String cidade, String endereco, long cnpj) {
+        Filial filial = new Filial(cidade, endereco, cnpj);
+        empresa.getListaFiliaisCadastradas().add(filial);
+    }
+
+    public String[][] lerFilial() {
+        final var dados = new String[empresa.getListaFiliaisCadastradas().size()][];
+        for (int i = 0; i < empresa.getListaFiliaisCadastradas().size(); i++) {
+        	dados[i] = empresa.getListaFiliaisCadastradas().get(i).filialJtableStruct();
+        }
+        return dados;
+    }
+
+    public void removerFilial(int index) {
+    	empresa.getListaFiliaisCadastradas().remove(index);
+    }
+
+    public void atualizarFilial(String cidade, String endereco, long cnpj, int index) {
+    	
+        	if (empresa.getListaFiliaisCadastradas().get(index).getCidade() != cidade) {
+        		empresa.getListaFiliaisCadastradas().get(index).setCidade(cidade);
 			}	
-			if (f.getEndereco() != endereco) {
-				f.setEndereco(endereco);
+        	
+			if (empresa.getListaFiliaisCadastradas().get(index).getEndereco() != endereco) {
+				empresa.getListaFiliaisCadastradas().get(index).setEndereco(endereco);
 			}
-			if (f.getCnpj() != cnpj) {
-				f.setCnpj(cnpj);
+			if (Long.valueOf(empresa.getListaFiliaisCadastradas().get(index).getCnpj()) != cnpj) {
+				empresa.getListaFiliaisCadastradas().get(index).setCnpj(cnpj);
 			}
-		}
-	}
+    }
 }

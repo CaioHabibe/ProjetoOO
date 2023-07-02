@@ -3,16 +3,17 @@ package model;
 import java.util.ArrayList;
 
 public class Cliente {
+	
 	ArrayList<Carrinho> listaComprasEfetuadas;
     private String nome;
-    private String cpf;
-    private String idade;
+    private long cpf;
+    private int idade;
 
     public Cliente() {
     	listaComprasEfetuadas = new ArrayList<>();
     }
 
-    public Cliente(String nome, String cpf, String idade) {
+    public Cliente(String nome, long cpf, int idade) {
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
@@ -27,24 +28,28 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getCpf() {
+    public long getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(long cpf) {
         this.cpf = cpf;
     }
 
-    public String getIdade() {
+    public int getIdade() {
         return idade;
     }
 
-    public void setIdade(String idade) {
+    public void setIdade(int idade) {
         this.idade = idade;
     }
 
     public void fechaCompra(Carrinho carrinho) {
     	listaComprasEfetuadas.add(carrinho);
+    }
+    
+    public String[] clienteJtableStruct() {
+        return new String[]{nome, String.valueOf(cpf), String.valueOf(idade)};
     }
     
     public ArrayList<Produto> listagemProdutosComprados(){
@@ -54,5 +59,5 @@ public class Cliente {
     	}
     	return aux;
     }
-    
+
 }

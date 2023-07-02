@@ -8,6 +8,9 @@ public class Remedio extends Produto{
 
 	public Remedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao) {
 		super(nome, preco, descricao);
+		this.dosagem = dosagem;
+		this.formula = formula;
+		this.administracao = administracao;
 	}
 
 	public String getDosagem() {
@@ -33,5 +36,8 @@ public class Remedio extends Produto{
 	public void setAdministracao(String administracao) {
 		this.administracao = administracao;
 	}
-
+	
+    public String[] remedioJtableStruct() {
+        return new String[]{nome, String.valueOf(preco), descricao, dosagem, formula, administracao};
+    }
 }

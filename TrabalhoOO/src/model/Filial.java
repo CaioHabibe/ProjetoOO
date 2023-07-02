@@ -3,63 +3,65 @@ package model;
 import java.util.ArrayList;
 
 public class Filial {
-	private ArrayList<Produto> listaProdutosCadastrados; 
+	
+	private ArrayList<Remedio> listaRemediosCadastrados = new ArrayList<Remedio>();
+	private ArrayList<Cosmetico> listaCosmeticosCadastrados = new ArrayList<Cosmetico>();
 	
 	private String cidade;
 	private String endereco;
-	private String cnpj;
-	
+	private long cnpj;
+
 	public Filial() {
-		listaProdutosCadastrados = new ArrayList<Produto>();
 	}
 
-	public Filial(String cidade, String endereco, String cnpj) {
+	public Filial(String cidade, String endereco, long cnpj) {
 		this.cidade = cidade;
 		this.endereco = endereco;
 		this.cnpj = cnpj;
-		listaProdutosCadastrados = new ArrayList<Produto>();
 	}
 	
+	public ArrayList<Remedio> getListaRemediosCadastrados() {
+		return listaRemediosCadastrados;
+	}
+
+	public void setListaRemediosCadastrados(ArrayList<Remedio> listaRemediosCadastrados) {
+		this.listaRemediosCadastrados = listaRemediosCadastrados;
+	}
+
+	public ArrayList<Cosmetico> getListaCosmeticosCadastrados() {
+		return listaCosmeticosCadastrados;
+	}
+
+	public void setListaCosmeticosCadastrados(ArrayList<Cosmetico> listaCosmeticosCadastrados) {
+		this.listaCosmeticosCadastrados = listaCosmeticosCadastrados;
+	}
+
 	public String getCidade() {
 		return cidade;
 	}
-	
+
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
+
 	public String getEndereco() {
 		return endereco;
 	}
-	
+
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 
-	public String getCnpj() {
+	public long getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(String cnpj) {
+	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
 	}
 
-	public ArrayList<Produto> getListaProdutosCadastrados(){
-		return listaProdutosCadastrados;
-	}
-	
-	public void addProduto(Produto p) {
-		listaProdutosCadastrados.add(p);
-	}
-	
-	public void removeProduto(Produto p) {
-		listaProdutosCadastrados.remove(p);
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "Filial [cidade=" + cidade + ", endereco=" + endereco + ", cnpj=" + cnpj + "]";
-	}
+	public String[] filialJtableStruct() {
+        return new String[]{cidade, endereco, String.valueOf(cnpj)};
+    }
 	
 }

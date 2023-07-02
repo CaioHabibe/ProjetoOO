@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaCarrinho {
+	
 	private JFrame frame;
 	
 	public TelaCarrinho() {
@@ -14,7 +15,7 @@ public class TelaCarrinho {
         frame.setTitle("Carrinho");
         frame.setSize(1000, 700);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

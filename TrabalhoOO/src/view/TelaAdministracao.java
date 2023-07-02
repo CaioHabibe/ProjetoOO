@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 
 import controller.ControleCliente;
+import controller.ControleFilial;
+import controller.ControleProduto;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,12 +14,12 @@ public class TelaAdministracao {
 
     private JFrame frame;
 
-    public TelaAdministracao(ControleCliente cc) {
+    public TelaAdministracao(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
         frame = new JFrame();
         frame.setTitle("Administração");
         frame.setSize(700, 600);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -48,7 +50,7 @@ public class TelaAdministracao {
         btnFiliais.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirTelaFiliais();
+               new TelaFilial(cf);
             }
         });
 
@@ -58,7 +60,7 @@ public class TelaAdministracao {
         btnProdutos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirTelaProdutos();
+               new TelaProduto(cp);
             }
         });
         
@@ -80,24 +82,7 @@ public class TelaAdministracao {
 
         frame.setVisible(true);
     }
-    /*
-     * Método abrirTelaClientes()
-     * É o método responsável por abrir a tela para o CRUD de clientes
-     * */
-    /*
-     * Método
-     * 
-     * */
-    private void abrirTelaFiliais() {
-        new TelaFilial();
 
-    }
-
-    private void abrirTelaProdutos() {
-        new TelaProduto();
-
-    }
-    
     private void voltar() {
     	frame.dispose();
     }

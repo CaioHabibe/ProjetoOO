@@ -23,13 +23,16 @@ import javax.swing.table.DefaultTableModel;
 import controller.ControleFilial;
 
 public class TelaFilial extends JFrame{
-	ControleFilial cf = new ControleFilial();
-	JTable table;
 	
-	JTextField t1,t2,t3;
-	JButton b1, b2, b3;
+	private JTable table;
 	
-	public TelaFilial(){
+	private JTextField t1,t2,t3;
+	private JButton b1, b2, b3;
+	
+	private final String[] colunas = {"CIDADE", "ENDEREÇO", "CNPJ"};
+	
+	public TelaFilial(ControleFilial cf){
+		
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -43,10 +46,21 @@ public class TelaFilial extends JFrame{
         int yPos = (screenHeight - frameHeight) / 2;
         setLocation(xPos, yPos);
 		
-		String[] nomeColunas = {"CIDADE", "ENDEREÇO", "CNPJ"};
-		DefaultTableModel modelo = new DefaultTableModel(nomeColunas, 0);
-		table = new JTable(modelo);
-		
+        final var dados = cf.lerFilial();
+        final var modelo = new DefaultTableModel(dados, colunas) {
+        	@Override
+        	public boolean isCellEditable(int linhas, int colunas) {
+        		if(colunas == 1) {
+        			return false;
+        		}else {
+        			return false;
+        		}
+        	}
+        };
+        
+        table = new JTable(modelo);
+        add(table);
+        
 		setLayout(new GridLayout(3, 3));
 		JPanel painelC = new JPanel();
 		add(new JScrollPane(table));
@@ -61,83 +75,94 @@ public class TelaFilial extends JFrame{
 		b1.setFont(new Font("SansSerif", Font.PLAIN, 17));
 		b1.setFocusable(false);
 		b1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty() || t3.getText().toString().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-				else {
-					String cidade = t1.getText();
-					String endereco =  t2.getText();
-					String cnpj = t3.getText();
-					
-					cf.salvarFilial(cidade, endereco, cnpj);
-				
-					modelo.addRow(cf.lerFilial());
-					t1.setText(null);
-					t2.setText(null);
-					t3.setText(null);
-					
-					JOptionPane.showMessageDialog(null, "Cadastro de filial realizado com sucesso!");
-				}
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty() || t3.getText().toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else {
+                	
+                	try {
+                		cf.salvarFilial(t1.getText(), t2.getText(), Long.valueOf(t3.getText()));
+                    	modelo.addRow(new String[]{t1.getText(), t2.getText(), t3.getText()});
+                    	JOptionPane.showMessageDialog(null, "Filial cadastrada com sucesso!");
+                    	
+                	} catch (RuntimeException e1) {
+                		JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+                	}
+
+                	t1.setText(null);
+                    t2.setText(null);
+                    t3.setText(null);
+
+                }
+            }
+        });
+		
+		 table.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseClicked(MouseEvent e) {
+	                if (e.getClickCount() == 2) {
+	                    int row = table.rowAtPoint(e.getPoint());
+	                    int column = table.columnAtPoint(e.getPoint());
+
+	                    t1.setText((String) table.getValueAt(table.getSelectedRow(), 0));
+	                    t2.setText((String) table.getValueAt(table.getSelectedRow(), 1));
+	                    t3.setText((String) table.getValueAt(table.getSelectedRow(), 2));
+	                }
+	            }
+	        });
+		
 		b2 = new JButton("Atualizar");
 		b2.setFont(new Font("SansSerif", Font.PLAIN, 17));
 		b2.setFocusable(false);
-		b2.addActionListener(new ActionListener() {	
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if(t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty() || t3.getText().toString().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-				else {
-					String cidade = t1.getText().toString();
-					String endereco =  t2.getText().toString();
-					String cnpj = t3.getText().toString();
-					 
-					cf.atualizarFilial(cidade, endereco, cnpj);
+		b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-					
-					int linha = table.getSelectedRow();
-					modelo.setValueAt(cidade, linha, 0);
-					modelo.setValueAt(endereco, linha, 1);
-					modelo.setValueAt(cnpj, linha, 2);
-					
-					t1.setText(null);
-					t2.setText(null);
-					t3.setText(null);
-				}
-				
-			}
-		});
+                if (t1.getText().toString().isEmpty() || t2.getText().toString().isEmpty() || t3.getText().toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else {
+                	
+                	try {
+                		cf.atualizarFilial(t1.getText(),t2.getText(), Integer.valueOf(t3.getText()),table.getSelectedRow());
+                    	modelo.setValueAt(t1.getText(), table.getSelectedRow(), 0);
+                    	modelo.setValueAt(t2.getText(), table.getSelectedRow(), 1);                	
+                    	modelo.setValueAt(t3.getText(), table.getSelectedRow(), 2);
+                    	JOptionPane.showMessageDialog(null, "Filial atualizada com sucesso!");
+                    
+                	} catch (RuntimeException e1) {
+                		JOptionPane.showMessageDialog(null, "Por favor preencha os campos corretamente.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+                	}
+                }
+            }
+        });
+		
 		b3 = new JButton("Remover");
 		b3.setFont(new Font("SansSerif", Font.PLAIN, 17));
 		b3.setFocusable(false);
-		b3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja apagar esta linha? \n" + "CIDADE: " 
-																+ t1.getText() + "\n" + "ENDEREÇO: " + t2.getText() + "\n" +
-																"CNPJ: " + t3.getText(), "Confirm", JOptionPane.YES_NO_OPTION);
-					
-					if (escolha == JOptionPane.YES_OPTION) {
-						//System.out.println(cf.quantidadeFiliais());
-						cf.removerFilial(table.getSelectedRow());
-						//System.out.println(cf.quantidadeFiliais());
-						modelo.removeRow(table.getSelectedRow());
-					}
-				}
-			}
-		});
+		 b3.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                if (table.getSelectedRow() == -1) {
+	                    JOptionPane.showMessageDialog(null, "Por favor, selecione uma linha.", "Erro: ", JOptionPane.ERROR_MESSAGE);
+	                } else {
+	                    int escolha = JOptionPane.showConfirmDialog(null, "Você realmente deseja remover esta filial? \n" +
+	                            "NOME: " + table.getValueAt(table.getSelectedRow(), 0) + "\n"
+	                            + "CPF: " + table.getValueAt(table.getSelectedRow(), 1) + "\n"
+	                            + "IDADE: " + table.getValueAt(table.getSelectedRow(), 2), "Confirm", JOptionPane.YES_NO_OPTION);
+
+	                    if (escolha == JOptionPane.YES_OPTION) {
+	                    	cf.removerFilial(table.getSelectedRow());
+	                    	modelo.removeRow(table.getSelectedRow());
+	                    	JOptionPane.showMessageDialog(null, "Filial removida com sucesso!");
+	                    }
+	                }
+	            }
+	        });
+		 
 		painelC.setLayout(new GridLayout(3, 3));
 		painelC.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 20));
 		
@@ -155,21 +180,7 @@ public class TelaFilial extends JFrame{
 		
 		validate();
 		
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int linhaIndex = table.getSelectedRow();
-				String cidade = (String) modelo.getValueAt(linhaIndex, 0);
-				String endereco = (String) modelo.getValueAt(linhaIndex, 1);
-				String cnpj = (String) modelo.getValueAt(linhaIndex, 2);
-				
-				t1.setText(cidade);
-				t2.setText(endereco);
-				t3.setText(cnpj);
-				
-			}
-		});
-		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //Define que apenas uma linha pode ser escolhida!	
 	}
+	
 }

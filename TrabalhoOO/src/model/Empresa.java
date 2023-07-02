@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Empresa {
 	
 	private String nome;
-	private static final ArrayList<Cliente> listaClientesCadastrados = new ArrayList<Cliente>();
-	private static final ArrayList<Filial> listaFiliaisCadastradas = new ArrayList<Filial>();
+	private ArrayList<Cliente> listaClientesCadastrados = new ArrayList<Cliente>();
+	private ArrayList<Filial> listaFiliaisCadastradas = new ArrayList<Filial>();
 	
 	public Empresa() {
 		this.nome = "Farmácias FGA";
@@ -16,26 +16,23 @@ public class Empresa {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public ArrayList<Cliente> getListaClientesCadastrados() {
+		return listaClientesCadastrados;
 	}
-	
-	public void adicionarCliente(Cliente cliente) {
-		listaClientesCadastrados.add(cliente);
+
+	public void setListaClientesCadastrados(ArrayList<Cliente> listaClientesCadastrados) {
+		this.listaClientesCadastrados = listaClientesCadastrados;
 	}
-	
-//	public void setListaFiliaisCadastradas(ArrayList<Filial> listaFiliaisCadastradas) {
-//		this.listaFiliaisCadastradas = listaFiliaisCadastradas;
-//	}
 
 	public ArrayList<Filial> getListaFiliaisCadastradas() {
 		return listaFiliaisCadastradas;
 	}
 
-	public ArrayList<Cliente> getListaClientesCadastrados() {
-		return listaClientesCadastrados;
+	public void setListaFiliaisCadastradas(ArrayList<Filial> listaFiliaisCadastradas) {
+		this.listaFiliaisCadastradas = listaFiliaisCadastradas;
 	}
-	
+
+
 //	public ArrayList<Filial> listagemFilialPorCidade(String cidade){
 //		ArrayList<Filial> filtro = new ArrayList<>();
 //		for(Filial filial : listaFiliaisCadastradas) {
@@ -45,7 +42,5 @@ public class Empresa {
 //		}
 //		return filtro;
 //	}
-	
-	
 	
 }

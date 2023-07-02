@@ -7,12 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.border.Border;
 
 import controller.ControleCliente;
+import controller.ControleFilial;
+import controller.ControleProduto;
 
 public class TelaPrincipal{
 
     private JFrame frame;
 
-    public TelaPrincipal(ControleCliente cc) {
+    public TelaPrincipal(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
         frame = new JFrame();
         frame.setTitle("Bem-vindo");
         frame.setSize(600, 320);
@@ -46,7 +48,7 @@ public class TelaPrincipal{
         btnAdministracao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	new TelaLoginAdministracao(cc);
+            	new TelaLoginAdministracao(cc,cf,cp);
             }
         });
 
@@ -56,7 +58,6 @@ public class TelaPrincipal{
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	frame.dispose();
             	new TelaCarrinho();
             }
         });
