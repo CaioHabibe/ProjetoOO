@@ -7,13 +7,15 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaCarrinho {
-	
+	private JTable tabelaFiliais; //esquerda
+	private JTable tabelaProdutos; //central
+	private JTable tabelaCarrinho; //esquerda
 	private JFrame frame;
 	
 	public TelaCarrinho() {
 		frame = new JFrame();
         frame.setTitle("Carrinho");
-        frame.setSize(1000, 700);
+        frame.setSize(1600, 700);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -26,6 +28,8 @@ public class TelaCarrinho {
         int xPos = (screenWidth - frameWidth) / 2;
         int yPos = (screenHeight - frameHeight) / 2;
         frame.setLocation(xPos, yPos);
+        
+        //botao e caixa de texto para procurar filial
         
         JPanel procurarFilial = new JPanel();
         procurarFilial.setVisible(true);
@@ -55,15 +59,58 @@ public class TelaCarrinho {
         //panelFiliais.setBackground(Color.green);
         panelFiliais.setPreferredSize(new Dimension(500,70));
         
-        DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("Nome");
-        tableModel.addColumn("Idade");
-        tableModel.addRow(new Object[]{"João", 25});
-        tableModel.addRow(new Object[]{"Maria", 30});
-        JTable tabelaFiliais = new JTable();
+        //Adicionando a tabela no painel da esquerda
+        
+//        DefaultTableModel tableModel = new DefaultTableModel();
+//        tableModel.addColumn("Nome");
+//        tableModel.addColumn("Idade");
+//        tableModel.addRow(new Object[]{"João", 25});
+//        tableModel.addRow(new Object[]{"Maria", 30});
+        final String[] colunasPanelFiliais = new String[] {"Cidade", "Endereço"};
+        
+        final var modelo = new DefaultTableModel(null, colunasPanelFiliais) {
+	        @Override
+	    	public boolean isCellEditable(int linhas, int colunas) {
+	    		if(colunas == 1) {
+	    			return false;
+	    		}else {
+	    			return false;
+	    		}
+	    	}
+        };
+        
+        tabelaFiliais = new JTable(modelo);
       
         panelFiliais.add(new JScrollPane(tabelaFiliais), BorderLayout.SOUTH);
         //fim panel esquerda
+        
+        //painel meio
+        JPanel painelProdutosFilial = new JPanel();
+        painelProdutosFilial.setPreferredSize(new Dimension(500, 70));
+        
+        final String[] colunasProdutosCad = new String[] {"Tipo", "Nome"};
+        
+        final var modeloProd = new DefaultTableModel(null, colunasProdutosCad) {
+        	@Override
+	    	public boolean isCellEditable(int linhas, int colunas) {
+	    		if(colunas == 1) {
+	    			return false;
+	    		}else {
+	    			return false;
+	    		}
+	    	}
+        };
+//        DefaultTableModel tableModelProd = new DefaultTableModel();
+//        tableModelProd.addColumn("Tipo");
+//        tableModelProd.addColumn("Nome");
+//        tableModelProd.addRow(new Object[] {"abc", 23});
+//        tableModelProd.addRow(new Object[] {"def", 25});
+        
+        tabelaProdutos = new JTable(modeloProd);
+        
+        painelProdutosFilial.add(new JScrollPane(tabelaProdutos), BorderLayout.SOUTH);
+        //fim painel central
+        //Adicionar controller dados cp.lerProduto
         
         
         //Panel da direita
@@ -71,14 +118,26 @@ public class TelaCarrinho {
        //panelProdutos.setBackground(Color.red);
         panelProdutos.setPreferredSize(new Dimension(500,70));
         
-        DefaultTableModel tableModelP = new DefaultTableModel();
-        tableModel.addColumn("Nome");
-        tableModel.addColumn("Idade");
-        tableModel.addRow(new Object[]{"João", 25});
-        tableModel.addRow(new Object[]{"Maria", 30});
-        JTable tabelaProdutos = new JTable();
+        final String[] colunasProdutosAdd = new String[] {"Carrinho"};      
+        
+        final var modeloCarrinho = new DefaultTableModel(null, colunasProdutosAdd) {
+        	@Override
+	    	public boolean isCellEditable(int linhas, int colunas) {
+	    		if(colunas == 1) {
+	    			return false;
+	    		}else {
+	    			return false;
+	    		}
+	    	}
+        };
+//        DefaultTableModel tableModelP = new DefaultTableModel();
+//        tableModelP.addColumn("Nome");
+//        tableModelP.addColumn("Idade");
+//        tableModelP.addRow(new Object[]{"João", 25});
+//        tableModelP.addRow(new Object[]{"Maria", 30});
+        tabelaCarrinho = new JTable(modeloCarrinho);
       
-        panelProdutos.add(new JScrollPane(tabelaProdutos), BorderLayout.SOUTH);
+        panelProdutos.add(new JScrollPane(tabelaCarrinho), BorderLayout.SOUTH);
         
         //fim panel da direita
         
@@ -141,6 +200,7 @@ public class TelaCarrinho {
         frame.add(procurarFilial, BorderLayout.NORTH);
         frame.add(panelBotoes, BorderLayout.SOUTH);
         frame.add(panelFiliais, BorderLayout.WEST);
+        frame.add(painelProdutosFilial, BorderLayout.CENTER);
         frame.add(panelProdutos, BorderLayout.EAST);
         
         frame.setVisible(true);
