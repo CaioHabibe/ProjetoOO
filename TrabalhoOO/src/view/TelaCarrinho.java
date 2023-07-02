@@ -94,7 +94,7 @@ public class TelaCarrinho {
         JButton remove = new JButton("Remover");
         remove.setFocusable(false);
         
-        JButton comprar = new JButton("Fechar carrinho");
+        JButton comprar = new JButton("Finalizar compra");
         comprar.setFocusable(false);
         
         JButton back = new JButton("Voltar");

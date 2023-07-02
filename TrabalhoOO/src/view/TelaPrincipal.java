@@ -58,7 +58,7 @@ public class TelaPrincipal{
         btnCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	new TelaCarrinho();
+            	new TelaLoginCliente();
             }
         });
 
