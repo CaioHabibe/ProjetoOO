@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import controller.ControleCarrinho;
 import controller.ControleCliente;
 import controller.ControleFilial;
 import controller.ControleProduto;
@@ -28,7 +29,7 @@ public class TelaLoginCliente {
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
 
-    public TelaLoginCliente(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
+    public TelaLoginCliente(ControleCliente cc, ControleFilial cf, ControleProduto cp, ControleCarrinho cca) {
         frame = new JFrame();
         frame.setTitle("Login");
         frame.setSize(300, 200);
@@ -56,7 +57,7 @@ public class TelaLoginCliente {
             @Override
             public void keyPressed(KeyEvent usuarioTxt) {
                 if (usuarioTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-                	realizarLogin(cc, cf, cp);
+                	realizarLogin(cc, cf, cp, cca);
                 }
             }
         });
@@ -71,7 +72,7 @@ public class TelaLoginCliente {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	realizarLogin(cc, cf, cp);
+            	realizarLogin(cc, cf, cp,cca);
             }
         });
         JButton voltar = new JButton("Voltar");
@@ -107,13 +108,13 @@ public class TelaLoginCliente {
         
     }
     
-    private void realizarLogin(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
+    private void realizarLogin(ControleCliente cc, ControleFilial cf, ControleProduto cp, ControleCarrinho cca) {
         String usuario = txtUsuario.getText();
 //        String senha = new String(txtSenha.getPassword());
 
         if (usuario.equals("123")) {
             frame.dispose();
-            new TelaCarrinho(cc, cf, cp);
+            new TelaCarrinho(cc, cf, cp, cca);
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
         }

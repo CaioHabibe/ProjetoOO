@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import controller.ControleCarrinho;
 import controller.ControleCliente;
 import controller.ControleFilial;
 import controller.ControleProduto;
@@ -26,9 +27,8 @@ public class TelaCarrinho {
     
     TableRowSorter<DefaultTableModel> trs;
     TableRowSorter<DefaultTableModel> trs2;
-    TableRowSorter<DefaultTableModel> trs3;
 	
-	public TelaCarrinho(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
+	public TelaCarrinho(ControleCliente cc, ControleFilial cf, ControleProduto cp, ControleCarrinho cca) {
 		frame = new JFrame();
         frame.setTitle("Carrinho");
         frame.setSize(1600, 700);
@@ -90,7 +90,7 @@ public class TelaCarrinho {
         
         //Panel da direita
         JPanel panelProdutos = new JPanel();
-        panelProdutos.setPreferredSize(new Dimension(500,70));     
+        panelProdutos.setPreferredSize(new Dimension(500,70));
         final var modeloCarrinho = new DefaultTableModel(null, produtosAdiconados) {
         	@Override
 	    	public boolean isCellEditable(int linhas, int colunas) {
@@ -103,9 +103,7 @@ public class TelaCarrinho {
         };
 
         tabelaCarrinho = new JTable(modeloCarrinho);
-      
         panelProdutos.add(new JScrollPane(tabelaCarrinho), BorderLayout.SOUTH);
-        
         //fim panel da direita
         
         
@@ -116,6 +114,11 @@ public class TelaCarrinho {
         
         JButton add = new JButton("Adicionar");
         add.setFocusable(false);
+        add.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         
         JButton remove = new JButton("Remover");
         remove.setFocusable(false);
@@ -156,22 +159,25 @@ public class TelaCarrinho {
 				trs.setRowFilter(RowFilter.regexFilter(txtProcura.getText(),0));
 			}
 		});
-        
-        tabelaProdutos.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int row = tabelaProdutos.rowAtPoint(e.getPoint());
-                    int column = tabelaProdutos.columnAtPoint(e.getPoint());
-                    
-                    trs2.setRowFilter(RowFilter.regexFilter(txtProcura.getText(),1));
-                }
-            }
-        });
+       
+        JLabel lblNome = new JLabel("Digite o nome do produto a ser buscado: ");
+        JTextField txtNome = new JTextField(20);
+        JButton filtraNome = new JButton("Buscar");
+
+        procurarFilial.add(lblNome);
+        procurarFilial.add(txtNome);
+        procurarFilial.add(filtraNome);
         
         procurarFilial.add(lblProcura);
         procurarFilial.add(txtProcura);
         procurarFilial.add(Procurar);
+        
+        filtraNome.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				trs2.setRowFilter(RowFilter.regexFilter(txtNome.getText(),0));
+			}
+		});
         
         frame.add(procurarFilial, BorderLayout.NORTH);
         frame.add(panelBotoes, BorderLayout.SOUTH);

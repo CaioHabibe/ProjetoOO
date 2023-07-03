@@ -4,20 +4,18 @@ import java.util.ArrayList;
 
 public class Cliente {
 	
-	ArrayList<Carrinho> listaComprasEfetuadas;
+	private ArrayList<String> listaComprasEfetuadas = new ArrayList<String>();
     private String nome;
     private long cpf;
     private int idade;
 
     public Cliente() {
-    	listaComprasEfetuadas = new ArrayList<>();
     }
-
+    
     public Cliente(String nome, long cpf, int idade) {
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
-        listaComprasEfetuadas = new ArrayList<>();
     }
 
     public String getNome() {
@@ -44,20 +42,28 @@ public class Cliente {
         this.idade = idade;
     }
 
-    public void fechaCompra(Carrinho carrinho) {
-    	listaComprasEfetuadas.add(carrinho);
-    }
-    
-    public String[] clienteJtableStruct() {
+    public ArrayList<String> getListaComprasEfetuadas() {
+		return listaComprasEfetuadas;
+	}
+
+	public void setListaComprasEfetuadas(ArrayList<String> listaComprasEfetuadas) {
+		this.listaComprasEfetuadas = listaComprasEfetuadas;
+	}
+
+	public String[] clienteJtableStruct() {
         return new String[]{nome, String.valueOf(cpf), String.valueOf(idade)};
     }
-    
-    public ArrayList<Produto> listagemProdutosComprados(){
-    	ArrayList<Produto> aux = new ArrayList<>();
-    	for (Carrinho c : listaComprasEfetuadas) {
-    		aux.addAll(c.listaProdutosCarrinho);
-    	}
-    	return aux;
+	
+	public String[] comprastableStruct() {
+        return new String[]{};
     }
+    
+//    public ArrayList<Produto> listagemProdutosComprados(){
+//    	ArrayList<Produto> aux = new ArrayList<>();
+//    	for (Carrinho c : listaComprasEfetuadas) {
+//    		aux.addAll(c.listaProdutosCarrinho);
+//    	}
+//    	return aux;
+//    }
 
 }
