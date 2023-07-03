@@ -41,12 +41,12 @@ public class ControleCliente {
     	return false;
     }
     
-    public String[][] lerCompra(int a) {
-    	final var dados = new String[empresa.getListaClientesCadastrados().size()][];
-        for (int i = 0; i < empresa.getListaClientesCadastrados().size(); i++) {
-        	dados[i] = empresa.getListaClientesCadastrados().get(a).compraJtableStruct();
-        }
-        return dados;
+    public Object[] lerCompra(int a) {
+//    	final var dados = new Object[empresa.getListaClientesCadastrados().size()][];
+//        for (int i = 0; i < empresa.getListaClientesCadastrados().size(); i++) {
+//        	dados[i] = empresa.getListaClientesCadastrados().get(a).compraJtableStruct();
+//        }
+        return empresa.getListaClientesCadastrados().get(a).compraJtableStruct();
     }
 
     public boolean removerCliente(int index) {

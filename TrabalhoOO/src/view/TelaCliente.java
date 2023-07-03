@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -204,7 +205,10 @@ public class TelaCliente extends JFrame {
         btnListar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	modeloListagem.addRow(cc.lerCompra(table.getSelectedRow()));
+            	Object[] teste = cc.lerCompra(table.getSelectedRow());
+            	for (int i = 0; i<cc.lerCompra(table.getSelectedRow()).length;i++) {
+            		modeloListagem.addRow(teste);
+            	}
             }
         });
         

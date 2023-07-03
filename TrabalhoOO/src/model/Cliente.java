@@ -63,7 +63,7 @@ public class Cliente {
         return new String[]{nome, String.valueOf(cpf), String.valueOf(idade)};
 	}
 	
-	public String[] compraJtableStruct() {
-        return new String[] {listaComprasEfetuadas.toString()};
+	public Object[] compraJtableStruct() {
+        return listaComprasEfetuadas.toArray();
 	}
 }
