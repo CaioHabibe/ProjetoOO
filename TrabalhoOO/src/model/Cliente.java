@@ -66,4 +66,5 @@ public class Cliente {
 	public Object[] compraJtableStruct() {
         return listaComprasEfetuadas.toArray();
 	}
+
 }

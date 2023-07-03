@@ -9,6 +9,10 @@ public class ControleCliente {
 
     static final Empresa empresa = new Empresa();
 	
+    public ControleCliente() {
+        empresa.dadosAleatoriosCliente();
+    }
+    
     public boolean salvarCliente(String nome, long cpf, int idade) {
         Cliente cliente = new Cliente(nome, cpf, idade);
         empresa.getListaClientesCadastrados().add(cliente);

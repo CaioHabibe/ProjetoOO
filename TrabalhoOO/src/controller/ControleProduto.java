@@ -7,7 +7,12 @@ import model.Remedio;
 public class ControleProduto {
 	
     static final Filial filial = new Filial();
-
+    
+    public ControleProduto() {
+        filial.dadosAleatoriosCosmetico();
+        filial.dadosAleatoriosRemedio();
+    }
+    
     public boolean salvarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, String tipo) {
         	Cosmetico cosmetico = new Cosmetico(nome, preco, descricao, textura, fragrancia, corante, tipo);
         	filial.getListaCosmeticosCadastrados().add(cosmetico);

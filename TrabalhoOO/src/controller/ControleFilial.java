@@ -7,6 +7,10 @@ public class ControleFilial {
 	
 	static final Empresa empresa = new Empresa();
 	
+	public ControleFilial(){
+        empresa.dadosAleatoriosFilial();
+    }
+	
 	public boolean salvarFilial(String cidade, String endereco, long cnpj) {
         Filial filial = new Filial(cidade, endereco, cnpj);
         empresa.getListaFiliaisCadastradas().add(filial);

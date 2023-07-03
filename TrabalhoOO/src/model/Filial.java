@@ -74,5 +74,20 @@ public class Filial {
 	public String[] filialJtableStruct() {
         return new String[]{cidade, endereco, String.valueOf(cnpj)};
     }
-	
+
+	public void dadosAleatoriosRemedio() {
+        for (int i = 1; i <= 3; i++) {
+            Remedio remedio = new Remedio("Remedio" + i, 10.00*i, "Nivel de dor " + i,"Mg" + i, 
+                    "Formula " + i, "Injeção " + i, "Remedio");
+            listaRemediosCadastrados.add(remedio);
+        }
+    }
+	public void dadosAleatoriosCosmetico() {
+        for (int i = 1; i <= 3; i++) {
+            Cosmetico cosmetico = new Cosmetico("Remedio" + i, 10.00*i, "Nivel de dor " + i,"Mg" + i, 
+                    "Formula " + i, "Injeção " + i, "Remedio");
+            listaCosmeticosCadastrados.add(cosmetico);
+        }
+    }
 }
+
