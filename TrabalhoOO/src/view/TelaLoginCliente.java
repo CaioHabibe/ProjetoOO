@@ -19,17 +19,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import controller.ControleCarrinho;
-import controller.ControleCliente;
-import controller.ControleFilial;
-import controller.ControleProduto;
+import controller.*;
+
 
 public class TelaLoginCliente {
 	private JFrame frame;
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
 
-    public TelaLoginCliente(ControleCliente cc, ControleFilial cf, ControleProduto cp, ControleCarrinho cca) {
+    public TelaLoginCliente(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
         frame = new JFrame();
         frame.setTitle("Login");
         frame.setSize(300, 200);
@@ -57,7 +55,7 @@ public class TelaLoginCliente {
             @Override
             public void keyPressed(KeyEvent usuarioTxt) {
                 if (usuarioTxt.getKeyCode() == KeyEvent.VK_ENTER) {
-                	realizarLogin(cc, cf, cp, cca);
+                	realizarLogin(cc, cf, cp);
                 }
             }
         });
@@ -71,8 +69,8 @@ public class TelaLoginCliente {
         btnLogin.setFocusable(false);
         btnLogin.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            	realizarLogin(cc, cf, cp,cca);
+            public void actionPerformed(ActionEvent e) {       
+            	realizarLogin(cc, cf, cp);        	
             }
         });
         JButton voltar = new JButton("Voltar");
@@ -108,15 +106,15 @@ public class TelaLoginCliente {
         
     }
     
-    private void realizarLogin(ControleCliente cc, ControleFilial cf, ControleProduto cp, ControleCarrinho cca) {
+    private void realizarLogin(ControleCliente cc, ControleFilial cf, ControleProduto cp) {
         String usuario = txtUsuario.getText();
-//        String senha = new String(txtSenha.getPassword());
-
-        if (usuario.equals("123")) {
-            frame.dispose();
-            new TelaCarrinho(cc, cf, cp, cca);
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos. Tente novamente.", "Erro de autenticação", JOptionPane.ERROR_MESSAGE);
+        String [] aux = cc.lerCpf();
+        for (int i = 0; i < cc.lerCpf().length; i++) {
+        	if (usuario.equals(aux[i])) {
+                frame.dispose();
+                new TelaCarrinho(cc, cf, cp, Long.valueOf(aux[i]));
+        	}
+        	}    
         }
+
     }
-}

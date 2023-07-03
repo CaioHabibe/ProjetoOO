@@ -8,6 +8,7 @@ public class Cliente {
     private String nome;
     private long cpf;
     private int idade;
+    private long senha;
 
     public Cliente() {
     }
@@ -18,7 +19,15 @@ public class Cliente {
         this.idade = idade;
     }
 
-    public String getNome() {
+    public long getSenha() {
+		return senha;
+	}
+
+	public void setSenha(long senha) {
+		this.senha = senha;
+	}
+
+	public String getNome() {
         return nome;
     }
 
@@ -52,18 +61,9 @@ public class Cliente {
 
 	public String[] clienteJtableStruct() {
         return new String[]{nome, String.valueOf(cpf), String.valueOf(idade)};
-    }
+	}
 	
-	public String[] comprastableStruct() {
-        return new String[]{};
-    }
-    
-//    public ArrayList<Produto> listagemProdutosComprados(){
-//    	ArrayList<Produto> aux = new ArrayList<>();
-//    	for (Carrinho c : listaComprasEfetuadas) {
-//    		aux.addAll(c.listaProdutosCarrinho);
-//    	}
-//    	return aux;
-//    }
-
+	public String[] compraJtableStruct() {
+        return new String[] {listaComprasEfetuadas.toString()};
+	}
 }

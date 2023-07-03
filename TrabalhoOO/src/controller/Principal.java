@@ -8,9 +8,8 @@ public class Principal {
 		final ControleCliente cc = new ControleCliente();
 		final ControleFilial cf = new ControleFilial();
 		final ControleProduto cp = new ControleProduto();
-		final ControleCarrinho cca = new ControleCarrinho();
 		
-		new TelaPrincipal(cc,cf,cp,cca);
+		new TelaPrincipal(cc,cf,cp);
 	}
 	
 }

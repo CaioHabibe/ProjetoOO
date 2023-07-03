@@ -20,7 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import controller.ControleCliente;
 
@@ -33,7 +35,7 @@ public class TelaCliente extends JFrame {
 
     private final String[] colunas = new String[]{"Nome", "CPF", "idade"};
     private final String[] colunaListagem = new String[]{"Nome"};
-    
+
     public TelaCliente(ControleCliente cc) {
 
         setSize(900, 700);
@@ -62,10 +64,9 @@ public class TelaCliente extends JFrame {
         		}
         	}
         };
-        
+
         //Layout da Table debaixo
-        final var dadoListagem = cc.lerCliente();
-        final var modeloListagem = new DefaultTableModel(dadoListagem, colunaListagem) {
+        DefaultTableModel modeloListagem = new DefaultTableModel(colunaListagem,0) {
         	@Override
         	public boolean isCellEditable(int linhas, int colunas) {
         		if(colunas == 1) {
@@ -130,7 +131,7 @@ public class TelaCliente extends JFrame {
             }
         });
         
-        //Table de cima     
+        //Table de cima     ).toString())
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -200,6 +201,13 @@ public class TelaCliente extends JFrame {
         btnListar = new JButton("Listar");
         btnListar.setFont(new Font("SansSerif", Font.PLAIN, 17));
         btnListar.setFocusable(false);
+        btnListar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	modeloListagem.addRow(cc.lerCompra(table.getSelectedRow()));
+            }
+        });
+        
         
         //Adicionando componentes ao painel
         painelC.setLayout(new GridLayout(4, 3));

@@ -7,9 +7,10 @@ public class ControleFilial {
 	
 	static final Empresa empresa = new Empresa();
 	
-	public void salvarFilial(String cidade, String endereco, long cnpj) {
+	public boolean salvarFilial(String cidade, String endereco, long cnpj) {
         Filial filial = new Filial(cidade, endereco, cnpj);
         empresa.getListaFiliaisCadastradas().add(filial);
+        return true;
     }
 
     public String[][] lerFilial() {
@@ -20,21 +21,26 @@ public class ControleFilial {
         return dados;
     }
 
-    public void removerFilial(int index) {
+    public boolean removerFilial(int index) {
     	empresa.getListaFiliaisCadastradas().remove(index);
+    	return true;
     }
 
-    public void atualizarFilial(String cidade, String endereco, long cnpj, int index) {
+    public boolean atualizarFilial(String cidade, String endereco, long cnpj, int index) {
     	
         	if (empresa.getListaFiliaisCadastradas().get(index).getCidade() != cidade) {
         		empresa.getListaFiliaisCadastradas().get(index).setCidade(cidade);
+        		return true;
 			}	
         	
 			if (empresa.getListaFiliaisCadastradas().get(index).getEndereco() != endereco) {
 				empresa.getListaFiliaisCadastradas().get(index).setEndereco(endereco);
+				return true;
 			}
 			if (Long.valueOf(empresa.getListaFiliaisCadastradas().get(index).getCnpj()) != cnpj) {
 				empresa.getListaFiliaisCadastradas().get(index).setCnpj(cnpj);
+				return true;
 			}
+			return false;
     }
 }

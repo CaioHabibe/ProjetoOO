@@ -8,14 +8,16 @@ public class ControleProduto {
 	
     static final Filial filial = new Filial();
 
-    public void salvarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, String tipo) {
+    public boolean salvarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, String tipo) {
         	Cosmetico cosmetico = new Cosmetico(nome, preco, descricao, textura, fragrancia, corante, tipo);
         	filial.getListaCosmeticosCadastrados().add(cosmetico);
+        	return true;
     }
 
-    public void salvarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, String tipo) {
+    public boolean salvarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, String tipo) {
     		Remedio remedio = new Remedio(nome, preco, descricao, dosagem, formula, administracao, tipo);
     		filial.getListaRemediosCadastrados().add(remedio);
+    		return true;
     }
 
     public String[][] lerRemedio() {
@@ -58,64 +60,80 @@ public class ControleProduto {
         return array;
     }
 
-    public void removerRemedio(int index) {
+    public boolean removerRemedio(int index) {
     	filial.getListaRemediosCadastrados().remove(index);
+    	return true;
     }
     
-    public void removerCosmetico(int index) {
+    public boolean removerCosmetico(int index) {
     	filial.getListaCosmeticosCadastrados().remove(index);
+    	return true;
     }
 
-    public void atualizarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, int index) {
+    public boolean atualizarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, int index) {
     	
     	if (filial.getListaRemediosCadastrados().get(index).getNome() != nome) {
     		filial.getListaRemediosCadastrados().get(index).setNome(nome);
+    		return true;
 		}	
     	
 		if (Double.valueOf(filial.getListaRemediosCadastrados().get(index).getPreco()) != preco) {
-			filial.getListaRemediosCadastrados().get(index).setPreco(preco);;
+			filial.getListaRemediosCadastrados().get(index).setPreco(preco);
+			return true;
 		}
 		if (filial.getListaRemediosCadastrados().get(index).getDescricao() != descricao) {
 			filial.getListaRemediosCadastrados().get(index).setDescricao(descricao);
+			return true;
 		}
 		
 		if (filial.getListaRemediosCadastrados().get(index).getDosagem() != dosagem) {
 			filial.getListaRemediosCadastrados().get(index).setDosagem(dosagem);
+			return true;
 		}
 		
 		if (filial.getListaRemediosCadastrados().get(index).getFormula() != formula) {
 			filial.getListaRemediosCadastrados().get(index).setFormula(formula);
+			return true;
 		}
 		
 		if (filial.getListaRemediosCadastrados().get(index).getAdministracao() != administracao) {
-			filial.getListaRemediosCadastrados().get(index).setAdministracao(administracao);;
+			filial.getListaRemediosCadastrados().get(index).setAdministracao(administracao);
+			return true;
 		}
+		return false;
     }
     
-public void atualizarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, int index) {
+public boolean atualizarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, int index) {
     	
     	if (filial.getListaCosmeticosCadastrados().get(index).getNome() != nome) {
     		filial.getListaCosmeticosCadastrados().get(index).setNome(nome);
+    		return true;
 		}	
     	
 		if (Double.valueOf(filial.getListaCosmeticosCadastrados().get(index).getPreco()) != preco) {
-			filial.getListaCosmeticosCadastrados().get(index).setPreco(preco);;
+			filial.getListaCosmeticosCadastrados().get(index).setPreco(preco);
+			return true;
 		}
 		if (filial.getListaCosmeticosCadastrados().get(index).getDescricao() != descricao) {
 			filial.getListaCosmeticosCadastrados().get(index).setDescricao(descricao);
+			return true;
 		}
 		
 		if (filial.getListaCosmeticosCadastrados().get(index).getTextura() != textura) {
 			filial.getListaCosmeticosCadastrados().get(index).setTextura(textura);
+			return true;
 		}
 		
 		if (filial.getListaCosmeticosCadastrados().get(index).getFragrancia() != fragrancia) {
 			filial.getListaCosmeticosCadastrados().get(index).setFragrancia(fragrancia);
+			return true;
 		}
 		
 		if (filial.getListaCosmeticosCadastrados().get(index).getCorante() != corante) {
-			filial.getListaCosmeticosCadastrados().get(index).setCorante(corante);;
+			filial.getListaCosmeticosCadastrados().get(index).setCorante(corante);
+			return true;
 		}
+		return false;
     }
     
 }

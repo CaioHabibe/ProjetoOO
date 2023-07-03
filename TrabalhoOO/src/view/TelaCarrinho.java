@@ -6,14 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import controller.ControleCarrinho;
-import controller.ControleCliente;
-import controller.ControleFilial;
-import controller.ControleProduto;
+import controller.*;
 
 public class TelaCarrinho {
 	private JTable tabelaFiliais; //esquerda
@@ -28,7 +27,7 @@ public class TelaCarrinho {
     TableRowSorter<DefaultTableModel> trs;
     TableRowSorter<DefaultTableModel> trs2;
 	
-	public TelaCarrinho(ControleCliente cc, ControleFilial cf, ControleProduto cp, ControleCarrinho cca) {
+	public TelaCarrinho(ControleCliente cc, ControleFilial cf, ControleProduto cp, long cpf) {
 		frame = new JFrame();
         frame.setTitle("Carrinho");
         frame.setSize(1600, 700);
@@ -115,16 +114,43 @@ public class TelaCarrinho {
         JButton add = new JButton("Adicionar");
         add.setFocusable(false);
         add.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        	}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableModel model1 = tabelaProdutos.getModel();
+                int[] indexs = tabelaProdutos.getSelectedRows();
+                Object[] row = new Object[2];
+                DefaultTableModel model2 = (DefaultTableModel) tabelaCarrinho.getModel();
+                for (int i = 0; i < indexs.length; i++) {
+                    row[0] = model1.getValueAt(indexs[i], 0);
+                    row[1] = model1.getValueAt(indexs[i], 0);
+                    model2.addRow(row);
+                }
+            }
         });
         
         JButton remove = new JButton("Remover");
         remove.setFocusable(false);
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel model = (DefaultTableModel) tabelaCarrinho.getModel();
+                int index = tabelaCarrinho.getSelectedRow();
+                model.removeRow(index);
+            }
+        });
         
         JButton comprar = new JButton("Finalizar compra");
         comprar.setFocusable(false);
+        comprar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	ArrayList<String> compra = new ArrayList<String>(); 
+            	for (int i = 0; i < tabelaCarrinho.getRowCount(); i++) {
+            		compra.add(String.valueOf(tabelaCarrinho.getValueAt(i,0)));
+            	}
+            	cc.compra(cpf,compra);
+                }
+            });
         
         JButton back = new JButton("Voltar");
         back.setFocusable(false);
