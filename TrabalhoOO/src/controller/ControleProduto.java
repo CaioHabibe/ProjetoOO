@@ -4,27 +4,61 @@ import model.Cosmetico;
 import model.Filial;
 import model.Remedio;
 
+/**
+ * Classe ControleProduto serve de controladora de dados do tipo Produto, no modelo MVC.
+ * @author Caio
+ *
+ */
 public class ControleProduto {
 	
     static final Filial filial = new Filial();
     
+    /**
+     * Construtor da classe
+     */
     public ControleProduto() {
         filial.dadosAleatoriosCosmetico();
         filial.dadosAleatoriosRemedio();
     }
     
+    /**
+     * Metodo de salvar cliente
+     * @param nome
+     * @param preco
+     * @param descricao
+     * @param textura
+     * @param fragrancia
+     * @param corante
+     * @param tipo
+     * @return boolean
+     */
     public boolean salvarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, String tipo) {
         	Cosmetico cosmetico = new Cosmetico(nome, preco, descricao, textura, fragrancia, corante, tipo);
         	filial.getListaCosmeticosCadastrados().add(cosmetico);
         	return true;
     }
-
+    
+    /**
+     * Metodo de salvar Remedio
+     * @param nome
+     * @param preco
+     * @param descricao
+     * @param dosagem
+     * @param formula
+     * @param administracao
+     * @param tipo
+     * @return boolean
+     */
     public boolean salvarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, String tipo) {
     		Remedio remedio = new Remedio(nome, preco, descricao, dosagem, formula, administracao, tipo);
     		filial.getListaRemediosCadastrados().add(remedio);
     		return true;
     }
-
+    
+    /**
+     * metodo de ler dados tipo Remedio
+     * @return String[][]
+     */
     public String[][] lerRemedio() {
         final var dados = new String[filial.getListaRemediosCadastrados().size()][];
         for (int i = 0; i < filial.getListaRemediosCadastrados().size(); i++) {
@@ -33,6 +67,10 @@ public class ControleProduto {
         return dados;
     }
     
+    /**
+     * Metodo de ler dados tipo Cosmetico
+     * @return String[][]
+     */
     public String[][] lerCosmetico() {
         final var dados = new String[filial.getListaCosmeticosCadastrados().size()][];
         for (int i = 0; i < filial.getListaCosmeticosCadastrados().size(); i++) {
@@ -41,6 +79,10 @@ public class ControleProduto {
         return dados;
     }
     
+    /**
+     * Metodo de leitura de um Produto
+     * @return String[][]
+     */
     public String[][] lerProduto() {
         final var dados = new String[filial.getListaRemediosCadastrados().size()][];
         final var dados2 = new String[filial.getListaCosmeticosCadastrados().size()][];
@@ -64,17 +106,38 @@ public class ControleProduto {
 
         return array;
     }
-
+    
+    /**
+     * Metodo de salvar Remedio
+     * @param index
+     * @return boolean
+     */
     public boolean removerRemedio(int index) {
     	filial.getListaRemediosCadastrados().remove(index);
     	return true;
     }
     
+    /**
+     * Metodo Remover Cosmetico
+     * @param index
+     * @return boolean
+     */
     public boolean removerCosmetico(int index) {
     	filial.getListaCosmeticosCadastrados().remove(index);
     	return true;
     }
-
+    
+    /**
+     * Metodo de atualizar Remedio
+     * @param nome
+     * @param preco
+     * @param descricao
+     * @param dosagem
+     * @param formula
+     * @param administracao
+     * @param index
+     * @return boolean
+     */
     public boolean atualizarRemedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, int index) {
     	
     	if (filial.getListaRemediosCadastrados().get(index).getNome() != nome) {
@@ -108,7 +171,18 @@ public class ControleProduto {
 		return false;
     }
     
-public boolean atualizarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, int index) {
+    /**
+     * Metodo de atualizar Cosmetico
+     * @param nome
+     * @param preco
+     * @param descricao
+     * @param textura
+     * @param fragrancia
+     * @param corante
+     * @param index
+     * @return
+     */
+    public boolean atualizarCosmetico(String nome, Double preco, String descricao, String textura, String fragrancia, String corante, int index) {
     	
     	if (filial.getListaCosmeticosCadastrados().get(index).getNome() != nome) {
     		filial.getListaCosmeticosCadastrados().get(index).setNome(nome);

@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe Cliente que serve de modelo para Cliente
+ * @author Caio
+ *
+ */
 public class Cliente {
 	
 	private ArrayList<String> listaComprasEfetuadas = new ArrayList<String>();
@@ -9,7 +14,10 @@ public class Cliente {
     private long cpf;
     private int idade;
     private long senha;
-
+    
+    /**
+     * Construtor da classe
+     */
     public Cliente() {
     }
     
@@ -58,11 +66,19 @@ public class Cliente {
 	public void setListaComprasEfetuadas(ArrayList<String> listaComprasEfetuadas) {
 		this.listaComprasEfetuadas = listaComprasEfetuadas;
 	}
-
+	
+	/**
+	 * Metodo que retorna dados de um Cliente em forma de array
+	 * @return String
+	 */
 	public String[] clienteJtableStruct() {
         return new String[]{nome, String.valueOf(cpf), String.valueOf(idade)};
 	}
 	
+	/**
+	 * Metodo que retorna as compras de um cliente em um array.
+	 * @return Object[]
+	 */
 	public Object[] compraJtableStruct() {
         return listaComprasEfetuadas.toArray();
 	}

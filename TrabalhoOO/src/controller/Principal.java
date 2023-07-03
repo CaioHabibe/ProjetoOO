@@ -2,6 +2,11 @@ package controller;
 
 import view.TelaPrincipal;
 
+/**
+ * Classe main do programa em que inicializa o programa
+ * @author Caio
+ *
+ */
 public class Principal {
 	public static void main(String[] args) {
 		
