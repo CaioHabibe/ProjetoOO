@@ -39,5 +39,25 @@ public class Empresa {
 	public void setListaFiliaisCadastradas(ArrayList<Filial> listaFiliaisCadastradas) {
 		this.listaFiliaisCadastradas = listaFiliaisCadastradas;
 	}
+	
+	public void dadosAleatoriosFilial() {
+        for (int i = 0; i < 3; i++)
+        {
+            Filial filial = new Filial("Brasília", "SMPW " + i + 1, 124123*(i + 1));
+            listaFiliaisCadastradas.add(filial);
+        }
+
+        Filial f = new Filial("São paulo", "Avenida paulista", 12314512);
+        listaFiliaisCadastradas.add(f);
+    }
+	
+	public void dadosAleatoriosCliente() {
+        for (int i = 0; i < 3; i++)
+        {
+            Cliente cliente = new Cliente("Cliente " + (i+1) ,134*(i+1), 10*(i+1));
+            listaClientesCadastrados.add(cliente);
+        }
+
+    }
 
 }
