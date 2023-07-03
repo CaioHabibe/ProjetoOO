@@ -1,12 +1,27 @@
 package model;
 
+/**
+ * Classe Remedio representa a modelo de uma remedio e herda da Classe abstrata Produto.
+ * @author Caio
+ * @since 2023
+ */
 public class Remedio extends Produto{
 	
 	private String dosagem;
 	private String formula;
 	private String administracao;
 	private String tipo;
-
+	
+	/**
+	 * Construtor da classe Remedio.
+	 * @param nome
+	 * @param preco
+	 * @param descricao
+	 * @param dosagem
+	 * @param formula
+	 * @param administracao
+	 * @param tipo
+	 */
 	public Remedio(String nome, Double preco, String descricao, String dosagem, String formula, String administracao, String tipo) {
 		super(nome, preco, descricao);
 		this.dosagem = dosagem;
@@ -43,6 +58,10 @@ public class Remedio extends Produto{
 		this.administracao = administracao;
 	}
 	
+	/**
+	 * Retorna todos os dados de um remedio em forma de array.
+	 * @return String[]
+	 */
     public String[] remedioJtableStruct() {
         return new String[]{nome, String.valueOf(preco), descricao, dosagem, formula, administracao};
     }

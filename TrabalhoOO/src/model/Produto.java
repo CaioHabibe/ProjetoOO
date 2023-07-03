@@ -1,11 +1,22 @@
 package model;
 
+/**
+ * Classe abstrata Produto serve apenas para herança das classes Remedio e Produto.
+ * @author Caio
+ * @since 2023
+ */
 public abstract class Produto {
 	
 	protected String nome;
 	protected double preco;
 	protected String descricao;
 	
+	/**
+	 * Construtor da classe Produto.
+	 * @param nome
+	 * @param preco
+	 * @param descricao
+	 */
 	public Produto(String nome, double preco, String descricao) {
 		this.nome = nome;
 		this.preco = preco;
@@ -28,6 +39,10 @@ public abstract class Produto {
 		this.preco = preco;
 	}
 	
+	/**
+	 * Metodo que retorna a descricao do produto em forma de String, funciona como um get.
+	 * @return String
+	 */
 	public String getDescricao() {
 		return descricao;
 	}

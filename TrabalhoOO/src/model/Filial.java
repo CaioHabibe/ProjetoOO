@@ -1,7 +1,11 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * Classe Filial que representa o modelo de uma Filial.
+ * @author Caio
+ * @since 2023
+ */
 public class Filial {
 	
 	private ArrayList<Remedio> listaRemediosCadastrados = new ArrayList<Remedio>();
@@ -10,10 +14,13 @@ public class Filial {
 	private String cidade;
 	private String endereco;
 	private long cnpj;
-
+	
+	/**
+	 * Construtor da classe Filial.
+	 */
 	public Filial() {
 	}
-
+	
 	public Filial(String cidade, String endereco, long cnpj) {
 		this.cidade = cidade;
 		this.endereco = endereco;
@@ -59,7 +66,11 @@ public class Filial {
 	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
 	}
-
+	
+	/**
+	 * Metodo em que retorna os dados de uma filial em forma de array.
+	 * @return String[]
+	 */
 	public String[] filialJtableStruct() {
         return new String[]{cidade, endereco, String.valueOf(cnpj)};
     }

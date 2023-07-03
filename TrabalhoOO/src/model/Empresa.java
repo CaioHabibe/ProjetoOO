@@ -2,12 +2,20 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe Empresa que faz o gerenciamento de dados do programa. 
+ * @author Caio
+ * @since 2023
+ */
 public class Empresa {
 	
 	private String nome;
 	private ArrayList<Cliente> listaClientesCadastrados = new ArrayList<Cliente>();
 	private ArrayList<Filial> listaFiliaisCadastradas = new ArrayList<Filial>();
 	
+	/**
+	 * Construtor da classe Empresa.
+	 */
 	public Empresa() {
 		this.nome = "Farmácias FGA";
 	}
@@ -32,15 +40,4 @@ public class Empresa {
 		this.listaFiliaisCadastradas = listaFiliaisCadastradas;
 	}
 
-
-//	public ArrayList<Filial> listagemFilialPorCidade(String cidade){
-//		ArrayList<Filial> filtro = new ArrayList<>();
-//		for(Filial filial : listaFiliaisCadastradas) {
-//			if(filial.getCidade().contains(cidade)) {
-//				filtro.add(filial);
-//			}
-//		}
-//		return filtro;
-//	}
-	
 }
