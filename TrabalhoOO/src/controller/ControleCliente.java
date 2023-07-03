@@ -46,10 +46,6 @@ public class ControleCliente {
     }
     
     public Object[] lerCompra(int a) {
-//    	final var dados = new Object[empresa.getListaClientesCadastrados().size()][];
-//        for (int i = 0; i < empresa.getListaClientesCadastrados().size(); i++) {
-//        	dados[i] = empresa.getListaClientesCadastrados().get(a).compraJtableStruct();
-//        }
         return empresa.getListaClientesCadastrados().get(a).compraJtableStruct();
     }
 

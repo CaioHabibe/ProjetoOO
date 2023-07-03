@@ -207,12 +207,11 @@ public class TelaCliente extends JFrame {
             public void actionPerformed(ActionEvent e) {
             	Object[] teste = cc.lerCompra(table.getSelectedRow());
             	for (int i = 0; i<cc.lerCompra(table.getSelectedRow()).length;i++) {
-            		modeloListagem.addRow(teste);
+            		modeloListagem.addRow(new Object[]{(teste[i])});
             	}
             }
         });
-        
-        
+       
         //Adicionando componentes ao painel
         painelC.setLayout(new GridLayout(4, 3));
        
